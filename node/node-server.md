@@ -1,47 +1,70 @@
 # HTTP详解 (Anatomy of an HTTP Transaction)
 >The purpose of this guide is to impart a solid understanding of the process of Node.js HTTP handling. We'll assume that you know, in a general sense, how HTTP requests work, regardless of language or programming environment. We'll also assume a bit of familiarity with Node.js EventEmitters and Streams. If you're not quite familiar with them, it's worth taking a quick read through the API docs for each of those.
 
-~~本指南的目的是让您充分了解Node.js中`HTTP`模块的工作的原理。我们假设您已经知晓在不考虑何种编程语言的情况下，HTTP请求是如何工作的。同时还要假设您了解一点Node.js`EventEmitters`和`Streams`的知识。如果你不是十分熟悉它们，建议花点时间去快速的浏览一下API Docs中的关于它们的介绍。~~
+本指南的目的是让您充分了解Node.js中`HTTP`模块的工作的原理。我们假设您已经知晓在不考虑何种编程语言的情况下，HTTP请求是如何工作的。同时还要假设您了解一点Node.js`[EventEmitters](https://nodejs.org/api/events.html)`和`[Streams](https://nodejs.org/api/stream.html)`的知识。如果你不是十分熟悉它们，建议花点时间去快速的浏览一下API Docs中的关于它们的介绍。
 
 ## 创建Server (Create the Server)
-Any node web server application will at some point have to create a web server object. This is done by using createServer.
-在某些时候，任何一个Node web服务器程序都必须创建web `Server`对象。
+>Any node web server application will at some point have to create a web server object. This is done by using createServer.
+
+在某些时候，任何一个Node web服务器程序都必须创建web `Server`对象。 创建`Server`对象是通过使用`createServer()`方法实现的。
+```
 const http = require('http');
 
 const server = http.createServer((request, response) => {
   // magic happens here!
 });
-The function that's passed in to createServer is called once for every HTTP request that's made against that server, so it's called the request handler. In fact, the Server object returned by createServer is an EventEmitter, and what we have here is just shorthand for creating a server object and then adding the listener later.
+```
 
+>The function that's passed in to createServer is called once for every HTTP request that's made against that server, so it's called the request handler. In fact, the Server object returned by createServer is an EventEmitter, and what we have here is just shorthand for creating a server object and then adding the listener later.
+
+函数
+
+```
 const server = http.createServer();
 server.on('request', (request, response) => {
   // the same kind of magic happens here!
 });
-When an HTTP request hits the server, node calls the request handler function with a few handy objects for dealing with the transaction, request and response. We'll get to those shortly.
+```
+>When an HTTP request hits the server, node calls the request handler function with a few handy objects for dealing with the transaction, request and response. We'll get to those shortly.
 
-In order to actually serve requests, the listen method needs to be called on the server object. In most cases, all you'll need to pass to listen is the port number you want the server to listen on. There are some other options too, so consult the API reference.
+当
 
-Method, URL and Headers
-When handling a request, the first thing you'll probably want to do is look at the method and URL, so that appropriate actions can be taken. Node makes this relatively painless by putting handy properties onto the request object.
+>In order to actually serve requests, the listen method needs to be called on the server object. In most cases, all you'll need to pass to listen is the port number you want the server to listen on. There are some other options too, so consult the API reference.
 
+为了
+
+## Method, URL and Headers
+>When handling a request, the first thing you'll probably want to do is look at the method and URL, so that appropriate actions can be taken. Node makes this relatively painless by putting handy properties onto the request object.
+
+当
+
+```
 const { method, url } = request;
-Note: The request object is an instance of IncomingMessage.
+```
 
-The method here will always be a normal HTTP method/verb. The url is the full URL without the server, protocol or port. For a typical URL, this means everything after and including the third forward slash.
+>Note: The request object is an instance of IncomingMessage.
 
-Headers are also not far away. They're in their own object on request called headers.
+注：
 
+>The method here will always be a normal HTTP method/verb. The url is the full URL without the server, protocol or port. For a typical URL, this means everything after and including the third forward slash.
+
+>Headers are also not far away. They're in their own object on request called headers.
+
+```
 const { headers } = request;
 const userAgent = headers['user-agent'];
-It's important to note here that all headers are represented in lower-case only, regardless of how the client actually sent them. This simplifies the task of parsing headers for whatever purpose.
+```
 
-If some headers are repeated, then their values are overwritten or joined together as comma-separated strings, depending on the header. In some cases, this can be problematic, so rawHeaders is also available.
+>It's important to note here that all headers are represented in lower-case only, regardless of how the client actually sent them. This simplifies the task of parsing headers for whatever purpose.
 
-Request Body
-When receiving a POST or PUT request, the request body might be important to your application. Getting at the body data is a little more involved than accessing request headers. The request object that's passed in to a handler implements the ReadableStream interface. This stream can be listened to or piped elsewhere just like any other stream. We can grab the data right out of the stream by listening to the stream's 'data' and 'end' events.
+>If some headers are repeated, then their values are overwritten or joined together as comma-separated strings, depending on the header. In some cases, this can be problematic, so rawHeaders is also available.
 
-The chunk emitted in each 'data' event is a Buffer. If you know it's going to be string data, the best thing to do is collect the data in an array, then at the 'end', concatenate and stringify it.
+## Request Body
+>When receiving a POST or PUT request, the request body might be important to your application. Getting at the body data is a little more involved than accessing request headers. The request object that's passed in to a handler implements the ReadableStream interface. This stream can be listened to or piped elsewhere just like any other stream. We can grab the data right out of the stream by listening to the stream's 'data' and 'end' events.
 
+>The chunk emitted in each 'data' event is a Buffer. If you know it's going to be string data, the best thing to do is collect the data in an array, then at the 'end', concatenate and stringify it.
+
+```
 let body = [];
 request.on('data', (chunk) => {
   body.push(chunk);
@@ -49,20 +72,24 @@ request.on('data', (chunk) => {
   body = Buffer.concat(body).toString();
   // at this point, `body` has the entire request body stored in it as a string
 });
-Note: This may seem a tad tedious, and in many cases, it is. Luckily, there are modules like concat-stream and body on npm which can help hide away some of this logic. It's important to have a good understanding of what's going on before going down that road, and that's why you're here!
+```
 
-A Quick Thing About Errors
-Since the request object is a ReadableStream, it's also an EventEmitter and behaves like one when an error happens.
+>Note: This may seem a tad tedious, and in many cases, it is. Luckily, there are modules like concat-stream and body on npm which can help hide away some of this logic. It's important to have a good understanding of what's going on before going down that road, and that's why you're here!
 
-An error in the request stream presents itself by emitting an 'error' event on the stream. If you don't have a listener for that event, the error will be thrown, which could crash your Node.js program. You should therefore add an 'error' listener on your request streams, even if you just log it and continue on your way. (Though it's probably best to send some kind of HTTP error response. More on that later.)
+## A Quick Thing About Errors
+>Since the request object is a ReadableStream, it's also an EventEmitter and behaves like one when an error happens.
 
+>An error in the request stream presents itself by emitting an 'error' event on the stream. If you don't have a listener for that event, the error will be thrown, which could crash your Node.js program. You should therefore add an 'error' listener on your request streams, even if you just log it and continue on your way. (Though it's probably best to send some kind of HTTP error response. More on that later.)
+
+```
 request.on('error', (err) => {
   // This prints the error message and stack trace to `stderr`.
   console.error(err.stack);
 });
-There are other ways of handling these errors such as other abstractions and tools, but always be aware that errors can and do happen, and you're going to have to deal with them.
+```
+>There are other ways of handling these errors such as other abstractions and tools, but always be aware that errors can and do happen, and you're going to have to deal with them.
 
-What We've Got so Far
+## What We've Got so Far
 At this point, we've covered creating a server, and grabbing the method, URL, headers and body out of requests. When we put that all together, it might look something like this:
 
 const http = require('http');
@@ -84,20 +111,20 @@ If we run this example, we'll be able to receive requests, but not respond to th
 
 So far we haven't touched on the response object at all, which is an instance of ServerResponse, which is a WritableStream. It contains many useful methods for sending data back to the client. We'll cover that next.
 
-HTTP Status Code
+## HTTP Status Code
 If you don't bother setting it, the HTTP status code on a response will always be 200. Of course, not every HTTP response warrants this, and at some point you'll definitely want to send a different status code. To do that, you can set the statusCode property.
 
 response.statusCode = 404; // Tell the client that the resource wasn't found.
 There are some other shortcuts to this, as we'll see soon.
 
-Setting Response Headers
+## Setting Response Headers
 Headers are set through a convenient method called setHeader.
 
 response.setHeader('Content-Type', 'application/json');
 response.setHeader('X-Powered-By', 'bacon');
 When setting the headers on a response, the case is insensitive on their names. If you set a header repeatedly, the last value you set is the value that gets sent.
 
-Explicitly Sending Header Data
+## Explicitly Sending Header Data
 The methods of setting the headers and status code that we've already discussed assume that you're using "implicit headers". This means you're counting on node to send the headers for you at the correct time before you start sending body data.
 
 If you want, you can explicitly write the headers to the response stream. To do this, there's a method called writeHead, which writes the status code and the headers to the stream.
@@ -108,7 +135,7 @@ response.writeHead(200, {
 });
 Once you've set the headers (either implicitly or explicitly), you're ready to start sending response data.
 
-Sending Response Body
+## Sending Response Body
 Since the response object is a WritableStream, writing a response body out to the client is just a matter of using the usual stream methods.
 
 response.write('<html>');
@@ -122,10 +149,10 @@ The end function on streams can also take in some optional data to send as the l
 response.end('<html><body><h1>Hello, World!</h1></body></html>');
 Note: It's important to set the status and headers before you start writing chunks of data to the body. This makes sense, since headers come before the body in HTTP responses.
 
-Another Quick Thing About Errors
+## Another Quick Thing About Errors
 The response stream can also emit 'error' events, and at some point you're going to have to deal with that as well. All of the advice for request stream errors still applies here.
 
-Put It All Together
+## Put It All Together
 Now that we've learned about making HTTP responses, let's put it all together. Building on the earlier example, we're going to make a server that sends back all of the data that was sent to us by the user. We'll format that data as JSON using JSON.stringify.
 
 const http = require('http');
