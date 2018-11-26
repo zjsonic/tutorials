@@ -1,12 +1,12 @@
 # HTTP详解 (Anatomy of an HTTP Transaction)
 >The purpose of this guide is to impart a solid understanding of the process of Node.js HTTP handling. We'll assume that you know, in a general sense, how HTTP requests work, regardless of language or programming environment. We'll also assume a bit of familiarity with Node.js EventEmitters and Streams. If you're not quite familiar with them, it's worth taking a quick read through the API docs for each of those.
 
-本指南的目的是让您充分了解Node.js中`HTTP`模块的工作的原理。我们假设您已经知晓在不考虑何种编程语言的情况下，HTTP请求是如何工作的。同时还要假设您了解一点Node.js[EventEmitters](https://nodejs.org/api/events.html)和[Streams](https://nodejs.org/api/stream.html)的知识。如果你不是十分熟悉它们，建议花点时间去快速的浏览一下API Docs中的关于它们的介绍。
+本指南的目的是让您充分了解Node.js中`HTTP`模块的工作的原理。在不考虑何种编程语言的情况下,我们假设您已经知晓HTTP请求是如何工作的。同时假设您了解一点Node.js中关于[EventEmitters](https://nodejs.org/api/events.html)和[Streams](https://nodejs.org/api/stream.html)的知识。如果你不是十分熟悉它们，建议花点时间去快速的浏览一下API Docs中的关于它们的介绍。
 
 ## 创建Server (Create the Server)
 >Any node web server application will at some point have to create a web server object. This is done by using createServer.
 
-在某些时候，任何一个Node web服务器程序都必须创建web `Server`对象。 创建`Server`对象是通过使用`createServer()`方法实现的。
+在某些时候，任何一个Node web服务器程序都必须创建web Server对象。 创建Web Server对象是通过使用`createServer()`方法实现的。
 ```
 const http = require('http');
 
@@ -17,7 +17,7 @@ const server = http.createServer((request, response) => {
 
 >The function that's passed in to createServer is called once for every HTTP request that's made against that server, so it's called the request handler. In fact, the Server object returned by createServer is an EventEmitter, and what we have here is just shorthand for creating a server object and then adding the listener later.
 
-函数
+一旦向服务器发起HTTP请求，传入`createServer(function(){})`方法的函数就会被调用。因此该函数被称为**请求处理程序**。实际上，`createServer()`方法返回的`Server`对象是一个`EventEmitter`(事件触发器)。我们这里只是简单的创建了一个Server对象，稍后会添加监听器。
 
 ```
 const server = http.createServer();
