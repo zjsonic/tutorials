@@ -27,11 +27,11 @@ server.on('request', (request, response) => {
 ```
 >When an HTTP request hits the server, node calls the request handler function with a few handy objects for dealing with the transaction, request and response. We'll get to those shortly.
 
-当
+当一个HTTP请求访问服务器的时候，node(使用几个方便的对象来)调用请求处理函数来处理请求和响应。
 
 >In order to actually serve requests, the listen method needs to be called on the server object. In most cases, all you'll need to pass to listen is the port number you want the server to listen on. There are some other options too, so consult the API reference.
 
-为了
+为了处理实际的服务器请求，需要在`Server`对象上调用`listen()`方法。在大多数情况下，你要做的是把需要服务器监听的端口号传递给`listen()`。还有一些其他选项，请参考[API reference](https://nodejs.org/dist/latest-v10.x/docs/api/net.html#net_server_listen)
 
 ## Method, URL and Headers
 >When handling a request, the first thing you'll probably want to do is look at the method and URL, so that appropriate actions can be taken. Node makes this relatively painless by putting handy properties onto the request object.
