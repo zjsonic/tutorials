@@ -36,7 +36,7 @@ server.on('request', (request, response) => {
 ## Method, URL and Headers
 >When handling a request, the first thing you'll probably want to do is look at the method and URL, so that appropriate actions can be taken. Node makes this relatively painless by putting handy properties onto the request object.
 
-当
+在处理请求的时候，你要做的第一件事可能就是查看请求所使用的`method`(方法)和url(请求地址)，以便采取相应的操作。Node通过在请求对象上设置的一些属性让这件事变得相对轻松。
 
 ```
 const { method, url } = request;
@@ -44,11 +44,15 @@ const { method, url } = request;
 
 >Note: The request object is an instance of IncomingMessage.
 
-注：
+注：`request`对象是`IncomingMessage`类的一个实例。
 
 >The method here will always be a normal HTTP method/verb. The url is the full URL without the server, protocol or port. For a typical URL, this means everything after and including the third forward slash.
 
+这里的`method`始终都是一个普通的HTTP`method`。`url`是一个完整的`url`（没有服务器、协议、端口号)，一个典型的`URL`应该包括第三个斜杠及之后的所有内容。(测试失败：发起URL:http://localhost/products  返回URL: '/')
+
 >Headers are also not far away. They're in their own object on request called headers.
+
+请求头的相关信息可以从`request`对象的`header`对象中获取。
 
 ```
 const { headers } = request;
@@ -57,12 +61,21 @@ const userAgent = headers['user-agent'];
 
 >It's important to note here that all headers are represented in lower-case only, regardless of how the client actually sent them. This simplifies the task of parsing headers for whatever purpose.
 
+在这里需要注意的是，不管客户端发送请求头的形式，所有的请求头都需要用小写表示。这样可以简化解析请求头的任务。
+
+
 >If some headers are repeated, then their values are overwritten or joined together as comma-separated strings, depending on the header. In some cases, this can be problematic, so rawHeaders is also available.
+
+如果重复请求头，根据请求头的不同，它们的值可能会被覆盖，也可能使用逗号链接在一起。在某些情况下，这可能会出问题，因此`rawHeaders也是可用的。
 
 ## Request Body
 >When receiving a POST or PUT request, the request body might be important to your application. Getting at the body data is a little more involved than accessing request headers. The request object that's passed in to a handler implements the ReadableStream interface. This stream can be listened to or piped elsewhere just like any other stream. We can grab the data right out of the stream by listening to the stream's 'data' and 'end' events.
 
+当收到`POST`或`PUT`请求时，对app来说，请求正文可能会很重要。获取正文数据比访问请求头复杂一些。传递给处理程序的请求对象实现了`ReadableStream`接口。就像任何其他`stream`一样，可以监听或传输这个`stream`到其他地方。通过监听`stream`的`data`和`end`事件，我们可以直接从`stream`中获取数据。
+
 >The chunk emitted in each 'data' event is a Buffer. If you know it's going to be string data, the best thing to do is collect the data in an array, then at the 'end', concatenate and stringify it.
+
+每个`data`事件中触发的数据块是一个buffer。如果你知道它会是字符串数据，那么最好的方法是在数组中收集数据，然后在`end`事件中连接并字符串化。
 
 ```
 let body = [];
