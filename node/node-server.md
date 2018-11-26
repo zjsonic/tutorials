@@ -1,7 +1,7 @@
 # HTTP详解 (Anatomy of an HTTP Transaction)
 >The purpose of this guide is to impart a solid understanding of the process of Node.js HTTP handling. We'll assume that you know, in a general sense, how HTTP requests work, regardless of language or programming environment. We'll also assume a bit of familiarity with Node.js EventEmitters and Streams. If you're not quite familiar with them, it's worth taking a quick read through the API docs for each of those.
 
-本指南的目的是让您充分了解Node.js中`HTTP`模块的工作的原理。我们假设您已经知晓在不考虑何种编程语言的情况下，HTTP请求是如何工作的。同时还要假设您了解一点Node.js`[EventEmitters](https://nodejs.org/api/events.html)`和`[Streams](https://nodejs.org/api/stream.html)`的知识。如果你不是十分熟悉它们，建议花点时间去快速的浏览一下API Docs中的关于它们的介绍。
+本指南的目的是让您充分了解Node.js中`HTTP`模块的工作的原理。我们假设您已经知晓在不考虑何种编程语言的情况下，HTTP请求是如何工作的。同时还要假设您了解一点Node.js[EventEmitters](https://nodejs.org/api/events.html)和[Streams](https://nodejs.org/api/stream.html)的知识。如果你不是十分熟悉它们，建议花点时间去快速的浏览一下API Docs中的关于它们的介绍。
 
 ## 创建Server (Create the Server)
 >Any node web server application will at some point have to create a web server object. This is done by using createServer.
