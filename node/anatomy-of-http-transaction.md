@@ -1,4 +1,17 @@
 # HTTP详解 (Anatomy of an HTTP Transaction)
+- 创建Server (Create the Server)
+- Method, URL and Headers
+- Request Body
+- A Quick Thing About Errors
+- What We've Got so Far
+- HTTP Status Code
+- Setting Response Headers
+- Explicitly Sending Header Data
+- Sending Response Body
+- Another Quick Thing About Errors
+- Put It All Together
+- Echo Server Example
+
 >The purpose of this guide is to impart a solid understanding of the process of Node.js HTTP handling. We'll assume that you know, in a general sense, how HTTP requests work, regardless of language or programming environment. We'll also assume a bit of familiarity with Node.js EventEmitters and Streams. If you're not quite familiar with them, it's worth taking a quick read through the API docs for each of those.
 
 本指南的目的是让您充分了解Node.js中`HTTP`模块的工作的原理。在不考虑何种编程语言的情况下,我们假设您已经知晓HTTP请求是如何工作的。同时假设您了解一点Node.js中关于[EventEmitters](https://nodejs.org/api/events.html)和[Streams](https://nodejs.org/api/stream.html)的知识。如果你不是十分熟悉它们，建议花点时间去快速的浏览一下API Docs中的关于它们的介绍。
@@ -336,9 +349,6 @@ Yay streams!
 为了处理请求流上的错误，我们将错误记录到stderr并发送400状态代码以指示错误请求。 但是，在实际应用程序中，我们需要检查错误以确定正确的状态代码和消息是什么。 像往常一样有错误，您应该查阅错误文档。
 
 在响应中，我们只是将错误记录到stderr。
-
-
-
 
 ```
 const http = require('http');
