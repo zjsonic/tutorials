@@ -89,10 +89,17 @@ request.on('data', (chunk) => {
 
 >Note: This may seem a tad tedious, and in many cases, it is. Luckily, there are modules like concat-stream and body on npm which can help hide away some of this logic. It's important to have a good understanding of what's going on before going down that road, and that's why you're here!
 
+注意：这看起来有点单调乏味，而且在很多情况下都是如此。 幸运的是，在npm上有像concat-stream和body这样的模块可以帮助简化一些逻辑。 在走这条路之前，要很好地了解正在发生的事情，这就是为什么你在这里！
+
+
 ## A Quick Thing About Errors
 >Since the request object is a ReadableStream, it's also an EventEmitter and behaves like one when an error happens.
 
+由于`request`对象是一个ReadableStream，所以它也是一个EventEmitter，行为像错误发生时的行为。
+
 >An error in the request stream presents itself by emitting an 'error' event on the stream. If you don't have a listener for that event, the error will be thrown, which could crash your Node.js program. You should therefore add an 'error' listener on your request streams, even if you just log it and continue on your way. (Though it's probably best to send some kind of HTTP error response. More on that later.)
+
+请求流中的错误通过触发stream上的`error`事件展示的。如果你没有该事件的监听器，则会抛出error，并可能导致Node.js程序崩溃。你应该在你的请求流上添加`error`监听器，即使你仅是记录它并继续下一步。(尽管发送某种HTTP erroe响应可能是最好的)
 
 ```
 request.on('error', (err) => {
@@ -102,9 +109,13 @@ request.on('error', (err) => {
 ```
 >There are other ways of handling these errors such as other abstractions and tools, but always be aware that errors can and do happen, and you're going to have to deal with them.
 
+还有其他方式来处理这些错误，比如其他abstractions和工具。但始终要注意错误确实可能会发生，你将不得不处理它们。
+
 ## What We've Got so Far
 At this point, we've covered creating a server, and grabbing the method, URL, headers and body out of requests. When we put that all together, it might look something like this:
 
+此刻，我们已经学习了创建server对象，并从请求中获取`method` `url` `headers`和`body`。当我们把这些放在一起，它可能看起来像这样：
+```
 const http = require('http');
 
 http.createServer((request, response) => {
@@ -120,54 +131,86 @@ http.createServer((request, response) => {
     // do whatever we need to in order to respond to this request.
   });
 }).listen(8080); // Activates this server, listening on port 8080.
-If we run this example, we'll be able to receive requests, but not respond to them. In fact, if you hit this example in a web browser, your request would time out, as nothing is being sent back to the client.
+```
 
-So far we haven't touched on the response object at all, which is an instance of ServerResponse, which is a WritableStream. It contains many useful methods for sending data back to the client. We'll cover that next.
+>If we run this example, we'll be able to receive requests, but not respond to them. In fact, if you hit this example in a web browser, your request would time out, as nothing is being sent back to the client.
+
+运行上面这个例子，我们可以收到request,但是不会响应请求。事实上，如果你在浏览器中运行它，你的请求会超时，因为没有任何内容发送回客户端。
+
+>So far we haven't touched on the response object at all, which is an instance of ServerResponse, which is a WritableStream. It contains many useful methods for sending data back to the client. We'll cover that next.
+
+到目前为止，我们还没有讨论`response`对象，`response`对象是`ServerResponse`类的一个实例,它是一个`WritableStream`。它包含许多有用的方法用于返回数据给客户端。接下来，我们将介绍。
+
 
 ## HTTP Status Code
-If you don't bother setting it, the HTTP status code on a response will always be 200. Of course, not every HTTP response warrants this, and at some point you'll definitely want to send a different status code. To do that, you can set the statusCode property.
+>If you don't bother setting it, the HTTP status code on a response will always be 200. Of course, not every HTTP response warrants this, and at some point you'll definitely want to send a different status code. To do that, you can set the statusCode property.
 
+如果你
+```
 response.statusCode = 404; // Tell the client that the resource wasn't found.
+```
+
 There are some other shortcuts to this, as we'll see soon.
 
 ## Setting Response Headers
-Headers are set through a convenient method called setHeader.
+>Headers are set through a convenient method called setHeader.
 
+```
 response.setHeader('Content-Type', 'application/json');
 response.setHeader('X-Powered-By', 'bacon');
-When setting the headers on a response, the case is insensitive on their names. If you set a header repeatedly, the last value you set is the value that gets sent.
+```
+
+>When setting the headers on a response, the case is insensitive on their names. If you set a header repeatedly, the last value you set is the value that gets sent.
+
+当
 
 ## Explicitly Sending Header Data
-The methods of setting the headers and status code that we've already discussed assume that you're using "implicit headers". This means you're counting on node to send the headers for you at the correct time before you start sending body data.
+>The methods of setting the headers and status code that we've already discussed assume that you're using "implicit headers". This means you're counting on node to send the headers for you at the correct time before you start sending body data.
 
-If you want, you can explicitly write the headers to the response stream. To do this, there's a method called writeHead, which writes the status code and the headers to the stream.
+方法
 
+>If you want, you can explicitly write the headers to the response stream. To do this, there's a method called writeHead, which writes the status code and the headers to the stream.
+```
 response.writeHead(200, {
   'Content-Type': 'application/json',
   'X-Powered-By': 'bacon'
 });
-Once you've set the headers (either implicitly or explicitly), you're ready to start sending response data.
+```
+>Once you've set the headers (either implicitly or explicitly), you're ready to start sending response data.
+
+一旦
 
 ## Sending Response Body
-Since the response object is a WritableStream, writing a response body out to the client is just a matter of using the usual stream methods.
-
+>Since the response object is a WritableStream, writing a response body out to the client is just a matter of using the usual stream methods.
+```
 response.write('<html>');
 response.write('<body>');
 response.write('<h1>Hello, World!</h1>');
 response.write('</body>');
 response.write('</html>');
 response.end();
-The end function on streams can also take in some optional data to send as the last bit of data on the stream, so we can simplify the example above as follows.
+```
+>The end function on streams can also take in some optional data to send as the last bit of data on the stream, so we can simplify the example above as follows.
 
+`end`函数
+
+```
 response.end('<html><body><h1>Hello, World!</h1></body></html>');
-Note: It's important to set the status and headers before you start writing chunks of data to the body. This makes sense, since headers come before the body in HTTP responses.
+```
+>Note: It's important to set the status and headers before you start writing chunks of data to the body. This makes sense, since headers come before the body in HTTP responses.
+
+注意：
 
 ## Another Quick Thing About Errors
-The response stream can also emit 'error' events, and at some point you're going to have to deal with that as well. All of the advice for request stream errors still applies here.
+>The response stream can also emit 'error' events, and at some point you're going to have to deal with that as well. All of the advice for request stream errors still applies here.
+
+responese流
 
 ## Put It All Together
-Now that we've learned about making HTTP responses, let's put it all together. Building on the earlier example, we're going to make a server that sends back all of the data that was sent to us by the user. We'll format that data as JSON using JSON.stringify.
+>Now that we've learned about making HTTP responses, let's put it all together. Building on the earlier example, we're going to make a server that sends back all of the data that was sent to us by the user. We'll format that data as JSON using JSON.stringify.
 
+现在
+```
 const http = require('http');
 
 http.createServer((request, response) => {
@@ -200,9 +243,14 @@ http.createServer((request, response) => {
     // END OF NEW STUFF
   });
 }).listen(8080);
-Echo Server Example
-Let's simplify the previous example to make a simple echo server, which just sends whatever data is received in the request right back in the response. All we need to do is grab the data from the request stream and write that data to the response stream, similar to what we did previously.
+```
 
+## Echo Server Example
+>Let's simplify the previous example to make a simple echo server, which just sends whatever data is received in the request right back in the response. All we need to do is grab the data from the request stream and write that data to the response stream, similar to what we did previously.
+
+让我们
+
+```
 const http = require('http');
 
 http.createServer((request, response) => {
@@ -236,10 +284,17 @@ http.createServer((request, response) => {
     response.end();
   }
 }).listen(8080);
-Note: By checking the URL in this way, we're doing a form of "routing". Other forms of routing can be as simple as switch statements or as complex as whole frameworks like express. If you're looking for something that does routing and nothing else, try router.
+```
 
-Great! Now let's take a stab at simplifying this. Remember, the request object is a ReadableStream and the response object is a WritableStream. That means we can use pipe to direct data from one to the other. That's exactly what we want for an echo server!
+>Note: By checking the URL in this way, we're doing a form of "routing". Other forms of routing can be as simple as switch statements or as complex as whole frameworks like express. If you're looking for something that does routing and nothing else, try router.
 
+注意：
+
+>Great! Now let's take a stab at simplifying this. Remember, the request object is a ReadableStream and the response object is a WritableStream. That means we can use pipe to direct data from one to the other. That's exactly what we want for an echo server!
+
+太好了！
+
+```
 const http = require('http');
 
 http.createServer((request, response) => {
@@ -250,14 +305,15 @@ http.createServer((request, response) => {
     response.end();
   }
 }).listen(8080);
-Yay streams!
-
+```
+>Yay streams!
 We're not quite done yet though. As mentioned multiple times in this guide, errors can and do happen, and we need to deal with them.
-
 To handle errors on the request stream, we'll log the error to stderr and send a 400 status code to indicate a Bad Request. In a real-world application, though, we'd want to inspect the error to figure out what the correct status code and message would be. As usual with errors, you should consult the Error documentation.
-
 On the response, we'll just log the error to stderr.
 
+
+
+```
 const http = require('http');
 
 http.createServer((request, response) => {
@@ -276,15 +332,16 @@ http.createServer((request, response) => {
     response.end();
   }
 }).listen(8080);
-We've now covered most of the basics of handling HTTP requests. At this point, you should be able to:
+```
+>We've now covered most of the basics of handling HTTP requests. At this point, you should be able to:
+- Instantiate an HTTP server with a request handler function, and have it listen on a port.
+- Get headers, URL, method and body data from request objects.
+- Make routing decisions based on URL and/or other data in request objects.
+- Send headers, HTTP status codes and body data via response objects.
+- Pipe data from request objects and to response objects.
+- Handle stream errors in both the request and response streams.
 
-Instantiate an HTTP server with a request handler function, and have it listen on a port.
-Get headers, URL, method and body data from request objects.
-Make routing decisions based on URL and/or other data in request objects.
-Send headers, HTTP status codes and body data via response objects.
-Pipe data from request objects and to response objects.
-Handle stream errors in both the request and response streams.
-From these basics, Node.js HTTP servers for many typical use cases can be constructed. There are plenty of other things these APIs provide, so be sure to read through the API docs for EventEmitters, Streams, and HTTP.
+>From these basics, Node.js HTTP servers for many typical use cases can be constructed. There are plenty of other things these APIs provide, so be sure to read through the API docs for EventEmitters, Streams, and HTTP.
 
 
 ## 参考
