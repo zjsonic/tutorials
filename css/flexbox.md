@@ -111,3 +111,6 @@ Flexbox布局的目标：提供一种更有效的布局方式。
     </div>
 </body>
 ```
+
+## 参考
+- [css-tricks](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
