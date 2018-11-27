@@ -30,3 +30,7 @@ Why bother doing something you already have done a hundred times, where there is
 >space-evenly: items are distributed so that the spacing between any two items (and the space to the edges) is equal.
 美 ['ivnli] 
 - adv. 均匀地；平衡地；平坦地；平等地
+
+
+## implicitly explicitly 
+>Once you've set the headers (either implicitly or explicitly), you're ready to start sending response data.

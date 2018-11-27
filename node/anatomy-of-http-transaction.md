@@ -145,15 +145,20 @@ http.createServer((request, response) => {
 ## HTTP Status Code
 >If you don't bother setting it, the HTTP status code on a response will always be 200. Of course, not every HTTP response warrants this, and at some point you'll definitely want to send a different status code. To do that, you can set the statusCode property.
 
-如果你
+如果你不进行设置，HTTP响应的状态码始终为200.当然不是每个HTTP响应都能保证这一点。在某些时候，你肯定希望发送不同的状态码。为此，可以设置`statusCode`属性。
+
 ```
 response.statusCode = 404; // Tell the client that the resource wasn't found.
 ```
 
-There are some other shortcuts to this, as we'll see soon.
+>There are some other shortcuts to this, as we'll see soon.
+
+有许多其他一些快捷方式，我们很快会看到。
 
 ## Setting Response Headers
 >Headers are set through a convenient method called setHeader.
+
+通过`setHeader()`方法可以很方便的设置响应头。
 
 ```
 response.setHeader('Content-Type', 'application/json');
@@ -162,14 +167,17 @@ response.setHeader('X-Powered-By', 'bacon');
 
 >When setting the headers on a response, the case is insensitive on their names. If you set a header repeatedly, the last value you set is the value that gets sent.
 
-当
+当设置响应头的时候，响应头的名字是区分大小写的。如果你重复设置响应头，最后一个值会被发送。
 
 ## Explicitly Sending Header Data
 >The methods of setting the headers and status code that we've already discussed assume that you're using "implicit headers". This means you're counting on node to send the headers for you at the correct time before you start sending body data.
 
-方法
+我们已经讨论了设置响应头和状态码的方法,假设您使用的是隐式响应头，这意味着在开始发送正文数据之前，要指望node在正确的时间，为你发送响应头。
 
 >If you want, you can explicitly write the headers to the response stream. To do this, there's a method called writeHead, which writes the status code and the headers to the stream.
+
+如果需要，你可以显式的将响应头写入响应流。为此，有一个名为`writeHead()`的方法，可以将状态码和响应头写入流。
+
 ```
 response.writeHead(200, {
   'Content-Type': 'application/json',
@@ -178,10 +186,13 @@ response.writeHead(200, {
 ```
 >Once you've set the headers (either implicitly or explicitly), you're ready to start sending response data.
 
-一旦
+一旦你设置了响应头(隐式或显式)，你可以准备发送响应数据了。
 
 ## Sending Response Body
 >Since the response object is a WritableStream, writing a response body out to the client is just a matter of using the usual stream methods.
+
+因为`response`对象是一个`WritableStream`，所以写给客户端的响应正文仅使用常用的流方法即可。
+
 ```
 response.write('<html>');
 response.write('<body>');
@@ -190,26 +201,31 @@ response.write('</body>');
 response.write('</html>');
 response.end();
 ```
+
+
 >The end function on streams can also take in some optional data to send as the last bit of data on the stream, so we can simplify the example above as follows.
 
-`end`函数
+`end`函数也可以接收一些可选的数据作为流上的最后一位数据发送，因此我们可以简化上面的示例。
 
 ```
 response.end('<html><body><h1>Hello, World!</h1></body></html>');
 ```
+
 >Note: It's important to set the status and headers before you start writing chunks of data to the body. This makes sense, since headers come before the body in HTTP responses.
 
-注意：
+注意：在开始向正文写入数据库之前，设置状态码和响应头是很重要的，因为在HTTP响应中，响应头在前，响应正文在后。
 
 ## Another Quick Thing About Errors
 >The response stream can also emit 'error' events, and at some point you're going to have to deal with that as well. All of the advice for request stream errors still applies here.
 
-responese流
+responese流也可以触发`error`事件，在某些时候，你还必须处理这些事件。所有关于请求流的错误的建议在这里仍然适用。
 
 ## Put It All Together
 >Now that we've learned about making HTTP responses, let's put it all together. Building on the earlier example, we're going to make a server that sends back all of the data that was sent to us by the user. We'll format that data as JSON using JSON.stringify.
 
-现在
+现在我们已经了解了如何创建HTTP响应。让我们把他们放在一起。在前面示例的基础上，我们将创建一个服务器，返回所有用户发送给我们的数据。我们会使用`JSON.stringify`方法将数据格式化为JSON。
+
+
 ```
 const http = require('http');
 
@@ -288,11 +304,13 @@ http.createServer((request, response) => {
 
 >Note: By checking the URL in this way, we're doing a form of "routing". Other forms of routing can be as simple as switch statements or as complex as whole frameworks like express. If you're looking for something that does routing and nothing else, try router.
 
-注意：
+注意：通过这种方式检查URL，我们正在做一种“路由”形式。 其他形式的路由可以像switch语句一样简单，也可以像express这样的框架一样复杂。 如果您正在寻找可以进行路由的东西，请尝试使用路由器。
+
 
 >Great! Now let's take a stab at simplifying this. Remember, the request object is a ReadableStream and the response object is a WritableStream. That means we can use pipe to direct data from one to the other. That's exactly what we want for an echo server!
 
-太好了！
+太好了！现在让我们来简化一下吧。 请记住，请求对象是ReadableStream，响应对象是WritableStream。 这意味着我们可以使用管道将数据从一个引导到另一个。 这正是我们想要的echo服务器！
+
 
 ```
 const http = require('http');
@@ -310,6 +328,15 @@ http.createServer((request, response) => {
 We're not quite done yet though. As mentioned multiple times in this guide, errors can and do happen, and we need to deal with them.
 To handle errors on the request stream, we'll log the error to stderr and send a 400 status code to indicate a Bad Request. In a real-world application, though, we'd want to inspect the error to figure out what the correct status code and message would be. As usual with errors, you should consult the Error documentation.
 On the response, we'll just log the error to stderr.
+
+Yay streams!
+
+我们还没有完成。 正如本指南中多次提到的，错误可以而且确实发生，我们需要处理它们。
+
+为了处理请求流上的错误，我们将错误记录到stderr并发送400状态代码以指示错误请求。 但是，在实际应用程序中，我们需要检查错误以确定正确的状态代码和消息是什么。 像往常一样有错误，您应该查阅错误文档。
+
+在响应中，我们只是将错误记录到stderr。
+
 
 
 
@@ -341,7 +368,16 @@ http.createServer((request, response) => {
 - Pipe data from request objects and to response objects.
 - Handle stream errors in both the request and response streams.
 
+我们现在已经介绍了处理HTTP请求的大部分基础知识。 在这一点上，你应该能够
+- 从`request`对象中获取headers, URL , method 和 body data
+- 根据`request`对象中的URL和/或其他数据确定路由
+- 通过`response`对象发送headers,HTTP状态码和响应报文
+- 从`request`对象输送数据到`response`对象
+- 处理`request`流和`response`流中的stream错误
+
 >From these basics, Node.js HTTP servers for many typical use cases can be constructed. There are plenty of other things these APIs provide, so be sure to read through the API docs for EventEmitters, Streams, and HTTP.
+
+根据这些基础知识，可以构建适用于许多典型用例的Node.jsHTTP服务器。这些API还提供了很多其他功能，因此请务必通读EventEmitter、Streams和HTTP的API文档。
 
 
 ## 参考
