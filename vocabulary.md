@@ -34,3 +34,11 @@ Why bother doing something you already have done a hundred times, where there is
 
 ## implicitly explicitly 
 >Once you've set the headers (either implicitly or explicitly), you're ready to start sending response data.
+
+## interface
+- n. 界面；<计>接口；交界面
+- v. （使通过界面或接口）接合，连接；[计算机]使联系
+- vi. 相互作用（或影响）；交流，交谈
+## interfaces
+>The HTTP interfaces in Node.js are designed to support many features of the protocol which have been traditionally difficult to use. 
+- n. [通信][计] 接口（interface的复数）

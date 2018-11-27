@@ -47,7 +47,7 @@ Node.js的检索文件扩展名顺序：
 
 
 ## Node.js的module类型
-- core modules
+- core modules（Node.js的核心模块被编译成了二进制文件，核心模块位于Node.js源代码的lib文件夹中。核心模块始终优先加载，即使存在该名称的文件）
     - http
     - url
     - queryString
@@ -56,6 +56,8 @@ Node.js的检索文件扩展名顺序：
     - util
 - local modules:指Node.js项目中由开发者创建的模块。
 - third party modules
+
+
 
 ## 例：引入一个全局模块
 使用Node.js的http模块创建一个服务器
