@@ -277,7 +277,8 @@ http.createServer((request, response) => {
 ## Echo Server Example
 >Let's simplify the previous example to make a simple echo server, which just sends whatever data is received in the request right back in the response. All we need to do is grab the data from the request stream and write that data to the response stream, similar to what we did previously.
 
-让我们
+让我们简化前面的例子来制作一个简单的echo服务器，它只是在响应中发送请求中收到的任何数据。 我们需要做的就是从请求流中获取数据并将该数据写入响应流，类似于我们之前所做的。
+
 
 ```
 const http = require('http');
@@ -291,12 +292,20 @@ http.createServer((request, response) => {
     response.end(body);
   });
 }).listen(8080);
-Now let's tweak this. We want to only send an echo under the following conditions:
+```
 
-The request method is POST.
-The URL is /echo.
-In any other case, we want to simply respond with a 404.
+>Now let's tweak this. We want to only send an echo under the following conditions:
+- The request method is POST.
+- The URL is /echo.
+- In any other case, we want to simply respond with a 404.
 
+现在让我们调整一下。 我们只想在以下条件下发送响应：
+- 请求方法是POST。
+- URL是/ echo。
+- 在任何其他情况下，我们只想回复404。
+
+
+```
 const http = require('http');
 
 http.createServer((request, response) => {
