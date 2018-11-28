@@ -1,11 +1,12 @@
 # Events Module
 - 打印`events`对象
+- Events Module简介
 - 向监听器传参
 - 异步VS同步
 - 单次处理事件
 - error事件
 - class
-    - events.EventEmitter
+    - events.EventEmitter()
 
 ## 打印events对象
 ```
@@ -39,22 +40,20 @@ EventEmitter {
   listenerCount: [Function: listenerCount],
   eventNames: [Function: eventNames] }
 ```
-很多Node.js核心API都是围绕一个惯用的异步事件驱动架构构建的，其中某些类型的对象（称为“发射器”）发出命名事件，导致调用Function对象（“侦听器”）。例如:
 
-- 每次客户端连接服务器的时候，`net.Server`对象会发出事件；
-- 每次文件被打开的时候，`fs.readStream`对象会发出事件
-- 只要有数据可供读取，`stream`就会发出事件。
-
-发出事件的所有对象都是EventEmitter类的实例。 这些对象暴露了`eventEmitter.on（）`函数，该函数允许将一个或多个函数附加到对象发出的命名事件。 通常，事件名称是camel-cased字符串，但可以使用任何有效的JavaScript属性键。
-
-当EventEmitter对象发出事件时，将同步调用附加到该特定事件的所有函数。 被调用侦听器返回的任何值都将被忽略，并将被丢弃。
-
-以下示例显示了具有单个侦听器的简单EventEmitter实例。 eventEmitter.on（）方法用于注册侦听器，而eventEmitter.emit（）方法用于触发事件。
+## Events Module简介
+- `events`是Node.js的内置模块。（无需额外安装）
+- `events`是一个构造函数。
+- `events`模块提供了一种使用事件的方式。使用`events`模块，我们可以：
+  - 创建事件对象
+  - 设置事件类型
+  - 添加事件监听程序
+  - 触发事件
 
 ```
-const EventEmitter = require('events');
+const events = require('events');
 
-class MyEmitter extends EventEmitter {}
+class myEvents extends events {}
 
 const myEmitter = new MyEmitter();
 myEmitter.on('event', () => {
@@ -62,23 +61,41 @@ myEmitter.on('event', () => {
 });
 myEmitter.emit('event');
 ```
+或
+```
+const events = require('events') // 引入events模块
+
+const em = new events.EventEmitter() //创建EventEmitter类的实例
+
+em.on('myEvent',(data) => {  //在事件对象上指定事件类型和事件处理函数
+    console.log('My event occurred' + data)
+})
+
+em.emit('myEvent','This is my first Node.js event emitter example.') //触发指定事件，并把参数传递给事件处理程序
+```
 ## 向监听器传参
 ## 异步VS同步
 ## 单次处理事件
 ## error事件
-## eventEmitter
-- eventEmitter是由`events`模块定义和暴露的。
-Node中的许多对象都会发出事件。
-所有能触发事件的对象都是events.EventEmitter类的实例。
-eventEmitter类属于events模块。可以通过下列代码访问eventEmitter
+## event.EventEmitter()
+- `EventEmitter`是一个类，由`events`模块定义并暴露。
+- EventEmitter用于创建事件对象。
+
 ```
 const events = require('events)
-const eventEmitter = new events.eventEmitter()
+const em = new events.eventEmitter()
 ```
-当`eventEmitter`实例遇到任何错误，它会发出一个`error`事件。
-当一个新的listener被建立，新的监听事件会被触发。
-当一个listener被删除的时候，删除监听的事件会被触发。
 
-eventEmitter提供了多个属性：
-- on:用于绑定事件处理函数
-- emit：用于触发事件
+## em.on(eventName,listener)
+数据类型：Function
+用途：为事件对象指定事件类型、添加事件处理程序。通常，事件名称是camel-cased字符串，但可以使用任何有效的JavaScript属性键。
+- 参数：
+  - eventName: string
+  - listener: function
+
+## em.emit(eventName,[...args])
+- 数据类型：Function
+- 用途：用于触发事件。
+- 参数：
+  - eventName: string  
+  - args: any
