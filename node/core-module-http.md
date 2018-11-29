@@ -3,10 +3,12 @@
 - HTTP简介
 - class
     - http.Agent
-    - http.ClientRequest
     - http.Server
-    - http.ServerResponse
+      - server.listen()
+    - http.ClientRequest
     - http.IncomingMessage
+    - http.ServerResponse
+    
 - properties
     - http.Methods
     - http.STATUSCODES
@@ -154,30 +156,19 @@
 - 用于创建HTTP服务器。
 - HTTP模块提供了一种方式，让Node.js可以通过http传输数据
 
-## http.createServer([options],[requestListener])
+## METHODS: http.createServer([options],[requestListener])
 - 用途: 用于创建node服务器
 - 参数: 
-  - options: 指定要使用的接收消息的类
-    - 类型： object
-    - IncomingMessage
-    - ServerResponse
-  - function:requestListener(req,res) 请求监听函数
-    - 每次服务器收到一个请求就会执行requestListener()函数
-    - requestListener()处理用户请求也响应用户请求
-    - req: 表示`IncomingMessage`对象（请求对象），该对象有处理请求的方法
-      - req.url
-      - req.method
-      - req.headers
-      - req.statusCode
-    - res: 表示`ServerResponse`对象(响应对象,返回客户端的可写流)，该对象有处理响应的方法
-      - res.writeHead(200,{ 'Content-Type': 'text/plain' }): 发送状态和响应头给客户端
-      - res.write( req.url ): 发送文本给客户端
-      - res.end(): 响应已完成的信号
-      - getHeader()
-      - setHeader()
-- return: `http.Server`(function)
+  - options:`object` 
+    - 用途：指定接收消息的类
+  - requestListener:`function`
+    - 用途：自动添加到`request`事件上的处理函数。
+- return: 新创建的`http.Server`实例
 
-## Server对象
+## CLASS:http.Server
+- `net.Server`是另一个类，用于创建TCP或IPC服务器。
+- `http.Server`继承自`net.Server` 用于创建http服务器
+- server.request： 自有事件,只要有请求，就会触发request事件，每个connection可能会存在多个请求。
 - server.setTimeout()
 - server.close() : 关闭服务器连接
 - server.listen() : 监听计算机端口
@@ -225,3 +216,50 @@ server.__proto__.__proto__:
   unref: [Function]
 }
 ```
+
+## CLASS: http.ClientRequest()
+- 类型：http.ClientRequest是一个类，也就是一个构造函数。
+```
+{ [Function: ClientRequest]
+  super_:
+   { [Function: OutgoingMessage]
+     super_:
+      { [Function: Stream]
+        super_: [Object],
+        Readable: [Object],
+        Writable: [Object],
+        Duplex: [Object],
+        Transform: [Object],
+        PassThrough: [Object],
+        Stream: [Circular],
+        _isUint8Array: [Function: isUint8Array],
+        _uint8ArrayToBuffer: [Function: _uint8ArrayToBuffer] } } }
+```
+- `http.ClientRequest`是`http.request()`方法的返回值。
+- `http.ClientRequest`表示请求队列中正在进行的请求。
+- 使用以下API可以修改`header`:
+  - request.setHeader(name,value)
+  - request.getHeader(name)
+  - request.removeHeader(name)
+- 实际的heaer将与第一个数据块一起发送，或者在调用request.end()时发送。
+- 要获得响应，请为request对象添加“response”侦听器。 收到响应头后，将从request对象发出'response'。
+- 'response'事件使用一个参数执行，该参数是http.IncomingMessage的一个实例。
+- 在“响应”事件期间，可以向响应对象添加侦听器；特别是侦听“数据”事件。
+- 如果未添加“响应”处理程序，则将完全丢弃响应。
+- 但是，如果添加了“响应”事件处理程序，则必须使用来自响应对象的数据，无论是在存在“可读”事件时调用response.read()，还是通过添加“数据”处理程序，或通过调用.install()方法。在使用数据之前，“结束”事件不会激发。此外，在读取数据之前，它将消耗内存，这最终会导致“内存不足进程”错误。
+
+## CLASS: http.IncomingMessage
+- 类型：类 构造函数
+- 由`http.ClientRequest`或`http.Server`创建
+- 它作为第一个参数，被分别地传入到`request`和`response`事件中
+- 它可以用于获取response.status、header和data
+
+
+## CLASS: http.ServerResponse
+- 此对象是由HTTP服务器在内部创建的，而不是由用户创建的。它作为第二个参数传递给`request`事件。
+- 响应继承了Stream，还实现了以下功能：
+
+
+
+
+

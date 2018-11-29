@@ -87,15 +87,17 @@ const em = new events.eventEmitter()
 ```
 
 ## em.on(eventName,listener)
-数据类型：Function
-用途：为事件对象指定事件类型、添加事件处理程序。通常，事件名称是camel-cased字符串，但可以使用任何有效的JavaScript属性键。
+- 数据类型：Function
+- 用途：为事件对象指定事件类型、添加事件处理程序。
 - 参数：
   - eventName: string
   - listener: function
+- 返回值：EventEmitter（可以形成chains)
 
 ## em.emit(eventName,[...args])
 - 数据类型：Function
 - 用途：用于触发事件。
 - 参数：
-  - eventName: string  
+  - eventName: string (通常是camel-cased字符串，也可以是任何有效的JavaScript key) 
   - args: any
+- 返回值：boolean
