@@ -1,15 +1,15 @@
 # Error构造函数
-通过`Error`构造函数可以创建一个错误对象，当程序运行出错时，程序会停止执行，并抛出`Error`的实例。该实例对象包含了错误的名称和提示信息。
+通过`Error`构造函数可以创建一个错误对象，当程序运行出错时，程序会停止执行，并抛出`Error`的实例。该实例对象包含了错误信息(错误的名称和提示信息)。
 
 ## Error对象的属性
 - `error.name`:设置错误的名字/返回错误的名字
- - `Error` error实例的默认名字
- - `ReferenceError` 非法引用错误
- - `SyntaxError` 语法错误
- - `TypeError` 类型错误
- - `RangeError` 使用内置对象的方法时，参数超范围
- - `URIError` 编码错误（encodeURI()、decodeURI()、encodeURIComponent()、decodeURIComponent()、escape()和unescape()这六个函数）
- - `EvalError` eval()函数未被正确执行
+    - `Error` error实例的默认名字
+    - `ReferenceError` 非法引用错误
+    - `SyntaxError` 语法错误
+    - `TypeError` 类型错误
+    - `RangeError` 使用内置对象的方法时，参数超范围
+    - `URIError` 编码错误（encodeURI()、decodeURI()、encodeURIComponent()、decodeURIComponent()、escape()和unescape()这六个函数）
+    - `EvalError` eval()函数未被正确执行
 - `error.message`:string 设置错误的提示信息/返回错误的提示信息
 
 ## Throw Error
@@ -22,7 +22,7 @@ Uncaught SyntaxError: Unexpected token }
 ```
 
 ## try语句
-- try用于定义一段代码测试潜在的错误。
+- try用于定义一段测试潜在错误的代码。
 - 无参数
 
 ## catch(error)语句
@@ -33,7 +33,7 @@ Uncaught SyntaxError: Unexpected token }
 
 
 ## finally语句
-- finaly用于处理代码块中潜在的错误。
+- Finally语句允许您在TRY和CATCH语句之后执行代码，而不管TRY和CATCH语句执行的结果如何。
 
 ## throw语句
 - throw语句允许你创建自定义错误。
@@ -50,16 +50,9 @@ console.log('world')
 ```
 ```
 console.log('hello')
-throw new Error() // return Error 停止程序继续执行
+throw new Error() // return 'Uncaught Error at index.html:19' 停止程序继续执行
 console.log('world')
 ```
-
-- ReferenceError子类
-- TypeError子类
-- RangeError子类
-- SyntaxError子类
-- EvalError子类
-- URIError子类
 
 ## 定义
 `Error`对象在出现错误的时候，负责提供错误信息。
