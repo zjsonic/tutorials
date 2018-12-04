@@ -22,17 +22,46 @@ Uncaught SyntaxError: Unexpected token }
 ```
 
 ## try语句
+```
+try{
+    //code
+}
+```
 - try用于定义一段测试潜在错误的代码。
 - 无参数
+- 注意：**try只能测试运行阶段出现的错误，如果是解析阶段出现的语法错误是try不到的**。
 
 ## catch(error)语句
+```
+catch(error){
+    //code
+}
+```
 - 当try语句中出现错误时，使用catch语句处理错误
 - try和catch是成对出现的
 - try语句测试无错误，则catch代码块不执行
 - try语句测试出现错误，则执行catch代码块
+```
+ try{
+// say('Hi,Good morning.')  // caught: ReferenceError: say is not defined.
+// say // caught: ReferenceError: say is not defined.
+// const say //Uncaught SyntaxError: 该错误在解析阶段出现，非运行阶段出现，所以try不到
+throw 'fdsafsafsafsa' //caught: 'fdsafsafsafsa'
+} 
+catch(err){
+alert(err) 
+}
+
+```
 
 
 ## finally语句
+- 语法
+```
+finally{
+    //code...
+}
+```
 - Finally语句允许您在TRY和CATCH语句之后执行代码，而不管TRY和CATCH语句执行的结果如何。
 
 ## throw语句
@@ -54,14 +83,6 @@ throw new Error() // return 'Uncaught Error at index.html:19' 停止程序继续
 console.log('world')
 ```
 
-## 定义
-`Error`对象在出现错误的时候，负责提供错误信息。
-
-## error Object的属性
-## error.name
-用途：设置或返回`error`的名字。
-### error.message
-用途：设置或返回`error`的信息（字符串形式)。
 
 ## 实例
 ```
@@ -81,12 +102,6 @@ catch(err) {
 
 
 
-## try/catch/finally Statement
-### 定义
-try/catch/finaly用于处理代码块中潜在的错误。
-- try语句 : 定义测试的代码块。
-- catch语句 : 定义处理错误的代码块。
-- finaly语句 : 定义出现错误后执行的代码。
 ```
 try {
     tryCode - Block of code to try
@@ -99,7 +114,7 @@ finally {
 }
 ```
 
-### 实例
+
 
 ```
 function myFunction() {
