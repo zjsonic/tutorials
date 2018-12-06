@@ -22,11 +22,11 @@ ECMA委员会是这么定义promise：
 ## promise语法解析（创建Promise)
 - `Promise`是一个构造函数。
 - `Promise`参数是一个函数(用于描述要执行的延迟计算)。
-        - resolve():为了表示延迟计算成功，我们需要把一个你希望的值(可以是string,number,boolean,object等)传递给resolve函数，该函数会自动把值发送给promise对象(JS引擎内部部署)，这时我们就说`Promise has been resolved`。
-        - reject():为了表示延迟计算失败或遇到错误，我们需要把一个值(通常是Error对象)传递给reject函数，该函数会自动把值发送给promise对象(JS引擎内部部署)，这时我们就说`Promise has been rejected`。
-        - 注意：并不存在一种事件机制，使得resolve()和reject()函数在延迟计算成功或失败时调用，而是我们需要把他们分别设置在延迟计算成功或失败的逻辑中。
-- 特点：固定性，状态一旦变化，永远不会改变。因此有了`Promise`，可以将异步操作以同步操作的流程表达出来，避免层层签套的回调函数。
-- 缺点：无法中途取消，一旦创建它就会立刻执行
+  - resolve():为了表示延迟计算成功，我们需要把一个你希望的值(可以是string,number,boolean,object等)传递给resolve函数，该函数会自动把值发送给promise对象(JS引擎内部部署)，这时我们就说`Promise has been resolved`。
+  - reject():为了表示延迟计算失败或遇到错误，我们需要把一个值(通常是Error对象)传递给reject函数，该函数会自动把值发送给promise对象(JS引擎内部部署)，这时我们就说`Promise has been rejected`。
+  - 注意：并不存在一种事件机制，使得resolve()和reject()函数在延迟计算成功或失败时调用，而是我们需要把他们分别设置在延迟计算成功或失败的逻辑中。
+  - 特点：固定性，状态一旦变化，永远不会改变。因此有了`Promise`，可以将异步操作以同步操作的流程表达出来，避免层层签套的回调函数。
+  - 缺点：无法中途取消，一旦创建它就会立刻执行
 
 ## promise.then(callback1,callback2)(使用Promise)
 获取promise对象中保存的值：
@@ -49,8 +49,7 @@ promise.then(function(value){
 Since error handling is a necessity for robust programs, a shortcut is given for such a case. Instead of writing .then(null, () => {...}) when we want to handle an error, we can use .catch(onRejected) which accepts one callback: onRejected.
 Remember that .catch is just a syntactical sugar for .then(undefined, onRejected).
 
-## Chaining promises
-
+## Chaining promises(链式Promises)
 .then() and .catch() methods always return a promise. So you can chain multiple .then calls together. Let’s understand it by an example.
 
 First, we create a delay function that returns a promise. The returned promise will resolve after the given number of seconds. Here’s its implementation —
