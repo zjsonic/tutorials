@@ -39,15 +39,15 @@ promise.then(function(value){
 ```
 - `then(callback1,callback2)`:指定promise实例的回调函数：
 - 参数：
-    - callback1(onResolved): 当promise为resolved时调用。
-        - 返回一个新的promise实例（需要手动设置return)
-    - callback2(onRejected) 可选。当promise为rejected时调用。
-        - 
-- 返回值：第一个回调函数
+  - callback1(onResolved): 当promise为resolved时调用。
+  - callback2(onRejected) 可选。当promise为rejected时调用。
+- 返回值：promise对象
 
 ## promise.catch(onRejected)
-Since error handling is a necessity for robust programs, a shortcut is given for such a case. Instead of writing .then(null, () => {...}) when we want to handle an error, we can use .catch(onRejected) which accepts one callback: onRejected.
-Remember that .catch is just a syntactical sugar for .then(undefined, onRejected).
+- 用途: Since error handling is a necessity for robust programs, a shortcut is given for such a case. Instead of writing .then(null, () => {...}) when we want to handle an error, we can use .catch(onRejected) which accepts one callback: onRejected. Remember that .catch is just a syntactical sugar for .then(undefined, onRejected).
+- 参数
+  - onRejected: Function
+- 返回值: promise对象
 
 ## Chaining promises(链式Promises)
 .then() and .catch() methods always return a promise. So you can chain multiple .then calls together. Let’s understand it by an example.
@@ -83,6 +83,47 @@ delay(2000)
 // Done.
 ```
 
+## promise.all(iterable)
+- 用途: 用于处理(聚合)多个promise对象的结果
+- 参数: 可迭代的对象(数组或字符串)
+- 返回值:
+  - 一个resolved promise对象(如果iterable的对象是空)
+  - 一个异步的resolved promise对象(如果iterable不包含任何promise)
+  - 一个pending promise对象(各种其他情况)
+  - 一个rejected promise(只要有一个rejected promise对象)
+如果传入`iterable`中的值包含`非promise值`,那么`非promise值`会被忽略,但仍会计算在返回值(promise数组值)中.
+```
+var p1 = Promise.resolve(3);
+var p2 = 1337;
+var p3 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("foo");
+  }, 100);
+}); 
 
+Promise.all([p1, p2, p3]).then(values => { 
+  console.log(values); // [3, 1337, "foo"] 
+});
+```
+```
+// this will be counted as if the iterable passed is empty, so it gets fulfilled
+var p = Promise.all([1,2,3]);
+// this will be counted as if the iterable passed contains only the resolved promise with value "444", so it gets fulfilled
+var p2 = Promise.all([1,2,3, Promise.resolve(444)]);
+// this will be counted as if the iterable passed contains only the rejected promise with value "555", so it gets rejected
+var p3 = Promise.all([1,2,3, Promise.reject(555)]);
+
+// using setTimeout we can execute code after the stack is empty
+setTimeout(function() {
+    console.log(p);
+    console.log(p2);
+    console.log(p3);
+});
+
+// logs
+// Promise { <state>: "fulfilled", <value>: Array[3] }
+// Promise { <state>: "fulfilled", <value>: Array[4] }
+// Promise { <state>: "rejected", <reason>: 555 }
+```
 ## 参考
 - [https://codeburst.io/a-simple-guide-to-es6-promises-d71bacd2e13a](https://codeburst.io/a-simple-guide-to-es6-promises-d71bacd2e13a)
