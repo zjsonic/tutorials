@@ -1,4 +1,4 @@
-# Promise
+# Promise函数
 
 ## Promise是什么
 ECMA委员会是这么定义promise：

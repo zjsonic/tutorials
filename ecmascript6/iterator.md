@@ -1,8 +1,8 @@
-# Literator
+# Iterator函数
 
-## Literator是什么
-- `literator`是一种遍历JS中的数据集合的新的方式.
-- `literator`之所以受欢迎是因为它可以用在各种各样的场景下.
+## Iterator是什么
+- `Iterator`是一种遍历JS中的数据集合的新的方式.
+- `Iterator`之所以受欢迎是因为它可以用在各种各样的场景下.
 
 这有一个数组:
 ```

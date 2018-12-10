@@ -1,4 +1,4 @@
-# Primitive value - Symbol 
+# Symbol函数 
 
 ## Symbol()函数
 - Symbol()函数ES6新增的函数
