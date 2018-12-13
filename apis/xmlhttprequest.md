@@ -16,7 +16,7 @@ const request = new XMLHttpRequest
 ```
 - 每个实例都代表一个独立的请求/响应对
 - 该实例的原型上有许多方法
-- XMLHttpRequest通常异步使用(发送请求后，send()方法立即返回，直到响应返回，响应的方法和属性才有效。必须监听readystatechange事件) 
+- XMLHttpRequest通常异步使用(发送请求后，send()方法立即返回，直到响应返回，响应的方法和属性才有效。必须监听readystatechange事件)
 ```
 console.log(request.hasOwnProperty('open')) // false
 console.log(request.__proto__.hasOwnProperty('open')) //true
@@ -89,8 +89,3 @@ XMLHttpRequest()构造函数
 - request.status
 - request.onreadystatechange
 - request.reponseText
-
-
-
-
-

@@ -64,19 +64,21 @@ jQuery.fn.init {}
 - 操作DOM
   - $().append()
 - AJAX
-  - $.ajax({options})
+  - $.ajax({options}) //执行异步HTTP
 ```
-$.ajax
-
+$.ajax({
   type: 'GET',
   url: '',
-  success(result,status,xhr),
-  fail(xhr,status,error)
+  async: true,
+  data: string, //发送到服务器的数据，自动转字符串
+  dataType: 'json', //设置响应数据的数据类型
+  success(result,status,xhr), //请求成功后的回调函数
+  error(xhr,status,error),  //请求失败后的回调函数
+  complete(xhr,type), //请求完成后的回调函数
+  beforeSend(xhr),
+  cache: true
 })
 ```
   - `$().load(url,data,callback)`
-```
-const url = 'https://newsapi.org/v2/everything?q=bitcoin&from=2018-12-12&sortBy=publishedAt&apiKey=ca9b207c09bc4c798e9161e66e1ca133'
-```
-  - `$('main').load(url)`
     - 用途：load()方法用于从指定地址请求数据并把数据返回给元素
+  
