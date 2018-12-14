@@ -23,5 +23,15 @@
 ## < meta >的属性
 |Attribute|Value|Description|
 |-|-|
-|http-equiv||设置HTTP请求头|
-||content-type|设置HTTP请求头|
+|http-equiv||为浏览器指定HTTP头字段|
+||content-type| 告诉浏览器文档主体内对象的媒体类型|
+||default-style||
+||refresh||
+|name ||定义文档的关键字描述和viewport等|
+||description|定义文档的描述|
+||keywords|定义文档的关键字|
+||author|定义文档的作者|
+||viewport|定义文档的viewport|
+||application-name|指定web应用的名称|
+|content|text|为`http-equiv`或`name`指定的属性设置值|
+|charset|character_set|指定当前文档的字符编码|
