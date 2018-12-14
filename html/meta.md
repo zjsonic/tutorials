@@ -24,9 +24,9 @@
 
 |Attribute|Value|Description|
 |-|-|-|
-|http-equiv||为浏览器指定HTTP头字段|
+|http-equiv||模拟一个HTTP响应头|
 ||content-type| 告诉浏览器文档主体内对象的媒体类型|
-||default-style||
+||default-style|必须匹配同一文档中的一个 link 元素上的 title 属性的值|
 ||refresh||
 |name ||定义文档的关键字描述和viewport等|
 ||description|定义文档的描述|
@@ -36,3 +36,29 @@
 ||application-name|指定web应用的名称|
 |content|text|为`http-equiv`或`name`指定的属性设置值|
 |charset|character_set|指定当前文档的字符编码|
+
+## 自动刷新页面
+```
+<meta http-equiv="Refresh" content="3"/>
+```
+
+## 自动跳转
+```
+<meta http-equiv="refresh" content="3 url=http://www.baidu.com">
+```
+- `3` : 3秒
+
+## 其他
+```
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Free web tutorials">
+<meta name="keywords" content="HTML, meta tag, tag reference">
+<meta name="application-name" content="W3schools">
+<meta name="generator" content="FrontPage 4.0">
+<meta name="author" content="John Doe">
+
+<meta http-equiv="content-type" content="text/html charset=utf-8">
+<meta http-equiv="default-style" content="the document's preferred stylesheet">
+<meta http-equiv="refresh" content="3 url=http://www.baidu.com">
+```

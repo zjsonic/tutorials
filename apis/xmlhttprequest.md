@@ -1,18 +1,51 @@
 # XMLHTTPRequest
 
 ## 先说AJAX
-
-## AJAX
 - Asynchronous JavaScript and XML
 - AJAX是一个术语。它描述的是使用脚本发送请求的一种web应用架构。
 
-## 可以指定URL的标签
-- 超链接`<a>`的`href`属性
 
+## HTML中发送请求的方式
 
+- `<a>`(请求由用户点击发送)
+```
+<a href="http://www.buhaoqi.com">不好奇</a>
+```
 
-发送一个HTTP请求有几种方式
--
+- `<form>`(请求由用户点击发送)
+```
+<form action="handle.html">
+  <input type='submit'> //
+</form>
+```
+
+- `<meta>`(请求由浏览器自动发送)
+```
+<meta http-equiv='refresh' content='3 url=http://www.buhaoqi.com'>
+```
+
+- `<link>`(请求由浏览器自动发送)
+```
+<link href="http://www.buhaoqi.com/css/style.css"
+```
+
+- `<script>`(请求由浏览器自动发送)
+```
+<script src='http://www.buhaoqi.com/js/jqery.js'></script>
+```
+
+- `<iframe>`(请求由浏览器自动发送)
+```
+<iframe src='http://www.buhaoqi.com'></iframe>
+```
+
+- `<img>`(请求由浏览器自动发送)
+```
+<img src='http://www.buhaoqi.com/images/logo.png'>
+```
+
+## JavaScript中发送请求的方式
+
 
 
 
