@@ -21,8 +21,9 @@
 - 总是向`<meta>`中传入一个名值对。
 
 ## < meta >的属性
+
 |Attribute|Value|Description|
-|-|-|
+|-|-|-|
 |http-equiv||为浏览器指定HTTP头字段|
 ||content-type| 告诉浏览器文档主体内对象的媒体类型|
 ||default-style||
