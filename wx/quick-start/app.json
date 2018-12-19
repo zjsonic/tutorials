@@ -1,0 +1,22 @@
+//app.json: 小程序的入口文件。作用：对当前小程序全局进行配置
+{
+  "pages": ["pages/index/index", "pages/logs/logs"], //定义所有页面的路径
+  "window": { //定义全局默认的窗口表现
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": { //定义全局默认的底部tab栏的表现
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/logs/logs",
+        "text": "日志"
+      }
+    ]
+  },
+}

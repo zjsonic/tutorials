@@ -1,0 +1,8 @@
+//对本页面的窗口表现进行配置。并且只能配置"当前窗口"的表现。
+{
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "微信接口功能演示",
+  "backgroundColor": "#eeeeee",
+  "backgroundTextStyle": "light"
+}

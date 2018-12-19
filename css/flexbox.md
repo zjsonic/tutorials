@@ -1,14 +1,79 @@
 # Flexbox详解
-## Flexbox出现的背景
-Flexbox布局的目标：提供一种更有效的布局方式。
+
+## 这里有三个普普通通的DIV元素
+效果:
+
+[三个尺寸不同的普通div元素](images/flexbox1.png)
+HTML代码：
+```
+<body>
+    <div class="container">
+      <div class="item1">A</div>
+      <div class="item2">B</div>
+      <div class="item3">C</div>
+    </div>
+</body>
+```
+CSS代码：
+```
+<style>
+  .container{
+      max-width:1000px;
+      height:500px;
+      margin: 0 auto;
+      border:1px solid #ccc;
+      background-color: #eee;
+  }
+  .item1{
+    width:50px;
+    height:300px;
+    background-color:red;
+  }
+  .item2{
+    width:100px;
+    height:100px;
+    background-color:green;
+
+  }
+  .item3{
+    width:300px;
+    height:50px;
+    background-color:blue;
+  }
+</style>
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Flexbox布局的目标
+提供一种更 **有效** 的布局方式。
 - 在一个容器内
-- 对齐元素
 - 分配空间
+- 对齐元素
 - 即使元素的尺寸未知或是动态的
+
 ## Flexbox实现的思想
-赋予父容器一种能力：
-- 转换子元素尺寸
-- 填充剩余空间的能力。
+赋予父容器一种 **控制子元素尺寸** （意味着分配剩余空间）的能力。
+- 主轴为横轴时：子元素的width受父元素控制，height不受父元素控制
+- 主轴为纵轴时：子元素的height受父元素控制，width不受父元素控制
+
 
 ## Flexbox的特点
 - 方向不固定:传统的布局(块垂直排列 inline水平排列)缺乏灵活性
@@ -57,7 +122,7 @@ Flexbox布局的目标：提供一种更有效的布局方式。
             border:1px solid #ccc;
             background-color: #eee;
             /* 激活flex context。 */
-            display: flex; 
+            display: flex;
             /* 建立主轴：row(default) row-reverse column column-reverse */
             flex-direction:row;
             /* 控制换行:nowrap(default) wrap wrap-reverse(沿纵轴逆向排列) */
@@ -76,7 +141,7 @@ Flexbox布局的目标：提供一种更有效的布局方式。
             border:1px solid black;
             flex-grow:1;
             /* flex-shrink:.3 */
-            
+
         }
         .item1{
             flex-grow:.3
