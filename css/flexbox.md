@@ -309,6 +309,18 @@ CSS：
 效果：
 ![align-items: stretch](images/align-items-stretch-h.png)
 
+CSS：
+```
+.container{
+  flex-direction: row;
+  flex-wrap:wrap;
+  align-items: stretch;
+}
+.itemX{
+  height:0;  /*所有子元素不可设置height，否则stretch不会生效*/
+}
+```
+
 ![align-items: stretch](images/align-items-stretch-h2.png)
 
 CSS：
@@ -318,14 +330,30 @@ CSS：
   flex-wrap:wrap;
   align-items: stretch;
 }
-.item1{
-  height:100px;  /*如果子元素存在高度，则stretch属性值无效*/
+.itemX{
+  height:0;  /*所有子元素不可设置height，否则stretch不会生效*/
+}
+```
+
+![align-items: stretch](images/align-items-stretch-h3.png)
+
+CSS：
+```
+.container{
+  flex-direction: row;
+  flex-wrap:wrap;
+  align-items: stretch;
+}
+.itemX{
+  height:100px;  /*如果子元素设置了height，则stretch不会生效*/
 }
 ```
 
 ## align-items: flex-start (Horizontal)
 效果：
 ![align-items: flex-start](images/align-items-flex-start-h.png)
+
+![align-items: flex-start](images/align-items-flex-start-h2.png)
 
 CSS：
 ```
@@ -340,6 +368,8 @@ CSS：
 效果：
 ![align-items: flex-end](images/align-items-flex-end-h.png)
 
+![align-items: flex-end](images/align-items-flex-end-h2.png)
+
 CSS：
 ```
 .container{
@@ -353,6 +383,8 @@ CSS：
 效果：
 ![align-items: center](images/align-items-center-h.png)
 
+![align-items: center](images/align-items-center-h2.png)
+
 CSS：
 ```
 .container{
@@ -365,6 +397,8 @@ CSS：
 ## align-items: baseline (Horizontal)
 效果：
 ![align-items: baseline](images/align-items-baseline-h.png)
+
+![align-items: baseline](images/align-items-baseline-h2.png)
 
 CSS：
 ```
