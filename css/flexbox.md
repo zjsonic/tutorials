@@ -4,8 +4,8 @@
   - align-items: 说白了就是"**沿垂直轴方向调整行内的空隙**"
   - align-content: 说白了就是"**调整行间/列间空隙**"
 - 前言
-- 如果不了解CSS布局的知识，请点这里：[《CSS的布局模型》](css-layout.md)
-- 本文编写基于CSS-tricks的文章（[A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)）和我自己的理解。如果错误请指正。
+  - 如果不了解CSS布局的知识，请点这里：[《CSS的布局模型》](css-layout.md)
+  - 本文编写基于CSS-tricks的文章（[A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)）和我自己的理解。如果错误请指正。
 
 ## 常规布局
 常规布局指基于`block`或`inline-blok`的布局
