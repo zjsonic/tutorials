@@ -3,7 +3,7 @@
 ## 这里有三个普普通通的DIV元素
 效果:
 
-[三个尺寸不同的普通div元素](images/flexbox1.png)
+![三个尺寸不同的普通div元素](images/flexbox1.png)
 HTML代码：
 ```
 <body>
