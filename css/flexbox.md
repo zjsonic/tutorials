@@ -385,12 +385,17 @@ CSS：
 效果：
 ![align-items: stretch](images/align-items-stretch-h.png)
 
+![align-items: stretch](images/align-items-stretch-h2.png)
+
 CSS：
 ```
 .container{
   flex-direction: row;
   flex-wrap:wrap;
   align-items: stretch;
+}
+.item1{
+  height:100px;  /*如果子元素存在高度，则stretch属性值无效*/
 }
 ```
 
