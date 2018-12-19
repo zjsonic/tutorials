@@ -306,7 +306,7 @@ CSS：
 ```
 
 ## align-items: stretch (Horizontal)
-效果：
+单行效果：
 ![align-items: stretch](images/align-items-stretch-h.png)
 
 CSS：
@@ -320,7 +320,7 @@ CSS：
   height:0;  /*所有子元素不可设置height，否则stretch不会生效*/
 }
 ```
-
+多行效果
 ![align-items: stretch](images/align-items-stretch-h2.png)
 
 CSS：
@@ -334,7 +334,7 @@ CSS：
   height:0;  /*所有子元素不可设置height，否则stretch不会生效*/
 }
 ```
-
+多行效果
 ![align-items: stretch](images/align-items-stretch-h3.png)
 
 CSS：
