@@ -201,7 +201,7 @@ CSS：
 }
 ```
 
-## flex-wrap: wrap-reverse
+## flex-wrap: wrap-reverse(水平)
 效果：
 ![flex-wrap: wrap-reverse](images/flex-wrap-wrap-reverse-h.png)
 
@@ -214,7 +214,7 @@ CSS：
 ```
 ## flex-wrap: nowrap(垂直)
 效果：
-![flex-wrap: wrap-reverse](images/flex-wrap-reverse-v.png)
+![flex-wrap: wrap-reverse](images/flex-wrap-wrap-reverse-v.png)
 
 CSS：
 ```
