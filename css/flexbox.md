@@ -1,9 +1,9 @@
 # Flexbox详解
-
-- justify-content: 说白了就是“沿主轴调整当前行内的空隙”
-- align-content: 说白了就是"调整行与行之间的空隙"
-- align-items: 说白了就是"沿垂直轴调整当前行内的空隙"
-
+- 核心总结
+  - justify-content: 说白了就是“**沿主轴方向调整行内的空隙**”
+  - align-items: 说白了就是"**沿垂直轴方向调整行内的空隙**"
+  - align-content: 说白了就是"**调整行间/列间空隙**"
+- 前言
 - 如果不了解CSS布局的知识，请点这里：[《CSS的布局模型》](css-layout.md)
 - 本文编写基于CSS-tricks的文章（[A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)）和我自己的理解。如果错误请指正。
 
@@ -68,6 +68,9 @@ CSS：
   - 子元素：在水平垂直方向上可任意排列
 
 ## flexbox的术语：
+
+![Flexbox terminology](images/00-basic-terminology.svg)
+
 |terminology|说明|terminology|说明|
 |-|-|-|-|
 |flex container| 父元素|||
@@ -302,8 +305,82 @@ CSS：
 }
 ```
 
+## align-items: stretch (Horizontal)
+效果：
+![align-items: stretch](images/align-items-stretch-h.png)
+
+![align-items: stretch](images/align-items-stretch-h2.png)
+
+CSS：
+```
+.container{
+  flex-direction: row;
+  flex-wrap:wrap;
+  align-items: stretch;
+}
+.item1{
+  height:100px;  /*如果子元素存在高度，则stretch属性值无效*/
+}
+```
+
+## align-items: flex-start (Horizontal)
+效果：
+![align-items: flex-start](images/align-items-flex-start-h.png)
+
+CSS：
+```
+.container{
+  flex-direction: row;
+  flex-wrap:wrap;
+  align-items: flex-start;
+}
+```
+
+## align-items: flex-end (Horizontal)
+效果：
+![align-items: flex-end](images/align-items-flex-end-h.png)
+
+CSS：
+```
+.container{
+  flex-direction: row;
+  flex-wrap:wrap;
+  align-items: flex-end;
+}
+```
+
+## align-items: center (Horizontal)
+效果：
+![align-items: center](images/align-items-center-h.png)
+
+CSS：
+```
+.container{
+  flex-direction: row;
+  flex-wrap:wrap;
+  align-items: center;
+}
+```
+
+## align-items: baseline (Horizontal)
+效果：
+![align-items: baseline](images/align-items-baseline-h.png)
+
+CSS：
+```
+.container{
+  flex-direction: row;
+  flex-wrap:wrap;
+  align-items: baseline;
+}
+.item2{
+  font-size:40px;
+}
+```
 ## align-content: stretch (Horizontal)
 效果：
+![align-content: stretch](images/align-content-stretch-h2.png)
+
 ![align-content: stretch](images/align-content-stretch-h.png)
 
 CSS：
@@ -380,80 +457,6 @@ CSS：
   align-content: space-around;
 }
 ```
-
-## align-items: stretch (Horizontal)
-效果：
-![align-items: stretch](images/align-items-stretch-h.png)
-
-![align-items: stretch](images/align-items-stretch-h2.png)
-
-CSS：
-```
-.container{
-  flex-direction: row;
-  flex-wrap:wrap;
-  align-items: stretch;
-}
-.item1{
-  height:100px;  /*如果子元素存在高度，则stretch属性值无效*/
-}
-```
-
-## align-items: flex-start (Horizontal)
-效果：
-![align-items: flex-start](images/align-items-flex-start-h.png)
-
-CSS：
-```
-.container{
-  flex-direction: row;
-  flex-wrap:wrap;
-  align-items: flex-start;
-}
-```
-
-## align-items: flex-end (Horizontal)
-效果：
-![align-items: flex-end](images/align-items-flex-end-h.png)
-
-CSS：
-```
-.container{
-  flex-direction: row;
-  flex-wrap:wrap;
-  align-items: flex-end;
-}
-```
-
-## align-items: center (Horizontal)
-效果：
-![align-items: center](images/align-items-center-h.png)
-
-CSS：
-```
-.container{
-  flex-direction: row;
-  flex-wrap:wrap;
-  align-items: center;
-}
-```
-
-## align-items: baseline (Horizontal)
-效果：
-![align-items: baseline](images/align-items-baseline-h.png)
-
-CSS：
-```
-.container{
-  flex-direction: row;
-  flex-wrap:wrap;
-  align-items: baseline;
-}
-.item2{
-  font-size:40px;
-}
-```
-
 
 ## 参考
 - [css-tricks](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
