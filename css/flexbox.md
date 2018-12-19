@@ -1,5 +1,9 @@
 # Flexbox详解
 
+- justify-content: 说白了就是“调整每行内的元素之间的空隙”
+- align-content: 说白了就是"调整行与行之间的空隙"
+- align-items:
+
 - 如果不了解CSS布局的知识，请点这里：[《CSS的布局模型》](css-layout.md)
 - 本文编写基于CSS-tricks的文章（[A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)）和我自己的理解。如果错误请指正。
 
@@ -212,7 +216,7 @@ CSS：
   flex-wrap: wrap-reverse;
 }
 ```
-## flex-wrap: nowrap(垂直)
+## flex-wrap: wrap-reverse(垂直)
 效果：
 ![flex-wrap: wrap-reverse](images/flex-wrap-wrap-reverse-v.png)
 
@@ -297,6 +301,157 @@ CSS：
   justify-content: space-evenly;
 }
 ```
+
+## align-content: stretch (Horizontal)
+效果：
+![align-content: stretch](images/align-content-stretch-h.png)
+
+CSS：
+```
+.container{
+  flex-direction: row;
+  flex-wrap:wrap;
+  align-content: stretch;
+}
+```
+
+## align-content: flex-start (Horizontal)
+效果：
+![align-content: flex-start](images/align-content-flex-start-h.png)
+
+CSS：
+```
+.container{
+  flex-direction: row;
+  flex-wrap:wrap;
+  align-content: flex-start;
+}
+```
+
+## align-content: flex-end (Horizontal)
+效果：
+![align-content: flex-end](images/align-content-flex-end-h.png)
+
+CSS：
+```
+.container{
+  flex-direction: row;
+  flex-wrap:wrap;
+  align-content: flex-end;
+}
+```
+## align-content: center (Horizontal)
+效果：
+![align-content: center](images/align-content-center-h.png)
+
+CSS：
+```
+.container{
+  flex-direction: row;
+  flex-wrap:wrap;
+  align-content: center;
+}
+```
+
+
+
+## align-content: space-between (Horizontal)
+效果：
+![align-content: space-between](images/align-content-space-between-h.png)
+
+CSS：
+```
+.container{
+  flex-direction: row;
+  flex-wrap:wrap;
+  align-content: space-between;
+}
+```
+
+## align-content: space-around (Horizontal)
+效果：
+![align-content: space-around](images/align-content-space-around-h.png)
+
+CSS：
+```
+.container{
+  flex-direction: row;
+  flex-wrap:wrap;
+  align-content: space-around;
+}
+```
+
+## align-items: stretch (Horizontal)
+效果：
+![align-items: stretch](images/align-items-stretch-h.png)
+
+CSS：
+```
+.container{
+  flex-direction: row;
+  flex-wrap:wrap;
+  align-items: stretch;
+}
+.item1{
+  ~~height:200px;~~  /*必须删掉，否则stretch无效*/
+}
+```
+
+## align-items: flex-start (Horizontal)
+效果：
+![align-items: flex-start](images/align-items-flex-start-h.png)
+
+CSS：
+```
+.container{
+  flex-direction: row;
+  flex-wrap:wrap;
+  align-items: flex-start;
+}
+```
+
+## align-items: flex-end (Horizontal)
+效果：
+![align-items: flex-end](images/align-items-flex-end-h.png)
+
+CSS：
+```
+.container{
+  flex-direction: row;
+  flex-wrap:wrap;
+  align-items: flex-end;
+}
+```
+
+## align-items: center (Horizontal)
+效果：
+![align-items: center](images/align-items-center-h.png)
+
+CSS：
+```
+.container{
+  flex-direction: row;
+  flex-wrap:wrap;
+  align-items: center;
+}
+```
+
+## align-items: baseline (Horizontal)
+效果：
+![align-items: baseline](images/align-items-baseline-h.png)
+
+CSS：
+```
+.container{
+  flex-direction: row;
+  flex-wrap:wrap;
+  align-items: baseline;
+}
+.item2{
+  font-size:40px;
+}
+```
+
 
 ## 参考
 - [css-tricks](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
