@@ -11,9 +11,9 @@
 
 常规flow布局:
 
-![流动布局下的四个div元素](images/flexbox01.png)
+![流动布局下的四个div元素](images/layout-flow-block.png)
 
-HTML代码：
+HTML：
 ```
 <body>
     <div class="container">
@@ -24,7 +24,7 @@ HTML代码：
 </body>
 ```
 
-CSS代码：
+CSS：
 ```
 <style>
   .container{
@@ -63,8 +63,8 @@ CSS代码：
 - 元素的排列与方向无关
   - 子元素：在水平垂直方向上可任意排列
 
-## flexbox的几个基本概念：
-|概念|说明|概念|说明|
+## flexbox的术语：
+|terminology|说明|terminology|说明|
 |-|-|-|-|
 |flex container| 父元素|||
 |flex items| 子元素|||
@@ -103,7 +103,7 @@ CSS：
   display: inline-flex;
 }
 ```
-为父元素设置`display:flex`后，发生了哪些事情？
+为父元素设置`display:inline-flex`后，发生了哪些事情？
 - 取消了父元素(`.container`)上的流动布局模型
 - 在父元素上建立了flex布局模型
   - 建立了flex-container和flex-items
@@ -156,50 +156,44 @@ CSS：
   flex-direction: column-reverse;
 }
 ```
+## flex-wrap: nowrap(水平)
+效果：
+![flex-wrap: nowrap](images/flex-wrap-nowrap-horizontal.png)
 
-
-
-## flex-wrap: 规定父元素是否允许子元素换行
-属性值：
-- nowrap
-- wrap
-- wrap-reverse
-
-默认值`nowrap`的效果 (主轴方向为水平)
-![默认状态下，flex-wrap的值为nowrap](images/flexbox04.png)
-
-CSS代码：
+CSS：
 ```
 .container{
   flex-direction: row;
   flex-wrap: nowrap;
 }
 ```
+## flex-wrap: nowrap(垂直)
+效果：
+![flex-wrap: nowrap](images/flex-wrap-nowrap-vertical.png)
 
-设置为`wrap`的效果(主轴方向为水平)
-![设置flex-wrap的值为wrap的效果](images/flexbox05.png)
-
-CSS代码：
-```
-.container{
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-```
-默认为`nowrap`的效果(主轴方向为垂直)
-![默认状态下，flex-wrap的值为nowrap](images/flexbox06.png)
-CSS代码：
+CSS：
 ```
 .container{
   flex-direction: column;
   flex-wrap: nowrap;
 }
 ```
+## flex-wrap: wrap(水平)
+效果：
+![flex-wrap: wrap](images/flex-wrap-wrap-horizontal.png)
 
-设置为`wrap`的效果(主轴方向为垂直)
-![设置flex-wrap的值为wrap的效果](images/flexbox07.png)
+CSS：
+```
+.container{
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+```
+## flex-wrap: wrap(垂直)
+效果：
+![flex-wrap: wrap](images/flex-wrap-wrap-vertical.png)
 
-CSS代码：
+CSS：
 ```
 .container{
   flex-direction: column;
@@ -207,7 +201,28 @@ CSS代码：
 }
 ```
 
+## flex-wrap: wrap-reverse
+效果：
+![flex-wrap: wrap-reverse](images/flex-wrap-wrap-reverse-horizontal.png)
 
+CSS：
+```
+.container{
+  flex-direction: row;
+  flex-wrap: wrap-reverse;
+}
+```
+## flex-wrap: nowrap(垂直)
+效果：
+![flex-wrap: wrap-reverse](images/flex-wrap-reverse-vertical.png)
+
+CSS：
+```
+.container{
+  flex-direction: column;
+  flex-wrap: wrap-reverse;
+}
+```
 
 
 
