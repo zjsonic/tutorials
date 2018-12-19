@@ -3,7 +3,7 @@
 ## 这里有三个普普通通的DIV元素
 效果:
 
-![三个尺寸不同的普通div元素](images/flexbox1.png)
+![三个尺寸不同的普通div元素](images/flexbox01.png)
 HTML代码：
 ```
 <body>
@@ -42,12 +42,53 @@ CSS代码：
   }
 </style>
 ```
+这里的普通的意思是：
+- 父元素(`.container`)是一个块元素，宽度为1000px
+- 子元素(`.itemX`)也是块元素，各自都设置了宽高
 
+## display:设置flex布局
+- flex
+- inline-flex
 
+效果：
+![三个尺寸不同的普通div元素](images/flexbox02.png)
 
+重置display属性值为flex
+```
+.container{
+  max-width:1000px;
+  height:500px;
+  margin: 0 auto;
+  border:1px solid #ccc;
+  background-color: #eee;
+  display: flex; /* 改变了父元素的布局方式为弹性布局 */
+  /* display:inline-flex; */ /* 改变了父元素的布局方式为行内弹性布局 */
+}
+```
+现象：
+- 所有子元素的排列方式不再遵循流动的排列规则(块元素自上而下)，而是遵循flex布局的排列规则：所有子元素沿主轴排列
+结论：
+- 弹性布局也是一种由父元素决定子元素的布局模型。
+- 弹性布局下，所有的弹性子元素沿主轴排列。
 
+## flex-direction:改变主轴的方向
+- row
+- column
+- row-reverse
+- column-reverse
 
-
+改变flex-container主轴的方向
+```
+.container{
+  max-width:1000px;
+  height:500px;
+  margin: 0 auto;
+  border:1px solid #ccc;
+  background-color: #eee;
+  display: flex;
+  flex-direction: column;
+}
+```
 
 
 
