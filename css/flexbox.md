@@ -158,7 +158,7 @@ CSS：
 ```
 ## flex-wrap: nowrap(水平)
 效果：
-![flex-wrap: nowrap](images/flex-wrap-nowrap-horizontal.png)
+![flex-wrap: nowrap](images/flex-wrap-nowrap-h.png)
 
 CSS：
 ```
@@ -169,7 +169,7 @@ CSS：
 ```
 ## flex-wrap: nowrap(垂直)
 效果：
-![flex-wrap: nowrap](images/flex-wrap-nowrap-vertical.png)
+![flex-wrap: nowrap](images/flex-wrap-nowrap-v.png)
 
 CSS：
 ```
@@ -180,7 +180,7 @@ CSS：
 ```
 ## flex-wrap: wrap(水平)
 效果：
-![flex-wrap: wrap](images/flex-wrap-wrap-horizontal.png)
+![flex-wrap: wrap](images/flex-wrap-wrap-h.png)
 
 CSS：
 ```
@@ -191,7 +191,7 @@ CSS：
 ```
 ## flex-wrap: wrap(垂直)
 效果：
-![flex-wrap: wrap](images/flex-wrap-wrap-vertical.png)
+![flex-wrap: wrap](images/flex-wrap-wrap-v.png)
 
 CSS：
 ```
@@ -203,7 +203,7 @@ CSS：
 
 ## flex-wrap: wrap-reverse
 效果：
-![flex-wrap: wrap-reverse](images/flex-wrap-wrap-reverse-horizontal.png)
+![flex-wrap: wrap-reverse](images/flex-wrap-wrap-reverse-h.png)
 
 CSS：
 ```
@@ -214,7 +214,7 @@ CSS：
 ```
 ## flex-wrap: nowrap(垂直)
 效果：
-![flex-wrap: wrap-reverse](images/flex-wrap-reverse-vertical.png)
+![flex-wrap: wrap-reverse](images/flex-wrap-reverse-v.png)
 
 CSS：
 ```
@@ -223,7 +223,6 @@ CSS：
   flex-wrap: wrap-reverse;
 }
 ```
-
 
 
 
