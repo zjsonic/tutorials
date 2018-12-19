@@ -1,14 +1,17 @@
 # Flexbox详解
 
-## 四个普普通通的DIV元素
-效果:
+- 如果不了解CSS布局的知识，请点这里：[《CSS的布局模型》](css-layout.md)
+- 本文编写基于CSS-tricks的文章（[A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)）和我自己的理解。如果错误请指正。
+
+## 常规布局
+常规布局指基于`block`或`inline-blok`的布局
+- flow
+- float
+- position
+
+常规flow布局:
 
 ![流动布局下的四个div元素](images/flexbox01.png)
-
-这里的普通的意思是：
-- 四个div遵循流动布局规则：块元素自上而下排列
-- 父元素(`.container`)设置了宽高
-- 三个嵌套的子元素(`.itemX`)也设置了宽高
 
 HTML代码：
 ```
@@ -20,6 +23,7 @@ HTML代码：
     </div>
 </body>
 ```
+
 CSS代码：
 ```
 <style>
@@ -48,64 +52,112 @@ CSS代码：
 </style>
 ```
 
-## display:设置父元素为flex布局
-属性值：
-- flex
-- inline-flex
+## 常规布局特征
+- 元素的尺寸不可自动改变
+- 元素的排列与方向有关
+  - 块元素：自上而下排列
+  - 内联元素：自左而右排列
 
+## flexbox布局特征：
+- 元素的尺寸可自动改变
+- 元素的排列与方向无关
+  - 子元素：在水平垂直方向上可任意排列
+
+## flexbox的几个基本概念：
+|概念|说明|概念|说明|
+|-|-|-|-|
+|flex container| 父元素|||
+|flex items| 子元素|||
+|main axis|主轴(子元素排列参照的轴)|cross axis|垂直轴(与当前主轴垂直的轴)|
+|main start|子元素排列的起点(主轴方向)|cross start|子元素排列的起点(垂直轴方向)|
+|main end|子元素排列的终点(主轴方向)|cross end|子元素排列的终点(垂直轴方向)|
+|main size|父元素尺寸(主轴方向)|cross size|父元素尺寸(垂直轴方向)|
+
+## display:flex (父元素属性)
 效果：
-![重置父元素的display属性值为flex](images/flexbox02.png)
+![重置父元素的display属性值为flex](images/display-flex.png)
 
-CSS代码：
+CSS：
 ```
 .container{
-  max-width:1000px;
-  height:500px;
-  margin: 0 auto;
-  border:1px solid #ccc;
-  background-color: #eee;
-  display: flex; /* 改变了父元素的布局方式为弹性布局 */
-  /* display:inline-flex; */ /* 改变了父元素的布局方式为行内弹性布局 */
+  display: flex;
 }
 ```
-现象：
-- 所有子元素不再遵循流动布局模型的排列规则(块元素自上而下)，而是遵循flex布局的排列规则：沿主轴排列
+为父元素设置`display:flex`后，发生了哪些事情？
+- 取消了父元素(`.container`)上的流动布局模型
+- 在父元素上建立了flex布局模型
+  - 建立了flex-container和flex-items
+  - 建立了main-axis和cross-axis
+  - 建立了start和end
+  - main-size由width或height决定
+  - cross-size由height或width决定
 
-结论：
-- 子元素的布局方式由父元素控制：也就是所有子元素沿着父元素的主轴排列
-- 子元素的宽/高度也由父元素控制：(增加子元素的数量即可发现)
-  - 当flex-direction方向为`row`时：子元素的`width`由父元素决定，`height`不变。
-  - 当flex-direction属性的值为`column`时，子元素的`height`由父元素决定，`width`不变。
-- 同HasLayout或BFC一样，弹性布局也是一种由父元素决定子元素宽高和布局方式的布局模型。
 
-## flex-direction:改变父元素主轴的方向
-属性值：
-- row
-- column
-- row-reverse
-- column-reverse
-
+## display:inline-flex(父元素属性)
 效果：
-![设置父容器的主轴方向为column](images/flexbox03.png)
+![重置父元素的display属性值为inline-flex](images/display-inline-flex.png)
 
-CSS代码
+CSS：
 ```
 .container{
-  max-width:1000px;
-  height:500px;
-  margin: 0 auto;
-  border:1px solid #ccc;
-  background-color: #eee;
-  display: flex;
+  display: inline-flex;
+}
+```
+为父元素设置`display:flex`后，发生了哪些事情？
+- 取消了父元素(`.container`)上的流动布局模型
+- 在父元素上建立了flex布局模型
+  - 建立了flex-container和flex-items
+  - 建立了main-axis和cross-axis
+  - 建立了start和end
+  - **main-size不再由width或height决定，而是由子元素的宽度之和决定（换言之，父元素像内联元素一样，具有向内收缩适应内容宽度的特性）**
+  - cross-size依然由height或width决定
+
+
+## flex-direction:row
+效果：
+![flex-direction:row](images/flex-direction-row.png)
+
+CSS：
+```
+.container{
+  flex-direction: row;
+}
+```
+
+## flex-direction:row-reverse
+效果：
+![flex-direction:row-reverse](images/flex-direction-row-reverse.png)
+
+CSS：
+```
+.container{
+  flex-direction: row-reverse;
+}
+```
+
+## flex-direction:column
+效果：
+![flex-direction:column](images/flex-direction-column.png)
+
+CSS：
+```
+.container{
   flex-direction: column;
 }
 ```
-现象：
-- 子元素由水平排列变为沿垂直方向排列
 
-结论：
-- 使用`flex-direction`属性可设置父元素的主轴方向
-- 父元素的`flex-direction`属性默认为`row`
+## flex-direction:column-reverse
+效果：
+![flex-direction:column-reverse](images/flex-direction-column-reverse.png)
+
+CSS：
+```
+.container{
+  flex-direction: column-reverse;
+}
+```
+
+
 
 ## flex-wrap: 规定父元素是否允许子元素换行
 属性值：
