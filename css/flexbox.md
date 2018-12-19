@@ -1,8 +1,8 @@
 # Flexbox详解
 
-- justify-content: 说白了就是“调整每行内的元素之间的空隙”
+- justify-content: 说白了就是“沿主轴调整当前行内的空隙”
 - align-content: 说白了就是"调整行与行之间的空隙"
-- align-items:
+- align-items: 说白了就是"沿垂直轴调整当前行内的空隙"
 
 - 如果不了解CSS布局的知识，请点这里：[《CSS的布局模型》](css-layout.md)
 - 本文编写基于CSS-tricks的文章（[A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)）和我自己的理解。如果错误请指正。
@@ -391,9 +391,6 @@ CSS：
   flex-direction: row;
   flex-wrap:wrap;
   align-items: stretch;
-}
-.item1{
-  ~~height:200px;~~  /*必须删掉，否则stretch无效*/
 }
 ```
 
