@@ -69,11 +69,14 @@ CSS代码：
 }
 ```
 现象：
-- 所有子元素的排列方式不再遵循流动的排列规则(块元素自上而下)，而是遵循flex布局的排列规则：所有子元素沿主轴排列
+- 所有子元素不再遵循流动布局模型的排列规则(块元素自上而下)，而是遵循flex布局的排列规则：沿主轴排列
 
 结论：
+- 子元素的布局方式由父元素控制：也就是所有子元素沿着父元素的主轴排列
+- 子元素的宽/高度也由父元素控制：(增加子元素的数量即可发现)
+  - 当flex-direction方向为`row`时：子元素的`width`由父元素决定，`height`不变。
+  - 当flex-direction属性的值为`column`时，子元素的`height`由父元素决定，`width`不变。
 - 同HasLayout或BFC一样，弹性布局也是一种由父元素决定子元素宽高和布局方式的布局模型。
-- 弹性布局模型下，所有的子元素沿主轴排列。
 
 ## flex-direction:改变父元素主轴的方向
 属性值：
@@ -101,15 +104,56 @@ CSS代码
 - 子元素由水平排列变为沿垂直方向排列
 
 结论：
-- 使用`flex-direction`属性可设置父元素的主轴方法
+- 使用`flex-direction`属性可设置父元素的主轴方向
 - 父元素的`flex-direction`属性默认为`row`
 
+## flex-wrap: 规定父元素是否允许子元素换行
+属性值：
+- nowrap
+- wrap
+- wrap-reverse
 
+默认值`nowrap`的效果 (主轴方向为水平)
+![默认状态下，flex-wrap的值为nowrap](images/flexbox04.png)
 
+CSS代码：
+```
+.container{
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+```
 
+设置为`wrap`的效果(主轴方向为水平)
+![设置flex-wrap的值为wrap的效果](images/flexbox05.png)
 
+CSS代码：
+```
+.container{
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+```
+默认为`nowrap`的效果(主轴方向为垂直)
+![默认状态下，flex-wrap的值为nowrap](images/flexbox06.png)
+CSS代码：
+```
+.container{
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+```
 
+设置为`wrap`的效果(主轴方向为垂直)
+![设置flex-wrap的值为wrap的效果](images/flexbox07.png)
 
+CSS代码：
+```
+.container{
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+```
 
 
 
