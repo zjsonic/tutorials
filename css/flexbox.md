@@ -1,9 +1,15 @@
 # Flexbox详解
 
-## 这里有三个普普通通的DIV元素
+## 这里有四个普普通通的DIV元素
 效果:
 
-![三个尺寸不同的普通div元素](images/flexbox01.png)
+![流动布局下的四个div元素](images/flexbox01.png)
+
+这里的普通的意思是：
+- 四个div遵循流动布局规则：块元素自上而下排列
+- 父元素(`.container`)是设置了宽高
+- 三个嵌套的子元素(`.itemX`)也设置了宽高
+
 HTML代码：
 ```
 <body>
@@ -26,34 +32,30 @@ CSS代码：
   }
   .item1{
     width:50px;
-    height:300px;
+    height:200px;
     background-color:red;
   }
   .item2{
     width:100px;
     height:100px;
     background-color:green;
-
   }
   .item3{
-    width:300px;
+    width:200px;
     height:50px;
     background-color:blue;
   }
 </style>
 ```
-这里的普通的意思是：
-- 父元素(`.container`)是一个块元素，宽度为1000px
-- 子元素(`.itemX`)也是块元素，各自都设置了宽高
 
-## display:设置flex布局
+## display:设置父容器为flex布局
 - flex
 - inline-flex
 
 效果：
-![三个尺寸不同的普通div元素](images/flexbox02.png)
+![重置父元素的display属性值为flex](images/flexbox02.png)
 
-重置display属性值为flex
+CSS代码：
 ```
 .container{
   max-width:1000px;
@@ -71,13 +73,15 @@ CSS代码：
 - 弹性布局也是一种由父元素决定子元素的布局模型。
 - 弹性布局下，所有的弹性子元素沿主轴排列。
 
-## flex-direction:改变主轴的方向
+## flex-direction:改变父容器主轴的方向
 - row
 - column
 - row-reverse
 - column-reverse
+效果：
+![设置父容器的主轴方向为column](images/flexbox03.png)
 
-改变flex-container主轴的方向
+CSS代码
 ```
 .container{
   max-width:1000px;
