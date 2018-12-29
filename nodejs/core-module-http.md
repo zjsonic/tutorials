@@ -1,52 +1,55 @@
 # Core Module: HTTP
-- HTTP简介
-- class
-    - http.Agent
-    - http.Server
-    - http.ClientRequest
-    - http.IncomingMessage
-    - http.ServerResponse
-    
-- properties
-    - http.Methods
-    - http.STATUSCODES
-- methods
-    - http.createServer([options],[requestListener])
-    - http.get(options,[callback])
-    - http.get(url,[options],[callback])
-    - http.globalAgent
-    - http.request(options,[callback])
-    - http.request(url,[options],[callback])
-- 打印HTTP
 
-
-|方法|用途|返回值|
-|-|-|-|
-|http.createServer()|创建HTTP Server|http.Server类的实例|
-|http.get()|用于显式发送GET请求|http.ClientRequest类的实例|
-|http.get()|用于显式发送GET请求|http.ClientRequest类的实例|
-|http.request()|用于显式发送请求|http.ClientRequest类的实例|
-|http.request()|用于显式发送请求|http.ClientRequest类的实例|
-
-|类|说明|用途|
-|-|-|-|
-|http.Server|用于生成Server实例|用来创建HTTP服务器|
-|http.ClientRequest|表示一个正在处理中的请求，该对象在http.request()内部创建并返回|常用来操作请求头|
-|http.IncomingMessage|该对象由http.Server创建，作为第一个参数分别传递给`request`和`response`事件|查询请求信息|
-|http.ServerResponse|该对象在 HTTP 服务器内部被创建。 作为第二个参数被传入 'request' 事件|查询响应信息|
-
-## HTTP简介
+## http简介
 - `http`是服务器与客户端通信的一个接口。
-- 从JS角度讲，`http`被设计成一个支持众多`HTTP协议`特性的对象。
-- 从Node.js角度讲，`http`是Node.js的一个核心模块。
+- `http`是一个接口对象。
+- `http`是Node.js的一个核心模块。
 - HTTP API是非常底层的，只涉及处理流和简单解析消息。
+网络数据的传输是通过一系列实现的，而Node.js帮助我们处理了这些协议，并提供了`http`接口。
 
-## CLASS:http.Server
-- `net.Server`是另一个类，用于创建TCP或IPC服务器。
-- `net.Server`是一个`EventEmitter`。
+## http暴露的接口
+- class
+  - http.Server: 用来实例化一个http server
+  - http.ClientRequest: 用来实例化一个http请求
+  - http.ServerResponse: 用来实例化一个http响应
+  - http.IncomingMessage: 用来实例化一个请求信息对象
+  - http.Agent
+- properties
+  - http.METHODS
+  - http.STATUSCODES
+  - http.globalAgent
+- methods
+    - http.createServer([options],[requestListener]): http.Server的语法糖
+    - http.get(options,[callback]): http.ClientRequest的语法糖
+    - http.get(url,[options],[callback]): http.ClientRequest的语法糖
+    - http.request(options,[callback]): http.ServerResponse的语法糖
+    - http.request(url,[options],[callback]): http.ServerResponse的语法糖
+
+## http.Server和http.createServer
+
+[https://github.com/nodejs/node-v0.x-archive/blob/master/lib/http.js#L1674](https://github.com/nodejs/node-v0.x-archive/blob/master/lib/http.js#L1674)
+```
+exports.Server = Server;
+exports.createServer = function(requestListener) {
+  return new Server(requestListener);
+};
+```
+```
+http.createServer = function (requestListener) {
+     var ser = new http.Server();
+     ser.addListener(requestListener);
+     return ser;
+};
+```
+
+
+## http.Server
 - `http.Server`继承自`net.Server` 用于创建http服务器
-
-http.server是一个基于事件的HTTP服务器，所有的请求都被封装到独立的事件当中，我们只需要对他的事件编写相应的行数就可以实现HTTP服务器的所有功能
+  - `net.Server`是另一个类，用于创建TCP或IPC服务器。
+  - `net.Server`是一个`EventEmitter`。
+- `http.Server`是一个基于事件的HTTP服务器
+  - 所有的请求都被封装到独立的事件当中
+  - 我们只需要对他的事件编写相应的行数就可以实现HTTP服务器的所有功能
 
 
 - server.request： 自有事件,只要有请求，就会触发request事件，每个connection可能会存在多个请求。
@@ -57,8 +60,8 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
 ## METHODS: http.createServer([options],[requestListener])
 - 用途: 用于创建HTTP服务器。
 - 返回值: `http.Server`
-- 参数: 
-  - options:`<object>` 
+- 参数:
+  - options:`<object>`
     - IncomingMessage: 拓展默认的http.IncomingMessage类。
     - ServerResponse: 拓展默认的http.ServerResponse类。
   - requestListener:`<function>`
@@ -242,7 +245,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
   ServerResponse: { [Function: ServerResponse] super_: { [Function: OutgoingMessage] super_: [Object] } },
   createServer: [Function: createServer],
   get: [Function: get],
-  request: [Function: request] 
+  request: [Function: request]
 }
   ```
   ## 打印`http.Server`
@@ -262,7 +265,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
   ## 打印`IncomingMessage`
   ```
   IncomingMessage {
-  _readableState: 
+  _readableState:
    ReadableState {
      objectMode: false,
      highWaterMark: 16384,
@@ -290,11 +293,11 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
   _events: {},
   _eventsCount: 0,
   _maxListeners: undefined,
-  socket: 
+  socket:
    Socket {
      connecting: false,
      _hadError: false,
-     _handle: 
+     _handle:
       TCP {
         reading: true,
         owner: [Circular],
@@ -304,7 +307,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
         _consumed: true },
      _parent: null,
      _host: null,
-     _readableState: 
+     _readableState:
       ReadableState {
         objectMode: false,
         highWaterMark: 16384,
@@ -329,7 +332,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
         encoding: null },
      readable: true,
      domain: null,
-     _events: 
+     _events:
       { end: [Array],
         finish: [Function: onSocketFinish],
         _socketEnd: [Function: onSocketEnd],
@@ -342,7 +345,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
         pause: [Function: onSocketPause] },
      _eventsCount: 10,
      _maxListeners: undefined,
-     _writableState: 
+     _writableState:
       WritableState {
         objectMode: false,
         highWaterMark: 16384,
@@ -375,7 +378,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
      _sockname: null,
      _pendingData: null,
      _pendingEncoding: '',
-     server: 
+     server:
       Server {
         domain: null,
         _events: [Object],
@@ -395,7 +398,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
         maxHeadersCount: null,
         _connectionKey: '6::::8888',
         [Symbol(asyncId)]: 7 },
-     _server: 
+     _server:
       Server {
         domain: null,
         _events: [Object],
@@ -416,7 +419,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
         _connectionKey: '6::::8888',
         [Symbol(asyncId)]: 7 },
      _idleTimeout: 120000,
-     _idleNext: 
+     _idleNext:
       TimersList {
         _idleNext: [Object],
         _idlePrev: [Circular],
@@ -424,7 +427,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
         _unrefed: true,
         msecs: 120000,
         nextTick: false },
-     _idlePrev: 
+     _idlePrev:
       Socket {
         connecting: false,
         _hadError: false,
@@ -460,7 +463,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
         [Symbol(triggerAsyncId)]: 17 },
      _idleStart: 4464,
      _destroyed: false,
-     parser: 
+     parser:
       HTTPParser {
         '0': [Function: parserOnHeaders],
         '1': [Function: parserOnHeadersComplete],
@@ -477,7 +480,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
         onIncoming: [Function: bound parserOnIncoming] },
      on: [Function: socketOnWrap],
      _paused: false,
-     _httpMessage: 
+     _httpMessage:
       ServerResponse {
         domain: null,
         _events: [Object],
@@ -513,11 +516,11 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
      [Symbol(bytesRead)]: 0,
      [Symbol(asyncId)]: 12,
      [Symbol(triggerAsyncId)]: 10 },
-  connection: 
+  connection:
    Socket {
      connecting: false,
      _hadError: false,
-     _handle: 
+     _handle:
       TCP {
         reading: true,
         owner: [Circular],
@@ -527,7 +530,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
         _consumed: true },
      _parent: null,
      _host: null,
-     _readableState: 
+     _readableState:
       ReadableState {
         objectMode: false,
         highWaterMark: 16384,
@@ -552,7 +555,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
         encoding: null },
      readable: true,
      domain: null,
-     _events: 
+     _events:
       { end: [Array],
         finish: [Function: onSocketFinish],
         _socketEnd: [Function: onSocketEnd],
@@ -565,7 +568,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
         pause: [Function: onSocketPause] },
      _eventsCount: 10,
      _maxListeners: undefined,
-     _writableState: 
+     _writableState:
       WritableState {
         objectMode: false,
         highWaterMark: 16384,
@@ -598,7 +601,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
      _sockname: null,
      _pendingData: null,
      _pendingEncoding: '',
-     server: 
+     server:
       Server {
         domain: null,
         _events: [Object],
@@ -618,7 +621,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
         maxHeadersCount: null,
         _connectionKey: '6::::8888',
         [Symbol(asyncId)]: 7 },
-     _server: 
+     _server:
       Server {
         domain: null,
         _events: [Object],
@@ -639,7 +642,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
         _connectionKey: '6::::8888',
         [Symbol(asyncId)]: 7 },
      _idleTimeout: 120000,
-     _idleNext: 
+     _idleNext:
       TimersList {
         _idleNext: [Object],
         _idlePrev: [Circular],
@@ -647,7 +650,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
         _unrefed: true,
         msecs: 120000,
         nextTick: false },
-     _idlePrev: 
+     _idlePrev:
       Socket {
         connecting: false,
         _hadError: false,
@@ -683,7 +686,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
         [Symbol(triggerAsyncId)]: 17 },
      _idleStart: 4464,
      _destroyed: false,
-     parser: 
+     parser:
       HTTPParser {
         '0': [Function: parserOnHeaders],
         '1': [Function: parserOnHeadersComplete],
@@ -700,7 +703,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
         onIncoming: [Function: bound parserOnIncoming] },
      on: [Function: socketOnWrap],
      _paused: false,
-     _httpMessage: 
+     _httpMessage:
       ServerResponse {
         domain: null,
         _events: [Object],
@@ -740,7 +743,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
   httpVersionMinor: 1,
   httpVersion: '1.1',
   complete: false,
-  headers: 
+  headers:
    { host: 'localhost:8888',
      connection: 'keep-alive',
      'cache-control': 'max-age=0',
@@ -750,7 +753,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
      'accept-encoding': 'gzip, deflate, br',
      'accept-language': 'zh-CN,zh;q=0.9,zh-TW;q=0.8,en;q=0.7',
      cookie: 'io=RUmTy3eVO6ivWIN9AAEB' },
-  rawHeaders: 
+  rawHeaders:
    [ 'Host',
      'localhost:8888',
      'Connection',
@@ -776,11 +779,11 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
   method: 'GET',
   statusCode: null,
   statusMessage: null,
-  client: 
+  client:
    Socket {
      connecting: false,
      _hadError: false,
-     _handle: 
+     _handle:
       TCP {
         reading: true,
         owner: [Circular],
@@ -790,7 +793,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
         _consumed: true },
      _parent: null,
      _host: null,
-     _readableState: 
+     _readableState:
       ReadableState {
         objectMode: false,
         highWaterMark: 16384,
@@ -815,7 +818,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
         encoding: null },
      readable: true,
      domain: null,
-     _events: 
+     _events:
       { end: [Array],
         finish: [Function: onSocketFinish],
         _socketEnd: [Function: onSocketEnd],
@@ -828,7 +831,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
         pause: [Function: onSocketPause] },
      _eventsCount: 10,
      _maxListeners: undefined,
-     _writableState: 
+     _writableState:
       WritableState {
         objectMode: false,
         highWaterMark: 16384,
@@ -861,7 +864,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
      _sockname: null,
      _pendingData: null,
      _pendingEncoding: '',
-     server: 
+     server:
       Server {
         domain: null,
         _events: [Object],
@@ -881,7 +884,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
         maxHeadersCount: null,
         _connectionKey: '6::::8888',
         [Symbol(asyncId)]: 7 },
-     _server: 
+     _server:
       Server {
         domain: null,
         _events: [Object],
@@ -902,7 +905,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
         _connectionKey: '6::::8888',
         [Symbol(asyncId)]: 7 },
      _idleTimeout: 120000,
-     _idleNext: 
+     _idleNext:
       TimersList {
         _idleNext: [Object],
         _idlePrev: [Circular],
@@ -910,7 +913,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
         _unrefed: true,
         msecs: 120000,
         nextTick: false },
-     _idlePrev: 
+     _idlePrev:
       Socket {
         connecting: false,
         _hadError: false,
@@ -946,7 +949,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
         [Symbol(triggerAsyncId)]: 17 },
      _idleStart: 4464,
      _destroyed: false,
-     parser: 
+     parser:
       HTTPParser {
         '0': [Function: parserOnHeaders],
         '1': [Function: parserOnHeadersComplete],
@@ -963,7 +966,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
         onIncoming: [Function: bound parserOnIncoming] },
      on: [Function: socketOnWrap],
      _paused: false,
-     _httpMessage: 
+     _httpMessage:
       ServerResponse {
         domain: null,
         _events: [Object],
@@ -1003,7 +1006,7 @@ http.server是一个基于事件的HTTP服务器，所有的请求都被封装�
   _dumped: false }
 ========
 IncomingMessage {
-  _readableState: 
+  _readableState:
    ReadableState {
      objectMode: false,
      highWaterMark: 16384,
@@ -1031,11 +1034,11 @@ IncomingMessage {
   _events: {},
   _eventsCount: 0,
   _maxListeners: undefined,
-  socket: 
+  socket:
    Socket {
      connecting: false,
      _hadError: false,
-     _handle: 
+     _handle:
       TCP {
         reading: true,
         owner: [Circular],
@@ -1045,7 +1048,7 @@ IncomingMessage {
         _consumed: true },
      _parent: null,
      _host: null,
-     _readableState: 
+     _readableState:
       ReadableState {
         objectMode: false,
         highWaterMark: 16384,
@@ -1070,7 +1073,7 @@ IncomingMessage {
         encoding: null },
      readable: true,
      domain: null,
-     _events: 
+     _events:
       { end: [Array],
         finish: [Function: onSocketFinish],
         _socketEnd: [Function: onSocketEnd],
@@ -1083,7 +1086,7 @@ IncomingMessage {
         pause: [Function: onSocketPause] },
      _eventsCount: 10,
      _maxListeners: undefined,
-     _writableState: 
+     _writableState:
       WritableState {
         objectMode: false,
         highWaterMark: 16384,
@@ -1116,7 +1119,7 @@ IncomingMessage {
      _sockname: null,
      _pendingData: null,
      _pendingEncoding: '',
-     server: 
+     server:
       Server {
         domain: null,
         _events: [Object],
@@ -1136,7 +1139,7 @@ IncomingMessage {
         maxHeadersCount: null,
         _connectionKey: '6::::8888',
         [Symbol(asyncId)]: 7 },
-     _server: 
+     _server:
       Server {
         domain: null,
         _events: [Object],
@@ -1157,7 +1160,7 @@ IncomingMessage {
         _connectionKey: '6::::8888',
         [Symbol(asyncId)]: 7 },
      _idleTimeout: 120000,
-     _idleNext: 
+     _idleNext:
       Socket {
         connecting: false,
         _hadError: false,
@@ -1191,7 +1194,7 @@ IncomingMessage {
         [Symbol(bytesRead)]: 0,
         [Symbol(asyncId)]: 18,
         [Symbol(triggerAsyncId)]: 17 },
-     _idlePrev: 
+     _idlePrev:
       TimersList {
         _idleNext: [Circular],
         _idlePrev: [Object],
@@ -1201,7 +1204,7 @@ IncomingMessage {
         nextTick: false },
      _idleStart: 4890,
      _destroyed: false,
-     parser: 
+     parser:
       HTTPParser {
         '0': [Function: parserOnHeaders],
         '1': [Function: parserOnHeadersComplete],
@@ -1218,7 +1221,7 @@ IncomingMessage {
         onIncoming: [Function: bound parserOnIncoming] },
      on: [Function: socketOnWrap],
      _paused: false,
-     _httpMessage: 
+     _httpMessage:
       ServerResponse {
         domain: null,
         _events: [Object],
@@ -1254,11 +1257,11 @@ IncomingMessage {
      [Symbol(bytesRead)]: 0,
      [Symbol(asyncId)]: 12,
      [Symbol(triggerAsyncId)]: 10 },
-  connection: 
+  connection:
    Socket {
      connecting: false,
      _hadError: false,
-     _handle: 
+     _handle:
       TCP {
         reading: true,
         owner: [Circular],
@@ -1268,7 +1271,7 @@ IncomingMessage {
         _consumed: true },
      _parent: null,
      _host: null,
-     _readableState: 
+     _readableState:
       ReadableState {
         objectMode: false,
         highWaterMark: 16384,
@@ -1293,7 +1296,7 @@ IncomingMessage {
         encoding: null },
      readable: true,
      domain: null,
-     _events: 
+     _events:
       { end: [Array],
         finish: [Function: onSocketFinish],
         _socketEnd: [Function: onSocketEnd],
@@ -1306,7 +1309,7 @@ IncomingMessage {
         pause: [Function: onSocketPause] },
      _eventsCount: 10,
      _maxListeners: undefined,
-     _writableState: 
+     _writableState:
       WritableState {
         objectMode: false,
         highWaterMark: 16384,
@@ -1339,7 +1342,7 @@ IncomingMessage {
      _sockname: null,
      _pendingData: null,
      _pendingEncoding: '',
-     server: 
+     server:
       Server {
         domain: null,
         _events: [Object],
@@ -1359,7 +1362,7 @@ IncomingMessage {
         maxHeadersCount: null,
         _connectionKey: '6::::8888',
         [Symbol(asyncId)]: 7 },
-     _server: 
+     _server:
       Server {
         domain: null,
         _events: [Object],
@@ -1380,7 +1383,7 @@ IncomingMessage {
         _connectionKey: '6::::8888',
         [Symbol(asyncId)]: 7 },
      _idleTimeout: 120000,
-     _idleNext: 
+     _idleNext:
       Socket {
         connecting: false,
         _hadError: false,
@@ -1414,7 +1417,7 @@ IncomingMessage {
         [Symbol(bytesRead)]: 0,
         [Symbol(asyncId)]: 18,
         [Symbol(triggerAsyncId)]: 17 },
-     _idlePrev: 
+     _idlePrev:
       TimersList {
         _idleNext: [Circular],
         _idlePrev: [Object],
@@ -1424,7 +1427,7 @@ IncomingMessage {
         nextTick: false },
      _idleStart: 4890,
      _destroyed: false,
-     parser: 
+     parser:
       HTTPParser {
         '0': [Function: parserOnHeaders],
         '1': [Function: parserOnHeadersComplete],
@@ -1441,7 +1444,7 @@ IncomingMessage {
         onIncoming: [Function: bound parserOnIncoming] },
      on: [Function: socketOnWrap],
      _paused: false,
-     _httpMessage: 
+     _httpMessage:
       ServerResponse {
         domain: null,
         _events: [Object],
@@ -1481,7 +1484,7 @@ IncomingMessage {
   httpVersionMinor: 1,
   httpVersion: '1.1',
   complete: false,
-  headers: 
+  headers:
    { host: 'localhost:8888',
      connection: 'keep-alive',
      pragma: 'no-cache',
@@ -1492,7 +1495,7 @@ IncomingMessage {
      'accept-encoding': 'gzip, deflate, br',
      'accept-language': 'zh-CN,zh;q=0.9,zh-TW;q=0.8,en;q=0.7',
      cookie: 'io=RUmTy3eVO6ivWIN9AAEB' },
-  rawHeaders: 
+  rawHeaders:
    [ 'Host',
      'localhost:8888',
      'Connection',
@@ -1520,11 +1523,11 @@ IncomingMessage {
   method: 'GET',
   statusCode: null,
   statusMessage: null,
-  client: 
+  client:
    Socket {
      connecting: false,
      _hadError: false,
-     _handle: 
+     _handle:
       TCP {
         reading: true,
         owner: [Circular],
@@ -1534,7 +1537,7 @@ IncomingMessage {
         _consumed: true },
      _parent: null,
      _host: null,
-     _readableState: 
+     _readableState:
       ReadableState {
         objectMode: false,
         highWaterMark: 16384,
@@ -1559,7 +1562,7 @@ IncomingMessage {
         encoding: null },
      readable: true,
      domain: null,
-     _events: 
+     _events:
       { end: [Array],
         finish: [Function: onSocketFinish],
         _socketEnd: [Function: onSocketEnd],
@@ -1572,7 +1575,7 @@ IncomingMessage {
         pause: [Function: onSocketPause] },
      _eventsCount: 10,
      _maxListeners: undefined,
-     _writableState: 
+     _writableState:
       WritableState {
         objectMode: false,
         highWaterMark: 16384,
@@ -1605,7 +1608,7 @@ IncomingMessage {
      _sockname: null,
      _pendingData: null,
      _pendingEncoding: '',
-     server: 
+     server:
       Server {
         domain: null,
         _events: [Object],
@@ -1625,7 +1628,7 @@ IncomingMessage {
         maxHeadersCount: null,
         _connectionKey: '6::::8888',
         [Symbol(asyncId)]: 7 },
-     _server: 
+     _server:
       Server {
         domain: null,
         _events: [Object],
@@ -1646,7 +1649,7 @@ IncomingMessage {
         _connectionKey: '6::::8888',
         [Symbol(asyncId)]: 7 },
      _idleTimeout: 120000,
-     _idleNext: 
+     _idleNext:
       Socket {
         connecting: false,
         _hadError: false,
@@ -1680,7 +1683,7 @@ IncomingMessage {
         [Symbol(bytesRead)]: 0,
         [Symbol(asyncId)]: 18,
         [Symbol(triggerAsyncId)]: 17 },
-     _idlePrev: 
+     _idlePrev:
       TimersList {
         _idleNext: [Circular],
         _idlePrev: [Object],
@@ -1690,7 +1693,7 @@ IncomingMessage {
         nextTick: false },
      _idleStart: 4890,
      _destroyed: false,
-     parser: 
+     parser:
       HTTPParser {
         '0': [Function: parserOnHeaders],
         '1': [Function: parserOnHeadersComplete],
@@ -1707,7 +1710,7 @@ IncomingMessage {
         onIncoming: [Function: bound parserOnIncoming] },
      on: [Function: socketOnWrap],
      _paused: false,
-     _httpMessage: 
+     _httpMessage:
       ServerResponse {
         domain: null,
         _events: [Object],
