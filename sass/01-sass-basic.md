@@ -40,7 +40,7 @@ sass --watch sass:css
 sass would watch all the files in the sass folder for changes,and compile CSS to the css folder
 
 ## variables(变量)
-Variables is the way to sore information that you want to reuse.You can sore things like: 
+Variables is the way to sore information that you want to reuse.You can sore things like:
 - colors
 - font stack
 - any css value you wanna reuse
@@ -87,7 +87,8 @@ partials Sass可以看做是Sass的模块.
 - Sass构建在CSS的`@import`指令之上,但不需要HTTP请求.Sass将获取您要导入的文件并将其与您导入的文件合并，这样您就可以将单个CSS文件提供给Web浏览器。
 例如:We want to import `_reset.scss` into `base.scss`.
 
-_reset.scss
+`_reset.scss`
+
 ```
 html,
 body,
@@ -132,9 +133,9 @@ css
 ```
 
 ## @extend/inheritance
-- `@extend`是Sass最有用的功能之一。 
-- `@extend`可以将某个选择器的一组CSS属性扩展到另一个选择器中。 
-- 它有助于保持你的Sass非常干燥。 
+- `@extend`是Sass最有用的功能之一。
+- `@extend`可以将某个选择器的一组CSS属性扩展到另一个选择器中。
+- 它有助于保持你的Sass非常干燥。
 最好的应用案例是:创建消息模块
 - 错误
 - 警告
