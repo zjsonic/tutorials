@@ -53,7 +53,7 @@ Vue.component('id',{ options }) //自动调用Vue.extend构造器
 
 ```
 上述代码会报错：
->>[Vue warn]: Unknown custom element: <my-component> - did you register the component correctly? For recursive components, make sure to provide the "name" option.
+>[Vue warn]: Unknown custom element: <my-component> - did you register the component correctly? For recursive components, make sure to provide the "name" option.
 
 原因：
 - `my-component`组件是通过`Vue()`构造函数的Vue.extend({options})方法注册的，为了简洁，Vue.extend()省略没写。
@@ -74,11 +74,65 @@ new Vue({
 
 ## Component Registration on new Vue()
 
+**全局注册有缺点**
+在webpack这样的打包系统中，全局注册的代码会最终包含在最终的构建结果中，造成代码无谓增加。
 
+**使用普通js对象的语法定义组件**
+
+```
+var ComponentA = { /* ... */ }
+var ComponentB = { /* ... */ }
+var ComponentC = { /* ... */ }
+```
+
+**在Vue实例中引入组件**
+```
+new Vue({
+  el: '#app',
+  components: {
+    'component-a': ComponentA,
+    'component-b': ComponentB
+  }
+})
+```
+
+## 通过props向子组件传递数据
+- props是创建组件的数据选项
+- 基本用法：
+  - props在组件类中定义
+  - props在组件实例上注入数据
+  - props在组件类中接收数据
+  - props可以是数组，也可以是对象。
+
+
+
+## 通过vm.$emit(eventName,[...args])向父组件传递消息
+- `vm.$emit()`是实例的方法。`vm.$emit()`用于触发组件实例上定义的事件。
+- 基本用法：
+  - 在组件实例上使用`v-on`监听自定义事件
+  - 在组件类中通过事件触发`$emit()`
+
+- 参数用法
+  - 通过参数抛出一个值
+  - 如果该值会作为第一个参数传入事件处理函数
+- 在input上使用`v-model`监听事件
+  - 将组件的`value`特性绑定到一个名叫`value`的prop上
+  - 在组件的`input`事件被触发时，将新的值通过自定义的`input`事件抛出
+
+
+```
+<button v-on:click ="$emit('enlarge-text', 0.2)"
+```
+- `0.2`会自动作为第一个参数传入事件处理函数
+
+
+
+## 动态组件
 
 ## `<component>`
 
-## `<slot>`
+## 通过`<slot>`分发内容
+- 用于标记往哪个具名插槽中插入子组件的内容
 
 ## `<transition>`
 
