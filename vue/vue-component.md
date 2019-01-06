@@ -1,11 +1,29 @@
 # Components
 
 - What is component
-- Component Registration on Vue()
-- Component Registration on new Vue()
-- Single File Component
--
-
+- Component Registration
+  - Component Registration on Vue()
+  - Component Registration on new Vue()
+  - Component Registration in a Module System
+- Passing Data
+  - Passing data to Child Component with props
+  - Sending message to Parents with event
+  - Content Distribution with slot
+- Built-In Components
+  - `<component>`：元组件、动态组件
+  - `<slot>`: 插槽
+  - `<keep-alive>`: 保留组件状态
+  - `<transition>`:
+- Asynchronous Components
+- Handle Edge Cases
+  - Accessing the Instance
+    - Access the root instance
+    - Access the parent instantce
+    - Access the child instance
+  - Manually listen for events on component instance
+  - Circlar References
+  - inline-template & x-template
+  - Controlling Updates
 ## What is component
 - 组件是可复用的Vue实例。
 - 组件可以当做自定义元素来使用。
@@ -85,7 +103,7 @@ var ComponentB = { /* ... */ }
 var ComponentC = { /* ... */ }
 ```
 
-**在Vue实例中引入组件**
+**在Vue实例中注册组件**
 ```
 new Vue({
   el: '#app',
@@ -95,7 +113,17 @@ new Vue({
   }
 })
 ```
+## Component Local Registration in a Module System
+singfile.js or singfile.vue
+```
+import 'component-a' from './components/component-a'
 
+export default {
+  components: {
+    `component-a`: component-a
+  }
+}
+```
 ## 通过props向子组件传递数据
 - props是创建组件的数据选项
 - 基本用法：
@@ -103,8 +131,26 @@ new Vue({
   - props在组件实例上注入数据
   - props在组件类中接收数据
   - props可以是数组，也可以是对象。
+- props大小写问题
+  - HTML的属性不区分大小写
+  - 所以浏览器会把大写属性解析成小写
+  - 所以在内嵌DOM模板中，camelCased需要换成kebab-cased
+  - 注意：字符串模板不受此限制
+- props的类型
 
-
+## Component Global Registration of Basic Components In a Module System
+**基本组件**:指通常只包含一个元素的基本的、通用的组件。
+- 使用`require.context()`注册
+```
+const requireComponent = require.context(
+  // The relative path of the components folder
+  './components',
+  // Whether or not to look in subfolders
+  false,
+  // The regular expression used to match base component filenames
+  /Base[A-Z]\w+\.(vue|js)$/
+)
+```
 
 ## 通过vm.$emit(eventName,[...args])向父组件传递消息
 - `vm.$emit()`是实例的方法。`vm.$emit()`用于触发组件实例上定义的事件。
@@ -127,13 +173,64 @@ new Vue({
 
 
 
-## 动态组件
+## 异步组件
+**基本用法：以工厂函数的方式定义组件**
+
+```
+Vue.component('async-example', function (resolve, reject) {
+  setTimeout(function () {
+    // 向 `resolve` 回调传递组件定义
+    resolve({
+      template: '<div>I am async!</div>'
+    })
+  }, 1000)
+})
+
+```
+
+**推荐用法：将异步组件和require()配合使用**
+
+```
+Vue.component('async-webpack-example', function (resolve) {
+  // 这个特殊的 `require` 语法将会告诉 webpack
+  // 自动将你的构建代码切割成多个包，这些包
+  // 会通过 Ajax 请求加载
+  require(['./my-async-component'], resolve)
+})
+```
+
+**ES6用法：箭头函数+import+Promise**
+
+```
+Vue.component(
+  'async-webpack-example',
+  // 这个 `import` 函数会返回一个 `Promise` 对象。
+  () => import('./my-async-component')
+)
+```
+
+**局部注册：直接返回一个promise**
+```
+new Vue({
+  // ...
+  components: {
+    'my-component': () => import('./my-async-component')
+  }
+})
+```
 
 ## `<component>`
+- `<component>`是“元组件”。
+- `<component>`用于渲染动态组件。
+- `<component>`依据`is`的值决定渲染哪个组件
 
-## 通过`<slot>`分发内容
-- 用于标记往哪个具名插槽中插入子组件的内容
+## 通过`<slot>`显示组件实例的内容
+- 组件实例的内容可以是纯文本，也可以是HTML内容。
+- `<slot>`自身将被组件实例的内容替换。
 
 ## `<transition>`
 
 ## `<keep-alive>`
+- 组件是有状态的
+- `<keep-alive>`用于保留组件状态
+- `<keep-alive>`是一个抽象组件，不会被渲染DOM。
