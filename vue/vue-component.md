@@ -229,7 +229,7 @@ new Vue({
 - `<slot>`自身将被组件实例的内容替换。
 
 ## `<transition>`
-
+- 为元素或组件添加过渡效果
 ## `<keep-alive>`
 - 组件是有状态的
 - `<keep-alive>`用于保留组件状态
