@@ -6,6 +6,25 @@
   - data
 - 每个 Vue 应用都是通过用 Vue 函数创建一个新的 Vue 实例开始的。
 
+## 构建App从构建实例开始
+```
+const app = new Vue()
+```
+- 每个app都是从创建一个Vue实例开始。
+
+## new Vue(options)
+向实例传入选项
+```
+const app = new Vue({
+  el: '#app',
+  data: {
+    key: 'value'
+  }
+})
+```
+- 一个Vue实例就是一个对象，里面保存了要管理的DOM和数据。只要数据发生变化，DOM就会自动更新。
+
+
 
 ## data:Vue实例的数据。
 **data is an object**
@@ -95,3 +114,33 @@ new Vue({
 ## filters包含Vue实例可用过滤器的hashList
 
 ## directive包含Vue实例可用指令的hashList
+
+
+
+
+## Lifecycle
+
+- `beforeCreate()`: `vm`实例初始化之后调用
+  - `data`未获取
+  - `computed`
+  - `methods`
+  - `watch`
+  - `event`
+- `created()`: `vm`实例创建完成之后调用
+  - `data`已注入
+  - `computed`已计算完成
+  - `methods`已计算完成
+  - `watch`事件回调
+  - `event`事件回调
+  - 挂载未开始，`vm.$el`不可见
+- `beforeMount()`: `vm`渲染完毕(render()函数首次被调用),挂载之前调用
+  - `vm.$el`已获取
+- `mounted()`: `el`被`vm.$el`替换，并挂载到实例上去之后调用该钩子
+  -  赋予你两种能力：1.访问template 2. interaction with the DOM
+- `beforeUpdate()`: 数据更新时调用
+- `updated()`: 数据更新后调用
+- `activated()`: `<keep-alive>`组件激活时调用
+- `deactivated()`: `<keep-alive>`组件停用时调用
+- `beforeDestory()`: 实例销毁之前调用
+- `destoried()`: 实例销毁之后调用
+- `errorCaptured()`: 当捕获来自后代组件的错误时调用

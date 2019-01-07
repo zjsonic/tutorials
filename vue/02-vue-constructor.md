@@ -8,30 +8,13 @@
 ## Print Vue Constructor
 ![Vue Constructor](./images/vue-constructor.png)
 
-
-## 构建App从构建实例开始
-```
-const app = new Vue()
-```
-- 每个app都是从创建一个Vue实例开始。
-
-## new Vue(options)
-向实例传入选项
-```
-const app = new Vue({
-  el: '#app',
-  data: {
-    key: 'value'
-  }
-})
-```
-- 一个Vue实例就是一个对象，里面保存了要管理的DOM和数据。只要数据发生变化，DOM就会自动更新。
-
-## Vue.component('component-name',{options})
+## Vue.component('component-name',Vue.extend({options}))
 - 用途：注册组件(global)
 
-## Vue.extend()
-- 用途:使用基础 Vue 构造器，创建一个“子类”。参数是一个包含组件选项的对象。
+## Vue.extend({options})
+- 用途:创建一个“子构造函数”(子类)。
+- `{options}`: 一个包含组件选项的对象。
+  - data: 必须是函数
 
-## Vue.mixin(mixin)
-- 用途：
+## Vue.directive('id',[function|object])
+- 用途: 注册全局指令
