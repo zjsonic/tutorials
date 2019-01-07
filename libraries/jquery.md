@@ -33,8 +33,28 @@ jQuery.fn.init {}
 - 必须放在任何css样式表文件之后
 - 建议在})之后添加一条注释: //end ready
 
+
+## jQuery( callback )
+允许你绑定一个在 DOM 文档载入完成后执行的函数。
+
+该函数的作用如同 $(document).ready() 一样，只不过用这个函数时，需要把页面中所有需要在 DOM 加载完成时执行的其他 $() 操作符都包装到其中来。尽管从技术上来说，这个函数是可链接的，但真正以这种方式链接的情况并不多。
+
+## jQuery('cssSelector',[context])
+
+## jQuery('<div></div>',[ownerDocument])
+
+## jQuery().css('property','value')
+
+
 ## jQuery的事件函数
 - $(document).ready():当文档完全加载完毕时，执行函数
+```
+$(document).ready(function(){
+  $(".btn1").click(function(){
+    $("p").slideToggle();
+  });
+});
+```
 - $().dblclick(handler) 当鼠标双击元素时触发。为元素绑定双击事件
 - $().mouseenter(handler) 当鼠标指针进入元素时触发
 - $().mousedown(handler) 当按下鼠标时触发
@@ -81,4 +101,3 @@ $.ajax({
 ```
   - `$().load(url,data,callback)`
     - 用途：load()方法用于从指定地址请求数据并把数据返回给元素
-  
