@@ -22,3 +22,6 @@ bash是shell的一种，在早年的UNIX年代，发展者众多，所以就有�
 ## 工厂函数
 - 工厂函数是一个最后返回值是对象的函数，但它既不是类，也不是构造函数。
 - 在JavaScript中，任何函数都可以返回一个对象。 但当函数没有使用new关键字时，那它便是一个工厂函数。
+
+## Progressive Web App（PWA）
+[什么是渐进式网络应用程序](https://www.digitaldoughnut.com/articles/2018/may/what-is-a-progressive-web-app)

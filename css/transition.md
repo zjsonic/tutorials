@@ -28,11 +28,11 @@
 ||seconds||
 ||milliseconds||
 |transition-timing-function||Specifies the speed curve设置过度曲线（速度曲线）|
-||ease||
-||ease-in||
-||ease-out||
-||ease-in-out||
-||linear||
+|默认值|ease|cubic-bezier(0.25,0.1,0.25,1)|
+||ease-in|cubic-bezier(0.42,0,1,1)|
+||ease-out|cubic-bezier(0,0,0.58,1)|
+||ease-in-out|cubic-bezier(0.42,0,0.58,1)|
+||linear|cubic-bezier(0,0,1,1)|
 |transition|p d f d|a shorthand property|
 
 ## properties can be animated
