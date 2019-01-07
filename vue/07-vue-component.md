@@ -13,7 +13,7 @@
   - `<component>`：元组件、动态组件
   - `<slot>`: 插槽
   - `<keep-alive>`: 保留组件状态
-  - `<transition>`:
+  - `<transition>`: 向单个元素或组件应用过渡效果
 - Asynchronous Components
 - Handle Edge Cases
   - Accessing the Instance
@@ -24,6 +24,8 @@
   - Circlar References
   - inline-template & x-template
   - Controlling Updates
+
+
 ## What is component
 - 组件是可复用的Vue实例。
 - 组件可以当做自定义元素来使用。
@@ -229,7 +231,22 @@ new Vue({
 - `<slot>`自身将被组件实例的内容替换。
 
 ## `<transition>`
-- 为元素或组件添加过渡效果
+- 为单个元素或组件添加过渡效果
+- props
+  - name: string 自动生成两组class名字
+    - value-enter
+    - value-enter-active
+    - value-enter-to
+    - value-leave
+    - value-leave-active
+    - value-leave-to
+  - appear
+  - css
+  - model: string 控制leaving/entering过渡的时间顺序。属性值有:
+    - `out-in`
+    - `in-out`
+    - `simultaneous` 默认同时发生
+
 ## `<keep-alive>`
 - 组件是有状态的
 - `<keep-alive>`用于保留组件状态

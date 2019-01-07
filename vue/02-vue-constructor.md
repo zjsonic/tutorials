@@ -30,9 +30,8 @@ const app = new Vue({
 ## Vue.component('component-name',{options})
 - 用途：注册组件(global)
 
-## Vue.use(plugin)
-
 ## Vue.extend()
-使用基础 Vue 构造器，创建一个“子类”。参数是一个包含组件选项的对象。
+- 用途:使用基础 Vue 构造器，创建一个“子类”。参数是一个包含组件选项的对象。
 
-## Vue.filter()
+## Vue.mixin(mixin)
+- 用途：
