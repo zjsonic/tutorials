@@ -1,6 +1,7 @@
 # Pixel
 
-## 2019年01月常见手机屏幕参数
+## iPhone手机屏幕参数
+2019年01月统计
 |手机|diagonal|pixels|PixelPerInch|DevicePixelRatio|
 |-|-|-|-|-|
 |iPhone 5|4.0|1136×640|326|2|
@@ -37,14 +38,14 @@
 - 这个区域必须不可分割
 - 任何设备的物理像素数量都是固定的
 - `physical`指的是设备屏幕玻璃后面真实存在的光线的这一事实。
-![Physical Pixel](./images/physical-pixel.jpeg)
+![Physical Pixel](images/physical-pixel.jpeg)
 
 ## What on earth is a LOGICAL PIXEL
 - `logical pixel`：我们在PS中谈论图片尺寸时所使用的单位就是逻辑像素。
 - `logical`指一种事实：这些像素仅仅是一些信息
 - 这些信息在表示图像的网格的某个位置上指定了一个颜色值
 - `logical pixel`自身没有物理尺寸：如果不指定图片显示的context,没人知道一个逻辑像素为100px*100px的图像有多大。
-![In this example color values are grayscale](./images/pixel-grayscale.png)
+![In this example color values are grayscale](images/pixel-grayscale.png)
 
 ## Why logical pixel is required?
 - Let's pretend there was just one kind of pixel
@@ -58,4 +59,4 @@
 - to keep the image size under different resolution devices.
 
 
-![3 x 4 px logo on low-res and high-res screens](./images/pixel-different-res.png)
+![3 x 4 px logo on low-res and high-res screens](images/pixel-different-res.png)
