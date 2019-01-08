@@ -2,6 +2,7 @@
 
 ## 2019年01月常见手机屏幕参数
 |手机|diagonal|pixels|ppi|devicePixelRatio|
+|-|-|-|-|-|
 |iPhone 5|4|1136×640|326|2|
 |iPhone 5s|4|1136×640|326|2|
 |iPhone SE|4|1136 x 640|326|2|
