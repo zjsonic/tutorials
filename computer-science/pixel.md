@@ -2,6 +2,7 @@
 
 ## iPhone手机屏幕参数
 2019年01月统计
+
 |手机|diagonal|pixels|PixelPerInch|DevicePixelRatio|
 |-|-|-|-|-|
 |iPhone 5|4.0|1136×640|326|2|
