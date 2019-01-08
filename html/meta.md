@@ -1,64 +1,77 @@
 # < meta >
 
-## 用途
-`<meta>`标签用于指定文档的元数据(metadata，即用于描述数据的数据)。
-
-## < meta >的解析
-- 网页中的`metadata`不会显示在页面上
-- 网页中的`metadata`会被浏览器解析
-
-
-## < meta >的类型
-- 提供给搜索引擎使用
-- 提供给开发者使用
-
-## < meta >的位置
-`<meta>`标签总是出现在`<head>`标签内。
-
-## < meta >的语法
+## < meta >简介
 - `<meta>`是一个单标签
-- `<meta>`在H5中，没有关闭标签。在xhtml中必须关闭
-- 总是向`<meta>`中传入一个名值对。
+- `<meta>`标签用于指定文档的元数据.
+- 元数据(`metadata`),即描述数据(该文档)的数据。
+- `<meta>`标签定义的元数据总是出现在`<head>`标签内。不会显示在前台页面上。
+- `<meta>`定义的元数据主要面向浏览器和搜索引擎。
+  - 告诉浏览器如何渲染文档
+  - 告诉搜索引擎如何检索我(文档的自我介绍)
 
-## < meta >的属性
+## < meta >的name属性：面向搜索引擎
+- `name`属性用于设置key
+  - `keywords`
+  - `description`
+  - `generator`
+  - `author`
+  - `application-name`
+- `content`属性用于设置value
 
-|Attribute|Value|Description|
-|-|-|-|
-|http-equiv||模拟一个HTTP响应头|
-||content-type| 告诉浏览器文档主体内对象的媒体类型|
-||default-style|必须匹配同一文档中的一个 link 元素上的 title 属性的值|
-||refresh||
-|name ||定义文档的关键字描述和viewport等|
-||description|定义文档的描述|
-||keywords|定义文档的关键字|
-||author|定义文档的作者|
-||viewport|定义文档的viewport|
-||application-name|指定web应用的名称|
-|content|text|为`http-equiv`或`name`指定的属性设置值|
-|charset|character_set|指定当前文档的字符编码|
+**定义文档的关键字**
 
-## 自动刷新页面
+```
+<meta name="keywords" content="HTML,CSS,JavaScript">
+```
+**定义文档的描述**
+```
+<meta name="description" content="Free Web tutorials">
+```
+
+**定义文档的作者**
+```
+<meta name="author" content="John Doe">
+```
+**定义文档的编辑器名称**
+```
+<meta name="generator" content="Dreamweaver">
+```
+**定义文档的名称**
+```
+<meta name="application-name" content="Free Tutorials">
+```
+
+## < meta >的name属性：面向浏览器
+- `name`属性用于设置key：
+  - `viewport`
+- `content`属性用于设置value：
+  - width=device-width (设置视口的宽度为设备的宽度)
+  - width=400 (设置视口的宽度为400px)
+  - initial-scale=1 (设置viewport的初始缩放比例为1)
+  - initial-scale=1.5 (设置viewport的初始缩放比例为1.5)
+  - minimum-scale (设置用户的最小缩放度)
+  - maximum-scale (设置用户的最大缩放度)
+  - user-scalable=yes (允许用户缩放，默认)
+  - user-scalable=no (不允许用户缩放)
+
+## < meta >的http-equiv属性：模拟一个HTTP响应头
+- `http-equiv`属性用于设置key
+- `content`属性用于设置value
+
+**告诉浏览器自动刷新文档**
+
 ```
 <meta http-equiv="Refresh" content="3"/>
 ```
 
-## 自动跳转
+**告诉浏览器3秒后自动更新url**
+
 ```
 <meta http-equiv="refresh" content="3 url=http://www.baidu.com">
 ```
-- `3` : 3秒
 
-## 其他
+##  < meta >的charset属性
+**告诉浏览器文档的编码**
 ```
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="Free web tutorials">
-<meta name="keywords" content="HTML, meta tag, tag reference">
-<meta name="application-name" content="W3schools">
-<meta name="generator" content="FrontPage 4.0">
-<meta name="author" content="John Doe">
-
-<meta http-equiv="content-type" content="text/html charset=utf-8">
-<meta http-equiv="default-style" content="the document's preferred stylesheet">
-<meta http-equiv="refresh" content="3 url=http://www.baidu.com">
+<meta charset='utf-8'>
 ```
