@@ -1,5 +1,9 @@
 # < meta >
 
+## 参考
+- [https://www.w3schools.com/tags/tag_meta.asp](https://www.w3schools.com/tags/tag_meta.asp)
+- [https://css-tricks.com/snippets/html/responsive-meta-tag/](https://css-tricks.com/snippets/html/responsive-meta-tag/)
+
 ## < meta >简介
 - `<meta>`是一个单标签
 - `<meta>`标签用于指定文档的元数据.
