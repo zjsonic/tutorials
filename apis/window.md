@@ -6,3 +6,8 @@
 ## window属性
 `window.devicePixelRatio`-返回比率（物理像素分辨率/css像素分辨率）
 ## window方法
+
+
+## 打印window对象
+
+## 打印Window构造函数
