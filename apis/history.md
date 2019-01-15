@@ -1,5 +1,10 @@
 # History Interface
 
+
+## 打印history对象
+
+![History Object](images/history-object.png)
+
 ## 用途
 `histroy`接口允许操作浏览器中的session记录。
 - session记录由history对象创建
