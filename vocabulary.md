@@ -1,14 +1,14 @@
-## interfere 
+## interfere
 - 冲突
 - 干涉、打扰
-> Each module in Node.js has its own context, so it cannot interfere with other modules or pollute global scope. 
+> Each module in Node.js has its own context, so it cannot interfere with other modules or pollute global scope.
 
 ## impart
 >>The purpose of this guide is to impart a solid understanding of the process of Node.js HTTP handling.
 - vt. 给予（尤指抽象事物），传授；告知，透露
 
 ## bother
->If you don't bother setting it, the HTTP status code on a response will always be 200. 
+>If you don't bother setting it, the HTTP status code on a response will always be 200.
 - vt.烦扰，打扰；使……不安；使……恼怒
 - vi. 操心，麻烦；烦恼
 - n. 麻烦；烦恼
@@ -28,11 +28,11 @@ Why bother doing something you already have done a hundred times, where there is
 
 ## evenly
 >space-evenly: items are distributed so that the spacing between any two items (and the space to the edges) is equal.
-美 ['ivnli] 
+美 ['ivnli]
 - adv. 均匀地；平衡地；平坦地；平等地
 
 
-## implicitly explicitly 
+## implicitly explicitly
 >Once you've set the headers (either implicitly or explicitly), you're ready to start sending response data.
 
 ## interface
@@ -40,5 +40,9 @@ Why bother doing something you already have done a hundred times, where there is
 - v. （使通过界面或接口）接合，连接；[计算机]使联系
 - vi. 相互作用（或影响）；交流，交谈
 ## interfaces
->The HTTP interfaces in Node.js are designed to support many features of the protocol which have been traditionally difficult to use. 
+>The HTTP interfaces in Node.js are designed to support many features of the protocol which have been traditionally difficult to use.
 - n. [通信][计] 接口（interface的复数）
+
+
+## parentheses
+- n. 括弧 圆括号

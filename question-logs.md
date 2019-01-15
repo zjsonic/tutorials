@@ -55,3 +55,12 @@ $settings[‘trusted_host_patterns’] = array(
 );
 ```
 注意：别犯晕，php的注释是多行注释，简单的去掉`*`号是没用的。
+
+
+## 1.toString()
+- 问题描述：通过`toString()`方法把数字`1`转换成字符串`‘1’`,我眼中的代码是这样写：`1.toString()`，但是会报错：
+```
+Uncaught SyntaxError: Invalid or unexpected token
+```
+- 原因：JavaScript解析器眼中的代码是这样：`1.` `toString()`,解析器把数字`1`后面的`.`看做是数字`1`的一部分，所以会报错。
+- 解决：`1..toString()` 或 `(1).toString()`
