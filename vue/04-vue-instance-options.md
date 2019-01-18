@@ -1,10 +1,21 @@
 # Vue Instance
 
+## MVVM
+- MVVM是Model-View-ViewModel的缩写。
+- MVVM是一种设计思想
+  - M代表数据模型
+  - v代表视图
+  - vm代表同步M和V的对象
+
+## Vue实例
 - Vue实例是一个使用MVVM模式定义的ViewModel(视图模型)
 - 当创建一个 Vue 实例时，你需要传入一个选项对象。选项用来创建你想要的行为。
   - el
   - data
 - 每个 Vue 应用都是通过用 Vue 函数创建一个新的 Vue 实例开始的。
+- Vue使用的模板语言
+  - 模板语言是HTML的超集。任何HTML都是有效的Vue.js的模板。
+  - 模板将会被Vue编译后生成的DOM所替换。
 
 ## 构建App从构建实例开始
 ```
@@ -44,29 +55,26 @@ new Vue({
 
 **data is a function when it used in a component**
 ```
-
+Vue.component({
+  template:``,
+  data: function(){
+    return {
+      key: 'value'
+    }
+  }
+})
 ```
-
 
 ## props:接收来自父组件的数据
 **props is an Array**
 
-
 **Porps is an Object**
 
-
-
 ## methods
-
 
 ## computed
 
 ## watch
-
-
-## Vue使用的模板语言
-- 模板语言是HTML的超集。任何HTML都是有效的Vue.js的模板。
-- 模板将会被Vue编译后生成的DOM所替换。
 
 ## el: 提供一个页面上已知的DOM元素作为Vue实例的模板。
 - 语法： `el:'CSSSelector'|HTMLElement `
@@ -84,6 +92,8 @@ new Vue({
   el: document.querySelector('#app')
 })
 ```
+
+
 ## template:提供一个字符串模板作为Vue实例的模板
 - 语法： `template: 'string'`
 - 若存在el,则el将会被模板替换。(除非模板的内容有分发插槽)
@@ -105,18 +115,18 @@ new Vue({
 - createElement(): 创建VNode，返回值：VNode
 - context: 为无实例的组件提供上下文
 ```
-待补充
+import App from './App'
+new Vue({
+  render: function(createElement){
+    return createElement(App)
+  }
+})
 ```
-
-
 ## Components包含Vue实例可用组件的hashList
 
 ## filters包含Vue实例可用过滤器的hashList
 
 ## directive包含Vue实例可用指令的hashList
-
-
-
 
 ## Lifecycle
 
