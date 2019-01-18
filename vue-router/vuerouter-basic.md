@@ -10,7 +10,7 @@
 ## VueRouter()是一个构造函数
 `VueRouter()`构造函数用于创建一个router实例。
 
-![VueRouter构造函数](images/vue-router.png)
+![VueRouter构造函数](images/vuerouter-constructor.png)
 ```
 function VueRouter (options) {
     if ( options === void 0 ) options = {};
