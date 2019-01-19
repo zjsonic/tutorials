@@ -172,15 +172,18 @@ new Vue({
 
 **`exact-active-class`:指定链接确切激活时的类名**
 
-默认值：`router-link-exact-active`
-确切激活：不添加exact模式也可以确切激活。如 
+- 默认值：`router-link-exact-active`
+- 确切激活：不添加exact模式也可以确切激活。如 
 ```
 <style>
 .router-link-active{color:red}
 .router-link-exact-active{color:green}
 </style>
-<router-link to='/about'>/about</router-link> // exact-active when click this, not exact-active when click another
-<router-link to='/about/abc'>/about/abc</router-link> //exact-active when click this
+
+// exact-active when click this, not exact-active when click another
+<router-link to='/about'>/about</router-link> 
+//exact-active when click this
+<router-link to='/about/abc'>/about/abc</router-link> 
 ```
 
 ## 组件`<router-view>`
