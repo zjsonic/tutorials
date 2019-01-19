@@ -81,7 +81,7 @@ new Vue({
 }).$mount('#app')
 ```
 
-## Router对象
+## $router: 路由实例对象
 
 **打印this.$router**
 ![this.$router](images/this-router-object.png)
@@ -102,31 +102,85 @@ new Vue({
 **Router对象的方法**
 
 
-## Route对象
+## $route：当前路由对象
 
 **打印this.$route**
 
 ![this.$route](images/this-route-object.png)
 
-**访问Route对象的方法**
+**当前路由对象包含的信息有**
 
-当向`Vue`实例注入`Router`实例之后，可以在任何组件内通过 `this.$route` 访问当前路由的信息
+- 当前url解析后的信息
+- url匹配到的路由记录
+
+**$route对象出现的地方有**
+
+- 组件内：`this.$route`
+- 在`$route`观察者回调内
+- `router.match(location)`的返回值
+- 导航守卫的参数
+- `scrollBehavior`方法的参数
+
+**$route对象的属性**
+
+- `$route.name`: `string`  the name the current route if it has one
+- `$route.path`: `string` the path of the current route
+- `$route.fullPath` : `string` the path with the query string and the hash
+- `$route.params`: `object` `dynamic segments` and `star segments`
+- `$route.query`: `object`  `key/value pairs of the query string`
+- `$route.hash`: `string`  `the hash with the # of the current route`
+- `$route.matched`: `Array` route records for all nested path segments of the current route
 
 
-## 组件
 
 
-- `<router-link>`
-    - 用途：在应用中创建导航链接。
-    - `to`属性
-    - `tag`属性
-    - `active-class`
-    - `exact-active-class`
-    - `exact`
-    - `replace`
-    - `append`
-    - `event`
+## 组件`<router-link>`
+`<router-link>`用于在app中创建导航链接。
 
-- `<router-view>`
-    - 用途：在应用中渲染组件。(functional组件)
-    - `name`
+**`to`:指定链接的地址一个路径字符串**
+```
+<router-link to='/about'>关于</router-link>
+```
+**`to`:指定链接的地址为一个路由对象**
+```
+<router-link :to="{name:'about'}">关于</router-link>
+```
+**`class='router-link-active'`:默认链接激活类名
+```
+<style>
+.router-link-active{
+    color:red
+}
+</style>
+<router-link to='/' class='router-link-active'>首页</router-link>
+<router-link to='/about' class='router-link-active'>关于</router-link>
+```
+注意：The default active class matching behavior is `inclusive match`,not `exact match`,所以,只要我包含你，我就匹配你。开头路径需要一致，以下路径均会被激活：
+- `/about/abc`
+- `/about/`
+- `/abo` (not actived)
+- `/about`
+- `/`
+
+
+**exact:Force the link into `exact match mode`**
+```
+<router-link to='/' class='router-link-active' exact>首页</router-link>
+<router-link to='/about' class='router-link-active'>关于</router-link>
+```
+
+
+
+## 组件`<router-view>`
+
+
+## 路由的应用
+
+**Dynamic Segments**
+- one component
+- multiple segments
+- setting `dynamic segments` in the `path` key of the routes
+
+**Nested Routes**
+- 在路由表中，使用`children`属性添加子路由
+- 在该路由对应的组件中，设置`<router-view/>`
