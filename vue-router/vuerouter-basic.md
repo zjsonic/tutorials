@@ -170,7 +170,8 @@ new Vue({
 <router-link to='/about' class='router-link-active'>关于</router-link>
 ```
 
-**`exact-active-class`:指定链接确切激活时的类名
+**`exact-active-class`:指定链接确切激活时的类名**
+
 默认值：`router-link-exact-active`
 确切激活：不添加exact模式也可以确切激活。如 
 ```
