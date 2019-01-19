@@ -137,7 +137,7 @@ new Vue({
 ## 组件`<router-link>`
 `<router-link>`用于在app中创建导航链接。
 
-**`to`:指定链接的地址一个路径字符串**
+**`to`:指定链接的地址为一个路径字符串**
 ```
 <router-link to='/about'>关于</router-link>
 ```
@@ -145,7 +145,8 @@ new Vue({
 ```
 <router-link :to="{name:'about'}">关于</router-link>
 ```
-**`class='router-link-active'`:默认链接激活类名
+**`active-class`:指定链接激活时的类名**
+- 默认值：`router-link-active`
 ```
 <style>
 .router-link-active{
@@ -163,13 +164,23 @@ new Vue({
 - `/`
 
 
-**exact:Force the link into `exact match mode`**
+**`exact`:Force the link into `exact match mode`**
 ```
 <router-link to='/' class='router-link-active' exact>首页</router-link>
 <router-link to='/about' class='router-link-active'>关于</router-link>
 ```
 
-
+**`exact-active-class`:指定链接确切激活时的类名
+默认值：`router-link-exact-active`
+确切激活：不添加exact模式也可以确切激活。如 
+```
+<style>
+.router-link-active{color:red}
+.router-link-exact-active{color:green}
+</style>
+<router-link to='/about'>/about</router-link> // exact-active when click this, not exact-active when click another
+<router-link to='/about/abc'>/about/abc</router-link> //exact-active when click this
+```
 
 ## 组件`<router-view>`
 
