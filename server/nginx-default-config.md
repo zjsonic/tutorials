@@ -1,4 +1,4 @@
-# Ngin Default Configuration
+# Nginx Default Configuration
 
 ## 第一步：解析域名
 - 解析example.com

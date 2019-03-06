@@ -46,3 +46,6 @@ Why bother doing something you already have done a hundred times, where there is
 
 ## parentheses
 - n. 括弧 圆括号
+
+
+## alright,the're straight down to business

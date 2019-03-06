@@ -89,17 +89,81 @@ new Vue({
 **Router对象简介**
 
 - `Router`对象是VueRouter()的实例对象。
-- 
-
 
 
 **访问Router对象的方法**
 
 当向`Vue`实例注入`Router`实例之后，可以在任何组件内通过 `this.$router` 访问路由器
 
-**Router对象的属性**
+## Router实例对象的属性
+- `$router.app`:返回`router`对象所在的根实例对象
+- `$router.mode`:返回`router`对象的模式
+- `$router.currentRoute`: 返回`router`对象的当前路由对象
+```
+{
+  fullPath: "/home",
+  hash: "",
+  matched: [[object Object] {
+  beforeEnter: undefined,
+  components: [object Object] {
+    default: [object Object] { ... }
+  },
+  instances: [object Object] {
+    default: [object Object] { ... }
+  },
+  matchAs: undefined,
+  meta: [object Object] { ... },
+  name: undefined,
+  parent: undefined,
+  path: "/home",
+  props: [object Object] { ... },
+  redirect: undefined,
+  regex: [object RegExp] {
+    keys: []
+  }
+}],
+  meta: [circular object Object],
+  name: undefined,
+  params: [object Object] { ... },
+  path: "/home",
+  query: [object Object] { ... }
+}
+```
 
-**Router对象的方法**
+
+## Router实例对象的方法
+- `this.$router.push(string|| object)`: 向浏览器的history stack中添加一条新记录
+```
+new Vue({
+    methods: {
+    pushEntry(){
+      this.$router.push('/products/mac/macbook/all')
+    }
+  }
+})
+```
+使用对象去描述一个route对象
+```
+methods: {
+    pushEntry(){
+      this.$router.push({name: 'about'})
+    }
+  }
+```
+- `this.$router.replace()`
+- `this.$router.go()`
+- `this.$router.back()`
+- `this.$router.forward()`
+- `this.$router.beforeEach()`
+
+
+## Navigation Guards
+- Global Navigation Guards: excute on every route change
+- per route Guards: be excuted on specific routes
+- in component Guards: be excuted on specific components
+
+
+
 
 
 ## $route：当前路由对象
@@ -121,7 +185,7 @@ new Vue({
 - 导航守卫的参数
 - `scrollBehavior`方法的参数
 
-**$route对象的属性**
+## $route对象的属性
 
 - `$route.name`: `string`  the name the current route if it has one
 - `$route.path`: `string` the path of the current route

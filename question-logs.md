@@ -64,3 +64,27 @@ Uncaught SyntaxError: Invalid or unexpected token
 ```
 - 原因：JavaScript解析器眼中的代码是这样：`1.` `toString()`,解析器把数字`1`后面的`.`看做是数字`1`的一部分，所以会报错。
 - 解决：`1..toString()` 或 `(1).toString()`
+
+
+## MongoDB
+>Failed to start mongod.service: Unit mongod.service not found.
+解决办法：
+```
+$ sudo systemctl enable mongod
+```
+
+## upload_max_filesize(PHP.ini)
+
+```
+Loaded Configuration File	/etc/php/7.0/fpm/php.ini
+
+post_max_size = 8M
+upload_max_filesize = 2M
+
+sudo nano /var/www/html/info.php
+<?php
+phpinfo();
+?>
+
+sudo service php7.0-fpm restart
+```
