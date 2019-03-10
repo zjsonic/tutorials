@@ -120,7 +120,7 @@ CSS：
   - cross-size依然由height或width决定
 
 
-## flex-direction:row
+## flex-direction:row (父元素属性)
 效果：
 ![flex-direction:row](images/flex-direction-row.png)
 
@@ -131,7 +131,7 @@ CSS：
 }
 ```
 
-## flex-direction:row-reverse
+## flex-direction:row-reverse (父元素属性)
 效果：
 ![flex-direction:row-reverse](images/flex-direction-row-reverse.png)
 
@@ -142,7 +142,7 @@ CSS：
 }
 ```
 
-## flex-direction:column
+## flex-direction:column (父元素属性)
 效果：
 ![flex-direction:column](images/flex-direction-column.png)
 
@@ -153,7 +153,7 @@ CSS：
 }
 ```
 
-## flex-direction:column-reverse
+## flex-direction:column-reverse (父元素属性)
 效果：
 ![flex-direction:column-reverse](images/flex-direction-column-reverse.png)
 
@@ -163,7 +163,7 @@ CSS：
   flex-direction: column-reverse;
 }
 ```
-## flex-wrap: nowrap(水平)
+## flex-wrap: nowrap(水平) (父元素属性)
 效果：
 ![flex-wrap: nowrap](images/flex-wrap-nowrap-h.png)
 
@@ -174,7 +174,7 @@ CSS：
   flex-wrap: nowrap;
 }
 ```
-## flex-wrap: nowrap(垂直)
+## flex-wrap: nowrap(垂直) (父元素属性)
 效果：
 ![flex-wrap: nowrap](images/flex-wrap-nowrap-v.png)
 
@@ -185,7 +185,7 @@ CSS：
   flex-wrap: nowrap;
 }
 ```
-## flex-wrap: wrap(水平)
+## flex-wrap: wrap(水平) (父元素属性)
 效果：
 ![flex-wrap: wrap](images/flex-wrap-wrap-h.png)
 
@@ -196,7 +196,7 @@ CSS：
   flex-wrap: wrap;
 }
 ```
-## flex-wrap: wrap(垂直)
+## flex-wrap: wrap(垂直) (父元素属性)
 效果：
 ![flex-wrap: wrap](images/flex-wrap-wrap-v.png)
 
@@ -208,7 +208,7 @@ CSS：
 }
 ```
 
-## flex-wrap: wrap-reverse(水平)
+## flex-wrap: wrap-reverse(水平) (父元素属性)
 效果：
 ![flex-wrap: wrap-reverse](images/flex-wrap-wrap-reverse-h.png)
 
@@ -219,7 +219,7 @@ CSS：
   flex-wrap: wrap-reverse;
 }
 ```
-## flex-wrap: wrap-reverse(垂直)
+## flex-wrap: wrap-reverse(垂直) (父元素属性)
 效果：
 ![flex-wrap: wrap-reverse](images/flex-wrap-wrap-reverse-v.png)
 
@@ -231,7 +231,7 @@ CSS：
 }
 ```
 
-## justify-content:flex-start (Horizontal)
+## justify-content:flex-start (Horizontal) (父元素属性)
 效果：
 ![justify-content: flex-start](images/justify-content-flex-start-h.png)
 
@@ -243,7 +243,7 @@ CSS：
   justify-content: flex-start;
 }
 ```
-## justify-content:flex-end (Horizontal)
+## justify-content:flex-end (Horizontal) (父元素属性)
 效果：
 ![justify-content: flex-end](images/justify-content-flex-end-h.png)
 
@@ -255,7 +255,7 @@ CSS：
   justify-content: flex-end;
 }
 ```
-## justify-content:center (Horizontal)
+## justify-content:center (Horizontal) (父元素属性)
 效果：
 ![justify-content: center](images/justify-content-center-h.png)
 
@@ -267,7 +267,7 @@ CSS：
   justify-content: center;
 }
 ```
-## justify-content:space-between (Horizontal)
+## justify-content:space-between (Horizontal) (父元素属性)
 效果：
 ![justify-content: space-between](images/justify-content-space-between-h.png)
 
@@ -279,7 +279,7 @@ CSS：
   justify-content: space-between;
 }
 ```
-## justify-content:space-around (Horizontal)
+## justify-content:space-around (Horizontal) (父元素属性)
 效果：
 ![justify-content: space-around](images/justify-content-space-around-h.png)
 
@@ -292,7 +292,7 @@ CSS：
 }
 ```
 
-## justify-content:space-evenly (Horizontal)
+## justify-content:space-evenly (Horizontal) (父元素属性)
 效果：
 ![justify-content: space-evenly](images/justify-content-space-evenly-h.png)
 
