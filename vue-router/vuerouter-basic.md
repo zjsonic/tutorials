@@ -1,84 +1,16 @@
 # Vue Router
 
 
-## Vue Router是什么
-- Vue Router是Vue.js官方的路由管理器。
-- Vue Router和Vue.js的核心深度集成。
-- Vue Router让构建单页面应用变得易如反掌。
+## VueRouter()是什么
+- `VueRouter()`是一个构造函数
+- `VueRouter()`是一个创建路由器的构造函数。
+- `VueRouter()`和Vue.js的核心深度集成。
+- `VueRouter()`让构建单页面应用变得易如反掌。
 - 主要功能包括：
   - 签套的路由表
   - 模块化的基于组件的路由配置
   - 路由参数、查询、通配符
   - 基于Vue.js系统的视图过渡效果
-
-## Vue.js + Vue Router的基本原理
-- 在Vue.js中，将组件组合起来构建应用程序。
-- 在Vue Router中，将组件映射到路由，并告诉Vue Router在哪里渲染组件。
-
-
-## 如何安装Vue Router
-- **引入** ：引入Vue Router库文件。注意：Vue-router.js文件应在vue.js文件之后。
-```
-<script src="https://unpkg.com/vue/dist/vue.js"></script>
-<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
-```
-- **安装** ：将VueRouter()函数添加到Vue.js中去。
-```
-Vue.use(VueRouter)
-```
-
-## 如何使用Vue Router
-- 创建VueRouter实例
-```
-const router = new VueRouter({
-    mode: 'hash', //利用url的hash模拟一个url。特点：url改变时，页面不会重新加载
-    mode: 'history', //利用history.pushState API完成URL跳转，页面不会重新加载
-    routes: [
-      {
-        path: '/home',
-        component: TheHome
-      },
-      {
-        path: '/course',
-        component: TheCourse
-      },
-      {
-        path: '/article',
-        component: TheArticle
-      },
-      {
-        path: '/about',
-        component: TheAbout
-      },
-      {
-        path: '/',
-        redirect: '/home'
-      }
-    ]
-  })
-```
-
-- 将VueRouter实例注入到Vue实例中
-```
-const vm = new Vue({
-  el: "#app",
-  router,
-  components: {
-    'main-nav': MainNav,
-    'the-home': TheHome,
-    'the-course': TheCourse,
-    'the-article': TheArticle,
-    'the-about': TheAbout
-  }
-})
-```
-
-- 设置链接
-- 设置渲染区域
-
-
-## VueRouter()是一个构造函数
-`VueRouter()`构造函数用于创建一个router实例。
 
 ![VueRouter构造函数](images/vuerouter-constructor.png)
 ```
@@ -121,47 +53,76 @@ function VueRouter (options) {
 }
 ```
 
-## 创建Vue Router的步骤
-**第一步：引入vue-router库**
-```
-import VueRouter from 'vue-router'
-```
+## VueRouter()的基本原理
+- VueRouter()的设计思路是：在组件和路由之间建立映射，并告诉VueRouter()在哪里渲染组件。
 
-**第二步：安装路由插件**
+
+## 如何为项目添加VueRouter()
+- **引入** ：引入Vue Router库文件。注意：Vue-router.js文件应在vue.js文件之后。
+```
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+```
+- **安装** ：将VueRouter()函数添加到Vue.js中去。
 ```
 Vue.use(VueRouter)
 ```
 
-**第三步：创建Router实例**
+## 如何使用VueRouter()
+- 创建VueRouter实例
 ```
-const router = new VueRouter({
+const myrouter = new VueRouter({
+    mode: 'hash', //利用url的hash模拟一个url。特点：url改变时，页面不会重新加载
+    mode: 'history', //利用history.pushState API完成URL跳转，页面不会重新加载
     routes: [
-        {
-            path: '/',
-            component: Home
-        }
+      {
+        path: '/home',
+        component: TheHome
+      },
+      {
+        path: '/course',
+        component: TheCourse
+      },
+      {
+        path: '/article',
+        component: TheArticle
+      },
+      {
+        path: '/about',
+        component: TheAbout
+      },
+      {
+        path: '/',
+        redirect: '/home'
+      }
     ]
-})
-```
-**第四步：将Router实例注入Vue实例中**
-```
-new Vue({
-    router,
-    render: h => h(App)
-}).$mount('#app')
+  })
 ```
 
-## $router: 路由实例对象
+- 将VueRouter实例注入到Vue实例中
+```
+const vm = new Vue({
+  el: "#app",
+  router: myrouter, //vm.router: 路由实例对象
+  components: {
+    'main-nav': MainNav,
+    'the-home': TheHome,
+    'the-course': TheCourse,
+    'the-article': TheArticle,
+    'the-about': TheAbout
+  }
+})
+```
+
+- 设置链接
+- 设置渲染区域
+
+## this.$router: 路由实例对象
 
 **打印this.$router**
 ![this.$router](images/this-router-object.png)
 
-**Router对象简介**
-
-- `Router`对象是VueRouter()的实例对象。
-
-
-**访问Router对象的方法**
+**访问this.$router对象的方法**
 
 当向`Vue`实例注入`Router`实例之后，可以在任何组件内通过 `this.$router` 访问路由器
 
@@ -236,7 +197,7 @@ methods: {
 
 
 
-## $route：当前路由对象
+## $route：路由对象
 
 **打印this.$route**
 
