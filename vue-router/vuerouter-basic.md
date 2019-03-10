@@ -126,7 +126,7 @@ const vm = new Vue({
 
 当向`Vue`实例注入`Router`实例之后，可以在任何组件内通过 `this.$router` 访问路由器
 
-## Router实例对象的属性
+## this.$router的属性
 - `$router.app`:返回`router`对象所在的根实例对象
 - `$router.mode`:返回`router`对象的模式
 - `$router.currentRoute`: 返回`router`对象的当前路由对象
@@ -162,7 +162,7 @@ const vm = new Vue({
 ```
 
 
-## Router实例对象的方法
+## this.$router的方法
 - `this.$router.push(string|| object)`: 向浏览器的history stack中添加一条新记录
 ```
 new Vue({
@@ -195,9 +195,7 @@ methods: {
 
 
 
-
-
-## $route：路由对象
+## $route：当前路由对象
 
 **打印this.$route**
 
