@@ -74,6 +74,7 @@ Vue.use(VueRouter)
 const myrouter = new VueRouter({
     mode: 'hash', //利用url的hash模拟一个url。特点：url改变时，页面不会重新加载
     mode: 'history', //利用history.pushState API完成URL跳转，页面不会重新加载
+    base: __dirname, //app的基路径，默认值:'/'。为何官方例子basic在history模式下，页面刷新不会报404?
     routes: [
       {
         path: '/home',
@@ -195,16 +196,11 @@ methods: {
 
 
 
-## $route：当前路由对象
+## $route：路由对象(当前激活的路由状态信息)
 
 **打印this.$route**
 
 ![this.$route](images/this-route-object.png)
-
-**当前路由对象包含的信息有**
-
-- 当前url解析后的信息
-- url匹配到的路由记录
 
 **$route对象出现的地方有**
 
@@ -215,16 +211,15 @@ methods: {
 - `scrollBehavior`方法的参数
 
 ## $route对象的属性
-
-- `$route.name`: `string`  the name the current route if it has one
-- `$route.path`: `string` the path of the current route
-- `$route.fullPath` : `string` the path with the query string and the hash
-- `$route.params`: `object` `dynamic segments` and `star segments`
-- `$route.query`: `object`  `key/value pairs of the query string`
-- `$route.hash`: `string`  `the hash with the # of the current route`
-- `$route.matched`: `Array` route records for all nested path segments of the current route
-
-
+- 当前url解析后的信息
+  - `$route.path`: `string` the path of the current route
+  - `$route.fullPath` : `string` the path with the query string and the hash
+  - `$route.query`: `object`  `key/value pairs of the query string`
+  - `$route.hash`: `string`  `the hash with the # of the current route`
+- url匹配到的路由记录
+  - `$route.name`: `string`  the name the current route if it has one
+  - `$route.params`: `object` `dynamic segments` and `star segments`
+  - `$route.matched`: `Array` route records for all nested path segments of the current route
 
 
 ## 组件`<router-link>`
