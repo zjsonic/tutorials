@@ -53,7 +53,7 @@ function VueRouter (options) {
 }
 ```
 
-## VueRouter()的基本原理
+### VueRouter()的基本原理
 - VueRouter()的设计思路是：在组件和路由之间建立映射，并告诉VueRouter()在哪里渲染组件。
 
 
@@ -118,7 +118,7 @@ const vm = new Vue({
 - 设置链接
 - 设置渲染区域
 
-## this.$router: 路由实例对象
+## 路由实例对象
 
 **打印this.$router**
 ![this.$router](images/this-router-object.png)
@@ -127,7 +127,7 @@ const vm = new Vue({
 
 当向`Vue`实例注入`Router`实例之后，可以在任何组件内通过 `this.$router` 访问路由器
 
-## this.$router的属性
+### this.$router的属性
 - `$router.app`:返回`router`对象所在的根实例对象
 - `$router.mode`:返回`router`对象的模式
 - `$router.currentRoute`: 返回`router`对象的当前路由对象
@@ -163,7 +163,7 @@ const vm = new Vue({
 ```
 
 
-## this.$router的方法
+### this.$router的方法
 - `this.$router.push(string|| object)`: 向浏览器的history stack中添加一条新记录
 ```
 new Vue({
@@ -189,13 +189,6 @@ methods: {
 - `this.$router.beforeEach()`
 
 
-## Navigation Guards
-- Global Navigation Guards: excute on every route change
-- per route Guards: be excuted on specific routes
-- in component Guards: be excuted on specific components
-
-
-
 ## $route：路由对象(当前激活的路由状态信息)
 
 **打印this.$route**
@@ -210,7 +203,7 @@ methods: {
 - 导航守卫的参数
 - `scrollBehavior`方法的参数
 
-## $route对象的属性
+### $route对象的属性
 - 当前url解析后的信息
   - `$route.path`: `string` the path of the current route
   - `$route.fullPath` : `string` the path with the query string and the hash
@@ -222,7 +215,7 @@ methods: {
   - `$route.matched`: `Array` route records for all nested path segments of the current route
 
 
-## 组件`<router-link>`
+### 组件`<router-link>`
 `<router-link>`用于在app中创建导航链接。
 
 **`to`:指定链接的地址为一个路径字符串**
@@ -274,7 +267,7 @@ methods: {
 <router-link to='/about/abc'>/about/abc</router-link>
 ```
 
-## 组件`<router-view>`
+### 组件`<router-view>`
 
 
 ## 路由的应用
@@ -287,3 +280,9 @@ methods: {
 **Nested Routes**
 - 在路由表中，使用`children`属性添加子路由
 - 在该路由对应的组件中，设置`<router-view/>`
+
+
+**Navigation Guards**
+- Global Navigation Guards: excute on every route change
+- per route Guards: be excuted on specific routes
+- in component Guards: be excuted on specific components
