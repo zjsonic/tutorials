@@ -99,4 +99,4 @@ const vm = new Vue({
 ![Vue instance](./images/vm-without-router.png)
 
 ## Print Vue instance with router
-![Vue instance](./images/vm-with-router.png)
+![Vue instance](./images/vm-with-router2.png)
