@@ -25,3 +25,38 @@ bash是shell的一种，在早年的UNIX年代，发展者众多，所以就有�
 
 ## Progressive Web App（PWA）
 [什么是渐进式网络应用程序](https://www.digitaldoughnut.com/articles/2018/may/what-is-a-progressive-web-app)
+
+## 钩子函数
+按我个人理解，就是在生命周期执行流程中预留的一个能让我们执行自己代码的地方。叫钩子函数，很形象的，钩子钩子，挂载我们自己的东西。而钩子函数的实现，基本原理就是callback。来看一下Vue中实现钩子函数部分的源码
+```
+作者：Ruphi
+链接：https://www.zhihu.com/question/60256230/answer/191762066
+来源：知乎
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+// ...
+export function lifecycleMixin (Vue: Class<Component>) {
+  Vue.prototype._update = function (vnode: VNode, hydrating?: boolean) {
+    const vm: Component = this
+    if (vm._isMounted) {
+      callHook(vm, 'beforeUpdate') // callHook来调用钩子函数
+    }
+// ...
+
+export function callHook (vm: Component, hook: string) {
+  const handlers = vm.$options[hook]
+  if (handlers) {
+    for (let i = 0, j = handlers.length; i < j; i++) {
+      try {
+        handlers[i].call(vm) // 以组件实例来作为钩子函数中this的指向
+      } catch (e) {
+        handleError(e, vm, `${hook} hook`)
+      }
+    }
+  }
+  if (vm._hasHookEvent) {
+    vm.$emit('hook:' + hook)
+  }
+}
+```
+我们可以看到处理流程就是在生命周期流程中相应流程执行后，执行callHook()。而callHook的作用便是执行我们自定义的钩子函数，并将钩子中this的指向指为当前组件实例（通过Function.prototype.call）
