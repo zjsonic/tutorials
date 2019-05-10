@@ -88,3 +88,9 @@ phpinfo();
 
 sudo service php7.0-fpm restart
 ```
+
+## git下为啥删不掉一个空文件夹
+```
+$ git rm -f tools
+fatal: pathspec 'tools' did not match any files
+```
