@@ -1,7 +1,7 @@
 # Vue教程
 - Vue Installation
 - Vue Constructor
--
+- Vue Instance
 
 
 ## Vue Installation
@@ -120,32 +120,62 @@ const vm = new Vue({
 const vm = new Vue($Options)
 ```
 **vm的属性**
-
-- vm.$data
-- vm.$props
-- vm.$el
-- vm.$options
-- vm.$parent
-- vm.$root
-- vm.$children
-- vm.$slots
-- vm.$refs
-- vm.$attrs
-- vm.$listeners
+- 第一组
+  - vm.$data
+  - vm.$props
+  - vm.$isServer
+  - vm.$route
+  - vm.$router
+  - vm.$ssrContext
+  - vm.get $attrs
+  - vm.set $attrs
+  - vm.get $listeners
+  - vm.set $listeners
+- 第二组
+  - vm.$attrs
+  - vm.$children
+  - vm.$createElement
+  - vm.$el
+  - vm.$listeners
+  - vm.$options
+  - vm.$parent
+  - vm.$refs
+  - vm.$root
+  - vm.$scopedSlots
+  - vm.$slots
+  - vm.$vnode
+- 第三组
+  - `_c`
+  - `_data`
+  - `_directInactive`
+  - `_events`
+  _ `_hasHookEvent`
+  - `_inactive`
+  - `_isBeingDestroyed`
+  - `_isDestroyed`
+  - `_isMounted`
+  - `_isVue`
+  - `_renderProxy`
+  - `_routerRoot`
+  - `_self`
+  - `_staticTrees`
+  - `_uid`
+  - `_vnode`
+  - `_watcher`
+  - `_watchers`
 
 **vm的方法**
-
-- vm.$watch
-- vm.$set
-- vm.$delete
-- vm.$on
-- vm.$once
-- vm.$off
-- vm.$emit
-- vm.$mount
-- vm.$forceUpdate
-- vm.$nextTick
-- vm.$destroy
+- `vm.__proto__.$watch`
+- `vm.__proto__.$set`
+- `vm.__proto__.$delete`
+- `vm.__proto__.$on`
+- `vm.__proto__.$once`
+- `vm.__proto__.$off`
+- `vm.__proto__.$emit`
+- `vm.__proto__.$mount`
+- `vm.__proto__.$forceUpdate`
+- `vm.__proto__.$nextTick`
+- `vm.__proto__.$destroy`
 
 
 ## Print Vue Constructor
