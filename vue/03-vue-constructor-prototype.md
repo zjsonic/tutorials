@@ -1,7 +1,6 @@
 # Vue Prototype
 
-## Print Vue Prototype
-![Vue Prototype](./images/vue-prototype.png)
+
 
 
 ## Vue.prototype.$mount()

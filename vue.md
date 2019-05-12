@@ -113,6 +113,7 @@ const vm = new Vue({
 - Vue.delete(): 删除对象的属性。
 
 ## Vue Instance
+一个Vue实例就是一个对象，里面保存了要管理的DOM和数据。只要数据发生变化，DOM就会自动更新。
 
 **创建实例对象的语法**
 
@@ -124,8 +125,15 @@ const vm = new Vue($Options)
   - vm.$data
   - vm.$props
   - vm.$isServer
-  - vm.$route
-  - vm.$router
+  - vm.$route: 当前路由对象。(若未添加VueRouter，则返回undefined) 包含以下信息
+    - $route.fullPath:返回解析后的URL(包含路径+查询字符串+hash字符串)
+    - $route.path:返回当前路由的路径部分(端口号后面，查询字符串前面)
+    - $route.query:
+    - $route.hash:
+    - $route.params:
+    - $route.matched:
+    - $route.name
+  - vm.$router: 路由对象。
   - vm.$ssrContext
   - vm.get $attrs
   - vm.set $attrs
@@ -149,7 +157,7 @@ const vm = new Vue($Options)
   - `_data`
   - `_directInactive`
   - `_events`
-  _ `_hasHookEvent`
+  - `_hasHookEvent`
   - `_inactive`
   - `_isBeingDestroyed`
   - `_isDestroyed`
@@ -186,3 +194,6 @@ const vm = new Vue($Options)
 
 ## Print Vue instance with router
 ![Vue instance](./images/vm-with-router.png)
+
+## Print Vue Prototype
+![Vue Prototype](./images/vue-prototype.png)
