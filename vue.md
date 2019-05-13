@@ -113,7 +113,12 @@ const vm = new Vue({
 - Vue.delete(): 删除对象的属性。
 
 ## Vue Instance
-一个Vue实例就是一个对象，里面保存了要管理的DOM和数据。只要数据发生变化，DOM就会自动更新。
+**Vue实例是由Vue构造函数创建的对象**
+
+- 每个应用都是从创建一个VUE实例开始的。
+- 当创建Vue实例的时候，可以传入一个选项对象，来描述你希望的行为(要管理的DOM和数据)。
+- 一个Vue应用由一个Vue根实例以及组件树构成。
+
 
 **创建实例对象的语法**
 
@@ -125,7 +130,7 @@ const vm = new Vue($Options)
   - vm.$data
   - vm.$props
   - vm.$isServer
-  - vm.$route: 当前路由对象。(若未添加VueRouter，则返回undefined) 包含以下信息
+  - vm.$route: 返回当前路由对象。(若未添加VueRouter，则返回undefined) 包含以下信息
     - $route.fullPath:返回解析后的URL(包含路径+查询字符串+hash字符串)
     - $route.path:返回当前路由的路径部分(端口号后面，查询字符串前面)
     - $route.query:
@@ -133,7 +138,7 @@ const vm = new Vue($Options)
     - $route.params:
     - $route.matched:
     - $route.name
-  - vm.$router: 路由对象。
+  - vm.$router: 返回路由对象。
   - vm.$ssrContext
   - vm.get $attrs
   - vm.set $attrs
@@ -184,6 +189,139 @@ const vm = new Vue($Options)
 - `vm.__proto__.$forceUpdate`
 - `vm.__proto__.$nextTick`
 - `vm.__proto__.$destroy`
+
+
+## 组件
+**组件是可复用的Vue实例。**
+- 组件可在根实例中作为定义元素使用。
+- 组件与实例的区别：
+  - 组件的选项对象中没有`el`
+  - 组件的选项对象中的`data`是一个函数
+  - 组件可以进行任意次数的复用
+- 组件名
+  - W3C规范：字母全小写且必须包含一个连字符
+  - 在DOM中使用时，只有烤串式有效
+
+
+### 自定义组件
+在模板中使用组件时必须先注册Vue才能识别。
+
+**全局注册**
+
+标准语法:
+
+```
+Vue.component('id',Vue.extend({ options }))
+```
+- id: string 指定组件名称
+- Vue.extend(): 构造器。创建Vue构造函数的“子类”(子构造函数)。
+  - options: 选项对象
+    - data: 必须是函数
+- Vue.extend()的实例：组件的每一次应用，组件实例会被自动创建
+
+简洁语法:
+```
+Vue.component('id',{ options }) //自动调用Vue.extend构造器
+```
+**案例**
+```
+<div id="app">
+  <my-component></my-component>
+  <my-component></my-component>
+  <my-component></my-component>
+</div>
+<script type="text/javascript">
+  new Vue({ el: '#app' })
+  Vue.component('my-component',{
+    data: function(){
+      return {
+        count: 0
+      }
+    },
+    template: '<h1 v-on:click="getCount"> {{ this.count }} </h1>',
+    methods: {
+      getCount: function(){
+        return this.count++
+      }
+    }
+  })
+</script>
+
+```
+上述代码会报错：
+>[Vue warn]: Unknown custom element: <my-component> - did you register the component correctly? For recursive components, make sure to provide the "name" option.
+
+原因：
+- `my-component`组件是通过`Vue()`构造函数的Vue.extend({options})方法注册的，为了简洁，Vue.extend()省略没写。
+- 在实例化时，遇到`el`会立刻进入编译过程，但此刻并未编译子类。
+- 在构造函数Vue()还未注册组件之前进行实例化显然是错误的。
+
+解决：
+- 方法1：把实例化代码`new Vue({ el: '#app' })`放在组件注册之后
+- 方法2：在实例化选项内，显示声明Vue实例可用组件
+```
+new Vue({
+    el: '#app',
+    components: {
+      'my-component': my-component
+    }
+})
+```
+
+
+**局部注册**
+```
+new Vue({
+    el: '#app',
+    components: {
+      'my-component-a': { //OPTIONS },
+      'my-component-b': { //OPTIONS }
+    }
+})
+```
+
+**在模块系统中局部注册**
+
+singfile.js or singfile.vue
+```
+import 'component-a' from './components/component-a'
+
+export default {
+  components: {
+    `component-a`: component-a
+  }
+}
+```
+
+
+### 内置组件
+
+**component**:
+
+**slot**
+
+**keep-alive**
+
+**transition**
+
+
+**transition-group**
+
+
+## Directives
+- v-on
+- v-if
+- v-else
+
+
+## Special Attributes
+- key
+- ref
+- is
+- slot
+- slot-scope
+- scope
+
 
 
 ## Print Vue Constructor

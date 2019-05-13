@@ -129,7 +129,7 @@ const vm = new Vue({
 - `/about`
 - `/`
 
-**<router-view>**
+**<router-view>**：渲染路径匹配到的组件。
 
 - `name`
 
