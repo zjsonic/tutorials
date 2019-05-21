@@ -1,7 +1,34 @@
 # Vue教程
+- What is Vue.js?
 - Vue Installation
 - Vue Constructor
 - Vue Instance
+
+
+## What is Vue.js?
+- Vue 是一套用于构建用户界面的框架。
+
+**为什么要用Vue.js等前端框架**
+
+一句话：为了提高开发效率。
+- 使用vue.js，我们无需关注渲染DOM，只需关注逻辑处理。
+
+**开发效率提升的历程**
+- 原生
+- jQuery: 提高了兼容效率
+- 前端模板引擎:
+- Vue.js/React.js/Angular.js: 不再操作DOM，提高渲染效率
+
+**框架和库的区别**
+- 框架：一套完整的解决方案，对项目侵入性比较大，后期更换困难。
+- 库：提供某一个小功能，对项目侵入性较小，后期容易切换其他库实现需求。
+  - 从jQuery切换到zepto
+  - 从EJS切换到art-template
+
+**MVC和MVVM**
+- MVC: 后端分层开发的概念:Model(数据库里的数据)、View、Controller
+- MVVM：前端视图分层开发的概念，主要关注视图层的分离：Model(页面里的数据)、View、ViewModel
+![MVC和MVVM](./images/mvc-mvvm.png)
 
 
 ## Vue Installation
@@ -12,6 +39,7 @@
 <script src = './js/vue.js'></script>
 ```
 - `Vue`会被注册为一个全局变量。
+- 当我们在页面中导入包之后，Window对象上就多了一个构造函数Vue()。
 
 **方法二：使用CDN引入**
 
@@ -49,9 +77,15 @@ $ vue --version
 ```
 const vm = new Vue({
   //DOM类： 用于创建DOM结构
-    el:
-    template:
-    render:
+    el: 提供一个页面上已知的DOM元素作为Vue实例的模板。
+      - 如果Vue实例存在`template`属性，则挂载元素会被Vue生成的DOM替换。
+      - 如果Vue实例不存在`template`属性，则挂载元素的HTML会被用作模板。
+      - 如果Vue实例存在`el`选项，则实例立即进入编译过程
+      - 如果Vue实例不存在`el`选项，则需要手动开启编译：`vm.$mount('#app')`
+    template: 设置Vue实例的模板
+      - 字符串模板
+      - `#tem`选择符：使用匹配元素的innerHTML作为模板
+    render: 使用函数创建Vue实例的模板
     renderError:
   //数据类：用于向DOM中注入数据(数据可以是响应的)
     data:
@@ -73,7 +107,7 @@ const vm = new Vue({
     destroyed:
     errorCaptured:
   //资源
-    components:
+    components: 注册组件列表。
     directives:
     filters:
   //组合
@@ -135,8 +169,8 @@ const vm = new Vue($Options)
     - $route.path:返回当前路由的路径部分(端口号后面，查询字符串前面)
     - $route.query:
     - $route.hash:
-    - $route.params:
-    - $route.matched:
+    - $route.params:返回`Dynamic Segments`(动态片段)，可以是一个Dynamic Segments也可以是多个。
+    - $route.matched:返回`Dynamic Segments`匹配到的所有路由记录(嵌套)。
     - $route.name
   - vm.$router: 返回路由对象。
   - vm.$ssrContext
@@ -307,9 +341,15 @@ export default {
 
 **transition-group**
 
+## 插值表达式
+{{ msg }} : 更新元素的部分`textContent`。
 
 ## Directives
-- v-on
+- v-cloak: 隐藏未编译的Mustache标签，常与[v-clock]{display:none}一起使用。（当网速教慢时）
+- v-text: 更新元素的`textContent`。
+- v-html: 更新元素的`innerHTML`。
+- v-bind: 动态绑定一个特性到表达式。
+- v-on: 绑定事件监听器。
 - v-if
 - v-else
 

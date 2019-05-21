@@ -1,4 +1,21 @@
 # Flexbox详解
+- Properties for the flex container
+  1. display: Define a flex container.(enable context)
+  2. flex-direction(flex-flow): Define the direction of the main-axis
+  3. flex-wrap(flex-flow): Allow the flex items to wrap.(by default,try to fit onto one line)
+  4. justify-content:Define the alignment alone the main axis.
+  5. align-items:Define the alignent alone the cross-axis on current line.
+  6. align-content: Define the alignment alone the cross-axis.
+
+
+- Properties for the flex items
+  1. order:Control the order of the flex items.default is 0.
+  2. flex-grow(flex):Allow the flex item to grow.
+  3. flex-shrink(flex):Allow the flex item to shrink.
+  4. flex-basis(flex):Define the default size of an flex item.
+  5. align-self:Set the alignment for an individual item.
+
+
 - 核心总结
   - justify-content: 说白了就是“**沿主轴方向调整行内的空隙**”
   - align-items: 说白了就是"**沿垂直轴方向调整行内的空隙**"

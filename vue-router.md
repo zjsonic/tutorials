@@ -55,7 +55,15 @@ const router = new VueRouter({
       - 默认值:'/'。
       - 自己指定:
     routes: 配置路由规则
-      - [ { path: '/home',component: TheHome },{ path: '/',redirect: '/home' } ]
+      - `path`
+      - `component`:组件
+      - `components`: 命名视图组件
+      - `name`
+      - `alias`
+      - `redirect`
+      - `children`: 签套路由
+      - `meta`
+      - `beforeEnter`
     linkActiveClass:
     linkExactActiveClass:
     scrollBehavior:

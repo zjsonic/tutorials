@@ -1,84 +1,163 @@
+# GIT
+
+## git文件的三种状态
+- committed: 文件已经安全的保存在库中。
+- modified: 文件已修改但未保存在库中。
+- staged: 文件已加入提交快照中。
+
+## git的三个区
+- 工作区：git init命令所在目录(在工作区中修改文件)
+- 暂存区：是一个文件：.git/index，保存了下次提交的文件列表信息。(将快照放入暂存区)
+- 版本库：是一个目录：.git 保存元数据和对象数据的地方(提交更新，将快照永久存储在git仓库)
 
 
-## 安装git的方法
-Mac OS系统：通过homebrew工具安装
+## 安装git (第一步)
 ```
-brew install git
+$ git //检查有无安装git
+$ git --version //查看git版本
+$ sudo apt-get install git //Fedora上安装git
+$ sudo yum install git //Debian和ubuntu上安装git
+$ git //Mac上安装git(直接运行即可)Mavericks （10.9)以上的
 ```
-## 配置Git
-git必须先配置再使用。`Git config`命令用于配置git。Git是分布式版本控制系统，所以，每台电脑必须自报家门。
 
-全局配置
-```
-git config --global user.name 'zjsonic'
-git config --global user.email 'zjsonic6@gmail.com'
-```
-- 参数：--global 本地电脑上的所有仓库都会使用这个配置
+## git config (第二步)
+`git config`: 设置git外观和行为的配置变量。这些变量存储在三个位置：
+- `.git/config`文件: 针对当前库
+- `~/.gitconfig`文件:针对当前用户
+- `/etc/gitconfig`文件: 针对所有用户
+注意：每一级别覆盖上一级别
 
-本地配置
+**检查所有配置信息**
 ```
-git config user.name 'zjsonic'
-git config user.email 'zjsonic6@gmail.com'
+$ git config --global  -l //检查当前用户的所有配置信息
+$ git config -l // 检查当前库的所有配置信息
 ```
-- 参数：不使用--global，为特定的仓库指定特定的用户名和Email
 
-## 查看全局设置
+**设置当前用户的配置变量**
+
+适用于电脑上只有一个git账号，多个版本库，本地电脑上的所有仓库都会使用这个配置。
 ```
-$ git config -l
+$ git config --global user //检查当前用户的某一项配置信息
+$ git config --global user.email //检查当前用户的某一项配置信息
+$ git config --global user.name 'zhangjie' //设置当前用户的名字
+$ git config --global user.email 'yeszhangjie@gmail.com' //设置当前用户的电子邮件
+$ git config --global core.editor emacs //设置当前用户的默认编辑器为emacs
 ```
-## 初始化本地仓库
+
+**设置当前库的配置变量**
+
+适用于电脑上有两个以上的git账号。
+```
+$ git config  user //检查当前库的某一项配置信息
+$ git config  user.email //检查当前库的某一项配置信息
+$ git config  user.name 'zhangjie' //设置当前库的名字
+$ git config  user.email 'yeszhangjie@gmail.com' //设置当前库的电子邮件
+```
+
+## 创建git仓库(第三步)
+有两种取得 Git 项目仓库的方法。 第一种是在现有项目或目录下导入所有文件到 Git 中； 第二种是从一个服务器克隆一个现有的 Git 仓库。
+**git init**
 
 ```
-$ mkdir 'repositoryName'
-$ cd 'repositoryName'
 $ git init
+$ git add *.c
+$ git add LICENSE
+$ git commit -m 'initial project version'
+```
+**git clone**
+```
+$ git clone https://github.com/libgit2/libgit2 //克隆远程仓库
+$ git clone https://github.com/libgit2/libgit2 mylibgit  //克隆远程仓库 自定义本地仓库名
+
 ```
 
+## .gitignore(第四步)
+版本库的根目录下创建`.gitignore`文件
+```
+# Numerous always-ignore extensions  
+*.bak  
+*.patch  
+*.diff  
+*.err  
 
-## 把文件提交到本地版本库
-第一步：添加队列
-```
-$ git add  'readme.md'   # 添加一个文件
-```
-或
-```
-$ git add  'readme.md' 'file1.md' 'file2.md'  # 添加多个文件
-```
-或
-```
-$ git add  .  # 添加所有文件
+# temp file for git conflict merging  
+*.orig  
+*.log  
+*.rej  
+*.swo  
+*.swp  
+*.zip  
+*.vi  
+*~  
+*.sass-cache  
+*.tmp.html  
+*.dump  
+
+# OS or Editor folders  
+.DS_Store  
+._*  
+.cache  
+.project  
+.settings  
+.tmproj  
+*.esproj  
+*.sublime-project  
+*.sublime-workspace  
+nbproject  
+thumbs.db  
+*.iml  
+
+# Folders to ignore  
+.hg  
+.svn  
+.CVS  
+.idea  
+node_modules/  
+jscoverage_lib/  
+bower_components/  
+dist/
 ```
 
-第二步：提交文件
-基本使用方法
-```
-$ git commit -m '版本说明'    # Record changes to the repository 本次提交描述 (之前必须使用git add)
-```
-其他使用方法
-```
-$ git commit -a -m '版本说明'  
-$ git commit -am '版本说明'  
-```
-Git 提供了一个跳过使用暂存区域的方式， 只要在提交的时候，给 git commit 加上 -a 选项，Git 就会自动把所有已经跟踪过的文件暂存起来一并提交，从而跳过 git add 步骤
-
-
-## 查看文件状态
+## git status
 ```
 $ git status
 ```
 
-### 查看文件版本不同之处
+## git add
+`git add`: Track the file,otherwise, the file is untracked.
+```
+$ git add  'readme.md'   # 添加一个文件
+$ git add  'readme.md' 'file1.md' 'file2.md'  # 添加多个文件
+$ git add  .  # 添加所有文件
+```
+
+## git commit
+```
+$ git commit -m '版本说明'    # Record changes to the repository 本次提交描述 (之前必须使用git add)
+$ git commit -a -m '版本说明'  
+$ git commit -am '版本说明'
+$ git commit --amend //commit amend:本次提交将代替上一次提交的结果(撤销上一次提交，重新提交)
+```
+
+## git ls-files
+`git ls-files`: 查看暂存区中的文件信息。
+```
+$ git ls-files //查看暂存区文件列表
+$ git ls-files --cached //查看暂存区文件列表 默认参数
+$ git ls-files --stage //获取暂存区中文件的内容
+$ git ls-files -s // --stage的简写
+$ git ls-files --modified // 显示修改过的文件
+```
+## git log
+`git log`: show the commit logs
+```
+$ git log  //显示从最近到最远的提交日志
+$ git log
+```
+
+### git diff
 ```
 $ git diff custom-select.html
-```
->git diff比较的是工作目录中当前文件和暂存区域快照之间的差异， 也就是修改之后还没有暂存起来的变化内容。若要查看已暂存的将要添加到下次提交里的内容，可以用 git diff --cached 命令。
-
->请注意，git diff 本身只显示尚未暂存的改动，而不是自上次提交以来所做的所有改动。 所以有时候你一下子暂存了所有更新过的文件后，运行 git diff 后却什么也没有，就是这个原因。
-
-## 查看提交日志
-
-```
-$ git log   # 显示从最近到最远的提交日志
 ```
 
 ## HEAD参数说明
@@ -89,7 +168,18 @@ $ git log   # 显示从最近到最远的提交日志
 `HEAD^^` ：表示上上一个版本
 `HEAD-100` ：表示往上100个版本
 
-## 版本回退
+
+## git checkout
+`git checkout`: Restore the working tree files
+```
+$ git checkout -- file_name  // 1.从版本库拉取文件替换工作区文件 2.从暂存区拉取文件替换工作区文件(如果有)
+```
+
+## git reset
+
+```
+$ git reset HEAD file_name   //取消某个暂存区的文件(比如，git add了两个，在commit之前发现想撤销其中一个的暂存)
+```
 
 `--hard`:彻底回退到某个版本，本地的源码也会变为上一个版本的内容
 
@@ -105,14 +195,12 @@ $ git reset --soft HEAD^ # 回退到上一个版本
 
 ```
 
-## 撤销版本回退
-`git reset --hard 470f80ed65437c3df6bcf20173772e2abf8aa550`之后，又想撤销回退？
 
+## git rm
+`git rm`: unstage
 ```
-git reset --hard 41c645b3d0e9501d82fc834fb839162fd10682bc(回退之前的版本id)
+$ git rm --cached file_to_be_unstaged  // to unstage
 ```
-
-## 移除文件
 
 要从 Git 中移除某个文件，就必须要从已跟踪文件清单中移除(确切地说，是从暂存区域移除)，然后提交。
 可以用git rm命令完成此项工作，并连带从工作目录中删除指定的文件，这样以后就不会出现在未跟踪文件清 单中了。
@@ -120,7 +208,7 @@ git reset --hard 41c645b3d0e9501d82fc834fb839162fd10682bc(回退之前的版本i
 ```
 $ git rm filename.md
 ```
-## 从工作目录中手工删除文件
+
 如果只是简单地从工作目录中手工删除文件，运行 git status 时就会在 “Changes not staged for commit” 部分(也就是 未暂存清单)看到:
 
 ```
@@ -133,11 +221,11 @@ $ git rm filename.md
 
 
 
-## 删除之前修改过并且已经放到暂存区域
+删除之前修改过并且已经放到暂存区域
 
 如果删除之前修改过并且已经放到暂存区域的话，则必须要用 强制删除选项 -f(译注:即 force 的首字母)。 这是一种安全特性，用于防止误删还没有添加到快照的数据， 这样的数据不能被 Git 恢复。
 
-## 想让文件保留在磁盘，但是并不想让 Git 继续跟踪
+想让文件保留在磁盘，但是并不想让 Git 继续跟踪
 另外一种情况是，我们想把文件从 Git 仓库中删除(亦即从暂存区域移除)，但仍然希望保留在当前工作目录 中。 换句话说，你想让文件保留在磁盘，但是并不想让 Git 继续跟踪。 当你忘记添加 .gitignore 文件，不小 心把一个很大的日志文件或一堆 .a 这样的编译生成文件添加到暂存区时，这一做法尤其有用。 为达到这一目 的，使用 --cached 选项:
 ```
   $ git rm --cached README
@@ -149,70 +237,42 @@ $ git rm \*~
 ```
 该命令为删除以 ~ 结尾的所有文件。
 
-
-
-## 移动文件/文件重命名
-
+## git mv
 ```
 $ git mv file_from file_to
 $ git mv a.txt c.txt
 ```
 
-
-## 查看本地电脑有没有 SSH 公钥
-
-```
-$ cd ~/.ssh // SSH公钥在Mac OS系统下的存储位置
-$ ls
-authorized_keys2 id_dsa known_hosts
-config id_dsa.pub
-```
-## 创建 SSH 公钥
+## git remote
 
 ```
-$ ssh-keygen
-```
-首先 ssh-keygen 会确认密钥的存储位置（默认是 .ssh/id_rsa），然后它会要求你输入两次密钥口令。如果你不想在使用密钥时输入口令，将其留空即可。
-现在，进行了上述操作的用户需要将各自的公钥发送给任意一个 Git 服务器管理员（假设服务器正在使用基于公钥的 SSH 验证设置）。 他们所要做的就是复制各自的 .pub 文件内容，并将其通过邮件发送。 公钥看起来是这样的：
-```
-$ cat ~/.ssh/id_rsa.pub
-ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAklOUpkDHrfHY17SbrmTIpNLTGK9Tjom/BWDSU
-GPl+nafzlHDTYW7hdyZ5ew18JH4JW9jbhUFrviQzM7xlELEVf4h9lFX5QVkbPppSwg0cda3
-Pbv7kOdJ/MTyBlWXFCR+HAo3FXRitBqxiX1nKhXpHAZsMciLq8V6RjsNAQwdsdMFvSlVK/7XA
-t3FaoJoAsncM1Q9x5+3V0Ww68/eIFmb1zuUFljQJKprrX88XypNDvjYNby6vw/Pb0rwert/En
-mZ+AW4OZPnTPI89ZPmVMLuayrD2cE86Z/il8b+gw3r3+1nKatmIkjn2so1d01QraTlMqVSsbx
-NrRFi9wrf+M7Q== schacon@mylaptop.local
-```
-
-## 将本地库与远程库关联起来
-
-```
+$ git remote //查看远程仓库的简写
+$ git remote -v //查看远程仓库的简写和地址
+$ git remote add <shortname> <url> //添加新的git远程仓库
+$ git remote add pb https://github.com/paulboone/ticgit //
 $ git remote add origin git@gitserver:zjsonic/learngit.git
+$ git remote rename <oldname> <newname> //修改远程仓库的名称
+$ git remote rename pb paul //
+$ git remote rm <name> //删除库
+$ git remote rm paul
+$ git remote remove origin
 
 ```
-## 查看远程仓库
-```
-$ git remote
-```
 
-## 删除远程库
+## git push
 ```
-$git remote remove origin
-```
-
-## 推送本地库到远程库
-```
+$ git push [remote-name] [branch-name] //当你想要将 master 分支推送到 origin 服务器时
 $ git push origin master
 ```
 
-## 配置
 
+
+## Github新库提示信息
 
 ```
 Quick setup — if you’ve done this kind of thing before
-or
-HTTPS
-SSH
+- HTTPS
+- SSH
 
 git@github.com:zjsonic/learn-mongodb.git
 Get started by creating a new file or uploading an existing file. We recommend every repository include a README, LICENSE, and .gitignore.
