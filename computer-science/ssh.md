@@ -4,6 +4,47 @@
 
 注：由于SSH协议基于Unix，在Windows系统中使用SSH时，需安装一个叫PuTTY的软件
 
+## ssh
+`ssh`: 创建ssh连接
+```
+$ ssh username@remote_host  //登录远程主机
+```
+- ssh: 告诉当前计算机，我要和远程计算机建立安全加密的连接通道。
+- username: 在远程计算机上注册的合法账号
+- remote_host: 远程计算机的ip地址或域名
+
+```
+$ ssh -T git@github.com //测试github账户是否正确授权
+```
+
+## ssh-keygen
+`ssh-keygen`: 创建public-private Keys。
+```
+$ ssh-keygen  //不使用参数，按引导创建public key 和private key
+```
+Generating public/private rsa key pair.
+Enter file in which to save the key (/Users/zj/.ssh/id_rsa): //可选，键入保存公钥和私钥的文件名
+Created directory '/Users/zj/.ssh'.
+Enter passphrase (empty for no passphrase): //可选 为秘钥设置口令
+Enter same passphrase again: //可选 再次输入秘钥口令
+Your identification has been saved in /Users/zj/.ssh/id_rsa.
+Your public key has been saved in /Users/zj/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:BVDdPyeUf0Bw80VwKFNTJwhjE6zmJDWfdJwQSzQzf9s zj@zjHost
+The key's randomart image is:
+
+```
+$ ssh-keygen -f ~/tatu-key-rsa -t rsa -b 521
+```
+- `-f`: Specifying the file in which to store the key.指定文件
+- `-t`: Chose an Algorithm type 指定一种加密算法
+  - rsa
+  - dsa
+  - ecdsa
+  - ed25519
+- `-b`: Choose the key size 指定文件大小
+
+
 ## Why SSH?
 **安全性提高**
 
@@ -131,6 +172,61 @@ $ sudo systemctl restart ssh
 ```
 ssh username@remote_host
 ```
+
+# Git SSH 设置
+
+## 创建多个key
+github不允许多个账号共用一个pub_key
+```
+$ ssh-keygen -f /Users/xxx/.ssh/github_id1_rsa -t rsa
+$ ssh-keygen -f /Users/xxx/.ssh/github_id2_rsa -t rsa
+```
+
+## 拷贝pub_key到github账户里
+- github_id1_rsa.pub里的内容复制到github_id1的账户的SSH选项中
+- github_id2_rsa.pub里的内容复制到github_id2的账户的SSH选项中
+
+## 不创建config直接测
+```
+zjHost:basic-exercises zj$ ssh -T git@github.com
+The authenticity of host 'github.com (52.74.223.119)' can't be established.
+RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'github.com,52.74.223.119' (RSA) to the list of known hosts.
+git@github.com: Permission denied (publickey).
+```
+
+## 创建config文件
+```
+#github server one
+Host github              #域名地址的别名
+Hostname github.com      #这个是真实的域名地址
+User git                     #配置使用用户名
+IdentityFile ~/.ssh/id_rsa   #这里是id_rsa的地址
+
+#github server two
+Host github_two
+Hostname github.com
+User git
+IdentityFile ~/.ssh/id_rsa_two
+
+```
+
+
+# zjsonic(zjsonic6@gmail.com)
+Host zjsonic.github.com
+HostName github.com
+PreferredAuthentications publickey
+IdentityFile ~/.ssh/id_rsa_zjsonic
+User zjsonic
+
+# laizuoti(535414656@qq.com)
+Host laizuoti.github.com
+HostName github.com
+PreferredAuthentications publickey
+IdentityFile ~/.ssh/id_rsa
+User laizuoti
+
 
 
 ## 参考

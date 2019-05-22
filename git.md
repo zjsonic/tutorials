@@ -31,6 +31,8 @@ $ git //Mac上安装git(直接运行即可)Mavericks （10.9)以上的
 ```
 $ git config --global  -l //检查当前用户的所有配置信息
 $ git config -l // 检查当前库的所有配置信息
+$ git config --list
+$ git config --local --list
 ```
 
 **设置当前用户的配置变量**
@@ -291,4 +293,32 @@ git push -u origin master
 You can initialize this repository with code from a Subversion, Mercurial, or TFS project.
 ```
 
+
+## git多账户的key问题
+本地库：`.git/config`文件设置
+```
+#Default GitHub
+Host zjsonic-github
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_rsa
+
+Host laizuoti-github
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_rsa_laizuoti
+```
+查询远程库地址
+```
+$ git remote -v
+origin  git@github.com:laizuoti/basic-exercises.git (fetch)
+origin  git@github.com:laizuoti/basic-exercises.git (push)
+```
+修改remote库的地址
+```
+$ git remote set-url origin laizuoti-github:laizuoti/basic-exercises.git
+$ git remote -v
+origin  laizuoti-github::laizuoti/basic-exercises.git (fetch)
+origin  laizuoti-github::laizuoti/basic-exercises.git (push)
+```
 > - [Git官网](https://git-scm.com/)
