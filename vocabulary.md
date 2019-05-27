@@ -58,3 +58,6 @@ Why bother doing something you already have done a hundred times, where there is
 - n. 披风 斗篷
   - baby cloak 婴儿披风
 - vt. 遮掩、掩藏
+
+## to grasp solid understand
+

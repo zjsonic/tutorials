@@ -321,4 +321,9 @@ $ git remote -v
 origin  laizuoti-github::laizuoti/basic-exercises.git (fetch)
 origin  laizuoti-github::laizuoti/basic-exercises.git (push)
 ```
+
+## 著名报错
+```
+ERROR: Permission to XXX.git denied to user
+```
 > - [Git官网](https://git-scm.com/)
