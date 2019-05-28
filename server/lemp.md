@@ -17,7 +17,7 @@ sudo nginx
 
 Check any of your domains in your browser to make sure nginx works correctly. The browser will output the nginx default page.
 
-## Setup the directories for each domain/subdomain
+### Setup the directories for each domain/subdomain
 
 Up untill now, all the domains have set up correctly but there is a huge problem, all pointing to the same page. We need to sperate these domains to point to their own pages. For this, I will setup the directories and html pages.
 
@@ -27,7 +27,7 @@ mkdir buhaoqi.com api.buhaoqi.com
 touch buhaoqi.com/index.html api.buhaoqi.com/index.html
 ```
 
-## Creating server blocks for each domain/subdomain
+### Creating server blocks for each domain/subdomain
 
 Nginx provides default server block in /etc/nginx/sites-available/default. We will copy the server block for each domain and do modifications for each.
 
@@ -51,25 +51,48 @@ server {
 }
 ```
 
-## 标准配置
+### Configure Firewall
 
-Default server configuration
+```bash
+sudo ufw allow OpenSSH
+sudo ufw allow 80
+sudo ufw allow 433
+sudo ufw allow ssh
+sudo ufw allow 'Nginx HTTP'
+sudo ufw enable
+sudo ufw status
+sudo ufw disable
+```
+
+## Install MySQL
+
+```bash
+sudo apt install mysql-server
+sudo mysql_secure_installation
+```
+
+## Install PHP
+
+```bash
+sudo apt install php-fpm php-opcache php-cli php-gd php-curl php-mysql
+```
+
+## Configure Nginx to Process php File
 
 ```bash
 server {
-  # listen 80 default_server;
-  # listen [::]:80 default_server;
-  listen 443 ssl default_server;
-  listen [::]:443 ssl default_server;
 
-  ssl_certificate /etc/nginx/ssl/buhaoqi.com/fullchain.cer;
-  ssl_certificate_key /etc/nginx/ssl/buhaoqi.com/buhaoqi.com.key;
+    # . . . other code
 
-  root /var/www/html;
-  index index.html index.htm index.nginx-debian.html;
-  server_name buhaoqi.com;
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+    }
 }
+
 ```
 
 ## references
 - ![https://hackprogramming.com/how-to-setup-subdomain-or-host-multiple-domains-using-nginx-in-linux-server/](https://hackprogramming.com/how-to-setup-subdomain-or-host-multiple-domains-using-nginx-in-linux-server/)
+
+- ![https://linuxize.com/series/how-to-install-lemp-stack-on-ubuntu-18-04/](https://linuxize.com/series/how-to-install-lemp-stack-on-ubuntu-18-04/)

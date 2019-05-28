@@ -61,3 +61,19 @@ Why bother doing something you already have done a hundred times, where there is
 
 ## to grasp solid understand
 
+> You need to validate form data to protect your script from malicious code.
+
+- validate: 验证
+- malicious: adj 毒 恶毒
+
+## semicolon
+
+分号
+
+> Proper validation of form data is important to protect your form from hackers and spammers.
+
+- spammer n 垃圾邮件发送者
+
+> The htmlspecialchars() function converts special charactoers to HTML entity.
+
+- entity n 实体 存在 本质
