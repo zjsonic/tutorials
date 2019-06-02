@@ -1,4 +1,11 @@
-## 什么是Module
+# Module
+
+## What is the modules in Node.js
+
+- In the Node.js modules system, each file is treated as a separate module.
+- Consider modules to be the (same as) javascript libraries.
+- You can include the module in any of your node.js file.
+
 - module是Node.js中的一个内置对象。
  `module` 是一个对象
 ```

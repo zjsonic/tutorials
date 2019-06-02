@@ -77,3 +77,11 @@ Why bother doing something you already have done a hundred times, where there is
 > The htmlspecialchars() function converts special charactoers to HTML entity.
 
 - entity n 实体 存在 本质
+
+>I see these in PHP all the time but I don't have a clue as to what they actually mean.
+
+- clue: 线索 头绪 
+
+> She is an expert on the ecology of wetlands. 她是一个湿地生态学专家。
+
+- ecology: n. 生态  生态学

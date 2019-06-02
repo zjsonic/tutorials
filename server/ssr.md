@@ -12,15 +12,21 @@ chmod +x shadowsocksR.sh
 
 ## 常用命令
 ```
-$ /etc/init.d/shadowsocks start  //启动
-$ /etc/init.d/shadowsocks stop //停止
-$ /etc/init.d/shadowsocks restart //重启
-$ /etc/init.d/shadowsocks status //查看状态
+/etc/init.d/shadowsocks start  //启动
+/etc/init.d/shadowsocks stop //停止
+/etc/init.d/shadowsocks restart //重启
+/etc/init.d/shadowsocks status //查看状态
+```
+
+## Configuration file
+
+```bash
+/etc/shadowsocks.json # configuration file
 ```
 
 ## 卸载ssr
 ```
-$ ./shadowsocksR.sh uninstall
+./shadowsocksR.sh uninstall
 ```
 
 ## 多用户配置

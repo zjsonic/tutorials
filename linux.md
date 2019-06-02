@@ -1,18 +1,42 @@
-# Linux Commands
+# Linux
+
+## ubuntu文件夹含义
+
+- `/bin/`:用以存储二进制可执行命令文件
+- `/etc/` :存放文件管理配置文件和目录
+- `/var/`    用于存放很多不断变化的文件，例如日志文件等
+- `/lib/`    存储各种程序所需要的共享库文件。
+
+## sudo install
+
+```bash
+sudo ....   //以系统管理员(root)身份执行指令
+sudo -V //查看sudo命令对版本号
+sudo install xxx  //如果需要，则手动选择Yes安装
+sudo install -y xxx //自动选择Yes按照
+
+```
+
+## sudo apt update
 
 ```bash
 sudo apt-get update
 chmod o+w filename
-sudo ufw enable // 开启防火墙
-sudo ufw default deny //随系统启动同时关闭所有外部对本机的访问
-sudo ufw disable
-sudo ufw status
-sudo ufw allow 80 //允许外网访问80端口
-sudo ufw allow 'Nginx HTTP'
+```
+
+## sudo ufw
+
+```bash
+sudo ufw status # check the ubuntu firewall's status
+sudo ufw disable # disable the ubuntu firewall
+sudo ufw allow ssh # add a rule
+sudo ufw allow 80 # add a rule
+sudo ufw allow 'Nginx HTTP' # add a rule
 sudo ufw allow from 192.168.1.1 //允许此IP访问所有的本机端口
 sudo ufw deny smtp //禁止外部访问smtp服务
 sudo ufw delete allow smtp //删除上面建立的某条规则
-
+sudo ufw enable // 开启防火墙
+sudo ufw default deny //随系统启动同时关闭所有外部对本机的访问
 ```
 
 修改文件或文件夹读写权限

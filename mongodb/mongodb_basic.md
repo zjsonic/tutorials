@@ -1,202 +1,200 @@
 # Mongodb Basic
 
-## 学Mongodb
-- 教程:[https://www.tutorialspoint.com/mongodb/mongodb_create_collection.htm](https://www.tutorialspoint.com/mongodb/mongodb_create_collection.htm)
+High Level Steps:
 
-## Profile
-- mongodb is a document database.
-- document database: data structure composed of key/value pairs. similar to JSON objects.
+- Installation
+- Start
+- Connection
+- Create
+- Security
 
 ## Installation
-- 安装参考：[how-to-install-and-secure-mongodb-on-ubuntu-16-04](https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-mongodb-on-ubuntu-16-04)
-- mongodb数据库存放位置（默认）：`var/lib/mongodb`
-- mongodb日志的存放位置：`var/log/mongodb/mongod.log`
-- mongodb可执行文件位置：`/usr/bin/mongo` 和 `/usr/bin/mongod`
-- mongodb配置文件的存放位置：`/etc/mongod.conf`
 
-## ubuntu文件夹含义
-- `/bin/`:用以存储二进制可执行命令文件
-- `/etc/` :存放文件管理配置文件和目录
-- `/var/`    用于存放很多不断变化的文件，例如日志文件等
-- `/lib/`    存储各种程序所需要的共享库文件。
+- version: MongoDB Community Editon
+- Platform: Ubuntu 18.04 MacOS
 
-## 数据库与用户管理
-- 参考：[https://blog.csdn.net/u010649766/article/details/78497928](https://blog.csdn.net/u010649766/article/details/78497928)
+### Installation on MacOS
 
-## Mongodb三大基本概念
-- `Database`: `collection`的物理容器。
-- `Collection`: 一组相关的`document`
-- `Document`: 一组`key/value`对的集合
-
-## 视频网站数据库设计规划
-- 每一个video有唯一`title` `description` `url`
-- 每一个video有一个或多个`tag`
-- 每一个video有`author`和`likes`
-- 每一个video有用户发表的`comments`
-```
-{
-    _id: VIDEO_ID,
-
-}
+```bash
+brew tap mongodb/brew # to tap the MongoDB Homebrew Tap
+brew install mongodb-community@4.0 # Install MongoDB
 ```
 
-## sudo apt-get install mongodb-org
+Configuration file
 
-## sudo systemctl start mongod
-
-## sudo service mongod start
-
-## sudo systemctl status mongod
-
-## sudo systemctl stop mongod
-
-## sudo systemctl enable mongod
+- the configuration file (/usr/local/etc/mongod.conf)
 
 
-## create database
-return the existing database or create a new database
-```
-> use DATABASE_NAME
-```
+### Installation on Ubuntu 18.04
 
-## 查看当前使用的数据库
-```
-> db
-```
-## show dbs = show databases
-```
-> show dbs
-```
-确认访问权限
-```
-$ mongo -u xxx -p --authenticationDatabase admin
-```
-
-## db.dropDatabase()
-- `db.dropDatabase()` will delete the selected database.
-- if you have not selected any database, then it will delete the `test` database.
-
-
-## db.createCollection(name,options)
-- name: the name of the collection to be created.
-- options: optional, a document used to specify configuration of memory size and indexing 
+```bash
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4
+echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org
 
 ```
-use test
-db.createCollection('user_vip')
+
+### check the version
+
+```bash
+mongodb --version # check the version of mongodb
 ```
+
+## Start
+
+### Start MongoDB on MacOS
+
+```bash
+mongod --config /usr/local/etc/mongod.conf # run mongodb
+brew services start mongodb-community@4.0 # run mongodb as a mac service
 ```
-use test
-db.createCollection('user_general',{
-    capped: true, // 是否激活capped collections  默认false
-    autoIndexId:true, //是否激活在`_id`字段上自动创建索引  默认false
-    size:6142800, //为capped collections指定最大字节
-    max:10000 // 指定允许创建的document的最大数字
+
+### Start MongoDB on Ubuntu
+
+```bash
+sudo service mongod status # check the service's status
+sudo service mongod stop # stop the mongodb server anytime
+sudo service mongod start # start the mongodb server
+sudo service mongod restart # restart the mongodb server
+```
+
+### Start MongoDB without access control
+ 
+```base
+mongod --port 27017 --dbpath /var/lib/mongodb
+```
+
+## Connection
+
+If you try to access the mongo shell by simply typing `mongo` in the terminal. You will get through but won't be able to access any database. You need to use your created users to access the databases.
+
+### The Mongo Shell
+
+- The mongo shell is an interactive js interface to MongoDB. You can use the mongo shell to query and update data as well as perform administrative operations.
+- The mongo shell is a component of the MongoDB. Once you have installed the MongoDB and started it, you can connect the mongo shell to  the running mongodb instance.
+- `which mongo`: look for the location of the mongo 
+
+### Connect MongoDB with a Full URI
+
+macOS\ubuntu:
+
+```bash
+mongo -u 'username' xxx.xxx.xx.xx./admin -p
+```
+
+### Connect MongoDB without a Full URI(未验证)
+
+macOS\ubuntu:
+
+```bash
+mongo -u 'username' --port 27017 --host xxx.xxx.xx.xx -p 
+```
+
+## Create
+
+Create 'admin' user
+
+```sql
+use admin;
+db.createUser({
+    user: "admin",
+    pwd: "123456",
+    roles: [
+        { role: "userAdminAnyDatabase", db: "admin" },
+        { role: "dbAdminAnyDatabase", db: "admin" },
+        { role: "readWriteAnyDatabase", db: "admin" }
+    ]
+})
+
+```
+
+creat a DB user
+
+```sql
+db.createUser({
+    user: 'user1',
+    pwd: '123456',
+    roles: [
+        { role: 'userAdmin', db: 'testdb' },
+        { role: 'dbAdmin', db: 'testdb' },
+        { role: 'readWrite', db: 'testdb' }
+    ]
 })
 ```
-## show collections
-```
-> show collections
+
+Create database 'testdb'
+
+```sql
+use testdb; --'testdb' will not be present in database list till you insert something into it. 
+db.movie.insert({"name":"tutorials point"})
 ```
 
-## mongod --path
+## Security
 
-## mongod --port 27107
+### Firewall
 
-
-## mongo SHELL
-
-## db:变量 指代当前数据库
-```
-> db
-admin
-```
-
-
-
-## db.COLLECTION_NAME.insert(document)
-
-## authorization:"enabled"
-mongodb要求所有的客户端进行身份验证，以确定它们的访问权限。
-authentication: 认证。验证用户身份的过程。
-authorization: 授权。决定用户可访问的资源和可进行的操作
-
-## 认证方法
-认证一个用户，需要提供：
-- username
-- password
-- authentication database
-
-使用mongo shell认证的方式
-- 在mongo shell连接数据库实例的时候进行认证
-- 先连接数据库实例 然后运行认证命令或认证方法进行认证
-    - db.auth()
-    - mongo - u xxx -p --authenticationDatabase admin
-
-## db.createUser()
-- 必须增加一个数据库对应的用户做认证
-- 当增加用户的时候，你可以给用户分配角色
-
-## 认证数据库
-当创建用户的时候，必须指定数据库。这个数据库就是用户的认证数据库
-- 用户可以拥有跨不同数据库的权限，用户的特权不会限制在认证数据库
-
-
-## 认证用户
-
-
-
-## mongo SHELL
-`mongo Shell`是一个与`mongodb`数据库交互的js接口。
-- 可进行CRUD操作
-- 可进行管理操作
-mongo shell是mongodb的组件。一旦安装了mongodb就可以使用mongo shell连接到数据库实例
-
-## mongo --port 27017
-连接本地默认端口的数据库实例,默认端口可省略
-```
-mongo  
-```
-连接本地非默认端口的数据库实例
+```bash
+sudo ufw enable # enable the firewall
+sudo ufw disable # disable the firewall
+sudo ufw allow 27017 # allow port 27017
+sudo ufw allow from another_server_ip/32 to any port 27017 # In most cases,MongoDB should be accessed from certain trusted server hosting an app. 27017:mongodb's port
+sudo nano /etc/mongodb.conf # open the config file and bind your server ip: bind_ip = 127.0.0.1,server_ip
+sudo netstat -plntu # check that mongodb has been started on the port 27017
+sudo systemctl restart mongodb # restart the mongodb server
 
 ```
-mongo --port 28015
-```
-连接远程数据库实例
-```
-mongo -u AdminSammy -p --authenticationDatabase admin --host IP_address_of_MongoHost
-```
-或
-```
-mongo --host mongodb0.example.com --port 28015
-```
-或
-```
-mongo --host mongodb0.example.com:28015
+MongoDB is now listening for remote connections, but anyone can access it. 
+
+### Authorization
+
+Open the MongoDB config file:
+
+```bash
+udo vim /etc/mongod.conf
 ```
 
-或
-```
-mongo mongodb://mongodb0.example.com:28015
+In this file add the following lines:
+
+```bash
+security:
+    authorization: 'enabled'
 ```
 
-## db
-显示当前使用的数据库
+This will tell mongodb that whenever it starts up next, it needs to enforce database access control using the roles we created in the previous step.
+
+## Remote
+
+Open the MongoDB config file:
+
+```bash
+udo vim /etc/mongod.conf
 ```
-> db   // 默认为test
+
+Change the `bindIp` from `127.0.0.1` to `0.0.0.0`
+
 ```
-## use DATABASE_NAME
-切换数据库
+# network interfaces
+net:
+    port: 27017
+    bindIp: 0.0.0.0   # means allow connections from any ip address #default value is 127.0.0.1 
 ```
-> use DATABASE_NAME  //可以切换到non-existing数据库
+
+However, we are still accessing the mongo shell from within the vultr instance. We havn't tried connecting remotely. To be able to do that,change the network settings of your vultr instance.
+
+Open up network port on the vultr instance
+
+MongoDB uses port 27107 for all connections by default.
+So, let's open up that port. You can go to the network settings of your vultr console and 
+open up `inbound` and `outbound` traffic on port 27107
+
 ```
-## show dbs
-列出可用数据库
+sudo iptables -A INPUT -p tcp --destination-port 27017 -m state --state NEW,ESTABLISHED -j ACCEPT
+sudo iptables -A OUTPUT  -p tcp --source-port 27017 -m state --state ESTABLISHED -j ACCEPT
 ```
-> show dbs
-```
-## exit the shell
-```
-> quit()
-```
-或 `ctl+C`
+
+## 参考
+
+- 教程:![https://www.tutorialspoint.com/mongodb/mongodb_create_collection.htm](https://www.tutorialspoint.com/mongodb/mongodb_create_collection.htm)
+- config firewall: ![https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-18-04](https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-18-04)
+- ![Setting up and connecting to a remote MongoDB database](https://medium.com/founding-ithaka/setting-up-and-connecting-to-a-remote-mongodb-database-5df754a4da89)
