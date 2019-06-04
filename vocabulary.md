@@ -85,3 +85,7 @@ Why bother doing something you already have done a hundred times, where there is
 > She is an expert on the ecology of wetlands. 她是一个湿地生态学专家。
 
 - ecology: n. 生态  生态学
+
+>Which of these snack brands have you seen online video advertising for recently?
+
+- snack: 小吃

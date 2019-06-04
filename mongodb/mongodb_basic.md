@@ -18,11 +18,22 @@ High Level Steps:
 ```bash
 brew tap mongodb/brew # to tap the MongoDB Homebrew Tap
 brew install mongodb-community@4.0 # Install MongoDB
+brew uninstall mongodb-community@4.0
 ```
 
-Configuration file
+Configuration File: `/usr/local/etc/mongod.conf`:
 
-- the configuration file (/usr/local/etc/mongod.conf)
+```bash
+systemLog:
+  destination: file
+  path: /usr/local/var/log/mongodb/mongo.log
+  logAppend: true
+storage:
+  dbPath: /usr/local/var/mongodb
+net:
+  bindIp: 127.0.0.1
+```
+
 
 
 ### Installation on Ubuntu 18.04
@@ -34,6 +45,24 @@ sudo apt-get update
 sudo apt-get install -y mongodb-org
 
 ```
+
+Configure file: `/etc/mongod.conf`
+
+```bash
+storage:
+    dbPath: /var/lib/mongodb
+systemLog:  
+    logAppend: true
+    path: /var/log/mongodb/mongod.log
+
+net:
+    port: 27107
+    bindIp: 127.0.0.1
+
+security:
+    authorization: 'enabled'
+```
+
 
 ### check the version
 
@@ -48,6 +77,7 @@ mongodb --version # check the version of mongodb
 ```bash
 mongod --config /usr/local/etc/mongod.conf # run mongodb
 brew services start mongodb-community@4.0 # run mongodb as a mac service
+brew services stop mongodb-community@4.0
 ```
 
 ### Start MongoDB on Ubuntu
@@ -69,7 +99,7 @@ mongod --port 27017 --dbpath /var/lib/mongodb
 
 If you try to access the mongo shell by simply typing `mongo` in the terminal. You will get through but won't be able to access any database. You need to use your created users to access the databases.
 
-### The Mongo Shell
+### Connection with The Mongo Shell
 
 - The mongo shell is an interactive js interface to MongoDB. You can use the mongo shell to query and update data as well as perform administrative operations.
 - The mongo shell is a component of the MongoDB. Once you have installed the MongoDB and started it, you can connect the mongo shell to  the running mongodb instance.

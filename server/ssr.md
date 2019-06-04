@@ -10,6 +10,13 @@ chmod +x shadowsocksR.sh
 
 ```
 
+Your Server IP        :  45.77.190.180 
+Your Server Port      :  13215 
+Your Password         :  Z
+Your Protocol         :  origin 
+Your obfs             :  plain 
+Your Encryption Method:  aes-256-cfb 
+
 ## 常用命令
 ```
 /etc/init.d/shadowsocks start  //启动
