@@ -1,11 +1,44 @@
 # Linux
 
-## ubuntu文件夹含义
+## 文件夹含义
 
-- `/bin/`:用以存储二进制可执行命令文件
-- `/etc/` :存放文件管理配置文件和目录
-- `/var/`    用于存放很多不断变化的文件，例如日志文件等
-- `/lib/`    存储各种程序所需要的共享库文件。
+- ubuntu
+  - `/bin/`:用以存储二进制可执行命令文件
+  - `/etc/` :存放文件管理配置文件和目录
+  - `/var/`    用于存放很多不断变化的文件，例如日志文件等
+  - `/lib/`    存储各种程序所需要的共享库文件。
+
+## Wget: Download File via HTTP/FTP
+
+wget: A free utility for downloading files from the web. It supports `HTTP` `HTTPS` `FTP` protocols.
+
+Installing wget
+
+```bash
+sudo apt-get install wget
+```
+
+## curl: Transfer Data to or from  a server
+
+`curl`:The curl command transfers data to or from a network server on Mac OS, using one of the supported protocols (HTTP, HTTPS, FTP, FTPS, SCP, SFTP, TFTP, DICT, TELNET, LDAP or FILE). It is designed to work without user interaction, so it is ideal for use in a shell script.
+
+```bash
+curl [options] [URL...]
+curl 'url'
+curl [option] 'url'
+curl -O 'url' # Capital O write output to a file named like the remote we get
+curl -L -O 'url'
+curl -o output.file.name.here 'url-here'
+curl -o foo.pdf 'http://server1.cyberciti.biz/foo.pdf'
+
+```
+
+```bash
+wget http://website.com/files/file.zip
+```
+
+
+
 
 ## sudo install
 

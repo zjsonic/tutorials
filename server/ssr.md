@@ -10,6 +10,16 @@ chmod +x shadowsocksR.sh
 
 ```
 
+## ubuntu按照ss
+
+```
+yum install wget
+wget — no-check-certificate -O shadowsocks.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
+chmod +x shadowsocks.sh
+./shadowsocks.sh 2>&1 | tee shadowsocks.log
+
+```
+
 Your Server IP        :  45.77.190.180 
 Your Server Port      :  13215 
 Your Password         :  Z
