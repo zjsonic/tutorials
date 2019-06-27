@@ -1,6 +1,429 @@
 
-## 打印HTTP
-`HTTP`
+# Print
+
+[TOC]
+
+## global 
+
+- global.process
+- global.Buffer
+- global.clearImmediate()
+- global.clearInterval()
+- global.clearTimeout()
+- global.setImmediate()
+- global.setInterval()
+- global.setTimeout()
+
+```js
+Object [global] {
+  DTRACE_NET_SERVER_CONNECTION: [Function],
+  DTRACE_NET_STREAM_END: [Function],
+  DTRACE_HTTP_SERVER_REQUEST: [Function],
+  DTRACE_HTTP_SERVER_RESPONSE: [Function],
+  DTRACE_HTTP_CLIENT_REQUEST: [Function],
+  DTRACE_HTTP_CLIENT_RESPONSE: [Function],
+  global: [Circular],
+  process:
+   process {
+     title: 'node',
+     version: 'v10.15.3',
+     versions:
+      { http_parser: '2.8.0',
+        node: '10.15.3',
+        v8: '6.8.275.32-node.51',
+        uv: '1.23.2',
+        zlib: '1.2.11',
+        ares: '1.15.0',
+        modules: '64',
+        nghttp2: '1.34.0',
+        napi: '3',
+        openssl: '1.1.0j',
+        icu: '62.1',
+        unicode: '11.0',
+        cldr: '33.1',
+        tz: '2018e' },
+     arch: 'x64',
+     platform: 'darwin',
+     release:
+      { name: 'node',
+        lts: 'Dubnium',
+        sourceUrl:
+         'https://nodejs.org/download/release/v10.15.3/node-v10.15.3.tar.gz',
+        headersUrl:
+         'https://nodejs.org/download/release/v10.15.3/node-v10.15.3-headers.tar.gz' },
+     argv: [ '/usr/local/bin/node' ],
+     execArgv: [],
+     env:
+      { NVM_RC_VERSION: '',
+        TERM_PROGRAM: 'Apple_Terminal',
+        NVM_CD_FLAGS: '',
+        SHELL: '/bin/bash',
+        TERM: 'xterm-256color',
+        TMPDIR: '/var/folders/4g/l88r0rbd52z04vbhb821l6700000gn/T/',
+        Apple_PubSub_Socket_Render: '/private/tmp/com.apple.launchd.nDA8Rq3B3s/Render',
+        TERM_PROGRAM_VERSION: '404.1',
+        OLDPWD: '/Users/zj/my-projects/learn',
+        TERM_SESSION_ID: 'FB8C0136-2639-47D2-807C-FC5CFC2233EE',
+        NVM_DIR: '/Users/zj/.nvm',
+        USER: 'zj',
+        SSH_AUTH_SOCK: '/private/tmp/com.apple.launchd.PjRxOkN4sJ/Listeners',
+        PATH:
+         '/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/zj/.composer/vendor/bin',
+        PWD: '/Users/zj/my-projects/learn/learn-nodejs',
+        LANG: 'en_US.UTF-8',
+        XPC_FLAGS: '0x0',
+        XPC_SERVICE_NAME: '0',
+        SHLVL: '1',
+        HOME: '/Users/zj',
+        LOGNAME: 'zj',
+        _: '/usr/local/bin/node',
+        __CF_USER_TEXT_ENCODING: '0x1F5:0x0:0x0' },
+     pid: 3262,
+     features:
+      { debug: false,
+        uv: true,
+        ipv6: true,
+        tls_alpn: true,
+        tls_sni: true,
+        tls_ocsp: true,
+        tls: true },
+     ppid: 1207,
+     execPath: '/usr/local/bin/node',
+     debugPort: 9229,
+     _debugProcess: [Function: _debugProcess],
+     _debugEnd: [Function: _debugEnd],
+     _startProfilerIdleNotifier: [Function: _startProfilerIdleNotifier],
+     _stopProfilerIdleNotifier: [Function: _stopProfilerIdleNotifier],
+     abort: [Function: abort],
+     chdir: [Function: chdir],
+     umask: [Function: umask],
+     _getActiveRequests: [Function: _getActiveRequests],
+     _getActiveHandles: [Function: _getActiveHandles],
+     _kill: [Function: _kill],
+     cwd: [Function: cwd],
+     dlopen: [Function: dlopen],
+     reallyExit: [Function: reallyExit],
+     uptime: [Function: uptime],
+     getuid: [Function: getuid],
+     geteuid: [Function: geteuid],
+     getgid: [Function: getgid],
+     getegid: [Function: getegid],
+     getgroups: [Function: getgroups],
+     _rawDebug: [Function],
+     moduleLoadList:
+      [ 'Internal Binding module_wrap',
+        'Binding contextify',
+        'Internal Binding worker',
+        'NativeModule events',
+        'NativeModule internal/async_hooks',
+        'NativeModule internal/errors',
+        'Binding uv',
+        'Binding buffer',
+        'Binding async_wrap',
+        'Internal Binding async_wrap',
+        'Binding config',
+        'Binding icu',
+        'NativeModule util',
+        'NativeModule internal/util/inspect',
+        'Binding util',
+        'NativeModule internal/util',
+        'Binding constants',
+        'Internal Binding types',
+        'NativeModule internal/util/types',
+        'NativeModule internal/validators',
+        'NativeModule internal/encoding',
+        'Internal Binding icu',
+        'NativeModule buffer',
+        'NativeModule internal/buffer',
+        'NativeModule internal/process/per_thread',
+        'NativeModule internal/process/main_thread_only',
+        'NativeModule internal/process/stdio',
+        'NativeModule assert',
+        'NativeModule internal/assert',
+        'NativeModule fs',
+        'NativeModule path',
+        'NativeModule internal/constants',
+        'Binding fs',
+        'NativeModule internal/fs/streams',
+        'NativeModule internal/fs/utils',
+        'NativeModule stream',
+        'NativeModule internal/streams/pipeline',
+        'NativeModule internal/streams/end-of-stream',
+        'NativeModule internal/streams/legacy',
+        'NativeModule _stream_readable',
+        'NativeModule internal/streams/buffer_list',
+        'NativeModule internal/streams/destroy',
+        'NativeModule internal/streams/state',
+        'NativeModule _stream_writable',
+        'NativeModule _stream_duplex',
+        'NativeModule _stream_transform',
+        'NativeModule _stream_passthrough',
+        'NativeModule internal/url',
+        'NativeModule internal/querystring',
+        'Binding url',
+        'NativeModule internal/process/warning',
+        'NativeModule internal/process/next_tick',
+        'NativeModule internal/process/promises',
+        'Internal Binding util',
+        'NativeModule internal/fixed_queue',
+        'Binding performance',
+        'Binding trace_events',
+        'NativeModule internal/inspector_async_hook',
+        'Binding inspector',
+        'NativeModule internal/options',
+        'Internal Binding options',
+        'NativeModule timers',
+        'Binding timer_wrap',
+        'NativeModule internal/linkedlist',
+        'NativeModule internal/timers',
+        'NativeModule console',
+        'Binding tty_wrap',
+        'Internal Binding tty_wrap',
+        'NativeModule tty',
+        'NativeModule net',
+        'NativeModule internal/net',
+        'Binding stream_wrap',
+        'Binding tcp_wrap',
+        'Binding pipe_wrap',
+        'NativeModule internal/stream_base_commons',
+        'Internal Binding stream_wrap',
+        'Internal Binding uv',
+        'NativeModule internal/tty',
+        'Binding signal_wrap',
+        'NativeModule internal/modules/cjs/loader',
+        'NativeModule vm',
+        'NativeModule url',
+        'NativeModule internal/safe_globals',
+        'NativeModule internal/modules/cjs/helpers',
+        'NativeModule internal/repl',
+        'NativeModule readline',
+        'NativeModule internal/readline',
+        'NativeModule repl',
+        'NativeModule internal/deps/acorn/dist/acorn',
+        'NativeModule domain',
+        'NativeModule async_hooks',
+        'Internal Binding domain',
+        'NativeModule internal/util/inspector',
+        'NativeModule inspector',
+        'NativeModule internal/repl/recoverable',
+        'NativeModule os',
+        'Binding os',
+        'NativeModule string_decoder',
+        'Internal Binding string_decoder',
+        'NativeModule internal/fs/read_file_context' ],
+     binding: [Function: binding],
+     _linkedBinding: [Function: _linkedBinding],
+     _events:
+      [Object: null prototype] {
+        newListener: [Array],
+        removeListener: [Array],
+        warning: [Function],
+        SIGWINCH: [Array] },
+     _eventsCount: 4,
+     _maxListeners: undefined,
+     _fatalException: [Function],
+     domain: [Getter/Setter],
+     _exiting: false,
+     assert: [Function: deprecated],
+     config: { target_defaults: [Object], variables: [Object] },
+     setUncaughtExceptionCaptureCallback: [Function],
+     hasUncaughtExceptionCaptureCallback: [Function],
+     emitWarning: [Function],
+     nextTick: [Function: nextTick],
+     _tickCallback: [Function: _tickCallback],
+     stdout: [Getter],
+     stderr: [Getter],
+     stdin: [Getter],
+     openStdin: [Function],
+     initgroups: [Function: initgroups],
+     setegid: [Function: setegid],
+     seteuid: [Function: seteuid],
+     setgid: [Function: setgid],
+     setuid: [Function: setuid],
+     setgroups: [Function: setgroups],
+     hrtime: { [Function: hrtime] bigint: [Function] },
+     cpuUsage: [Function: cpuUsage],
+     memoryUsage: [Function: memoryUsage],
+     exit: [Function],
+     kill: [Function],
+     argv0: 'node',
+     allowedNodeEnvironmentFlags: [Getter/Setter] },
+  Buffer:
+   { [Function: Buffer]
+     poolSize: 8192,
+     from: [Function: from],
+     of: [Function: of],
+     alloc: [Function: alloc],
+     allocUnsafe: [Function: allocUnsafe],
+     allocUnsafeSlow: [Function: allocUnsafeSlow],
+     isBuffer: [Function: isBuffer],
+     compare: [Function: compare],
+     isEncoding: [Function: isEncoding],
+     concat: [Function: concat],
+     byteLength: [Function: byteLength],
+     [Symbol(kIsEncodingSymbol)]: [Function: isEncoding] },
+  clearImmediate: [Function: clearImmediate],
+  clearInterval: [Function: clearInterval],
+  clearTimeout: [Function: clearTimeout],
+  setImmediate:
+   { [Function: setImmediate] [Symbol(util.promisify.custom)]: [Function] },
+  setInterval: [Function: setInterval],
+  setTimeout:
+   { [Function: setTimeout] [Symbol(util.promisify.custom)]: [Function] } }
+```
+
+## Module()
+
+- `module.constructor.builtinModules` 
+- module.constructor.
+
+Run `module.constructor`
+
+```javascript
+{ [Function: Module]
+  builtinModules:
+   [ 'async_hooks',
+     'assert',
+     'buffer',
+     'child_process',
+     'console',
+     'constants',
+     'crypto',
+     'cluster',
+     'dgram',
+     'dns',
+     'domain',
+     'events',
+     'fs',
+     'http',
+     'http2',
+     '_http_agent',
+     '_http_client',
+     '_http_common',
+     '_http_incoming',
+     '_http_outgoing',
+     '_http_server',
+     'https',
+     'inspector',
+     'module',
+     'net',
+     'os',
+     'path',
+     'perf_hooks',
+     'process',
+     'punycode',
+     'querystring',
+     'readline',
+     'repl',
+     'stream',
+     '_stream_readable',
+     '_stream_writable',
+     '_stream_duplex',
+     '_stream_transform',
+     '_stream_passthrough',
+     '_stream_wrap',
+     'string_decoder',
+     'sys',
+     'timers',
+     'tls',
+     '_tls_common',
+     '_tls_wrap',
+     'trace_events',
+     'tty',
+     'url',
+     'util',
+     'v8',
+     'vm',
+     'zlib',
+     'v8/tools/splaytree',
+     'v8/tools/codemap',
+     'v8/tools/consarray',
+     'v8/tools/csvparser',
+     'v8/tools/profile',
+     'v8/tools/profile_view',
+     'v8/tools/logreader',
+     'v8/tools/arguments',
+     'v8/tools/tickprocessor',
+     'v8/tools/SourceMap',
+     'v8/tools/tickprocessor-driver',
+     'node-inspect/lib/_inspect',
+     'node-inspect/lib/internal/inspect_client',
+     'node-inspect/lib/internal/inspect_repl' ],
+  _cache: [Object: null prototype] {},
+  _pathCache: [Object: null prototype] {},
+  _extensions:
+   [Object: null prototype] { '.js': [Function], '.json': [Function], '.node': [Function] },
+  globalPaths:
+   [ '/Users/zj/.node_modules',
+     '/Users/zj/.node_libraries',
+     '/usr/local/lib/node' ],
+  wrap: [Function],
+  wrapper:
+   [ '(function (exports, require, module, __filename, __dirname) { ',
+     '\n});' ],
+  _debug: [Function: deprecated],
+  _findPath: [Function],
+  _nodeModulePaths: [Function],
+  _resolveLookupPaths: [Function],
+  _load: [Function],
+  _resolveFilename: [Function],
+  runMain: [Function],
+  createRequireFromPath: [Function],
+  _initPaths: [Function],
+  _preloadModules: [Function],
+  Module: [Circular] }
+```
+
+## Module Object
+
+- module.constructor.prototype.require(id)
+  + Description: provides a way to load a module
+  + Id: string
+  + Return: <anytype> Exported module content
+- module.constructor.prototype.load()
+- module.constructor.prototype._compile()
+
+Run `module.constructor.prototype`
+
+```javascript
+Module { load: [Function], require: [Function], _compile: [Function] }
+```
+
+## module
+
+- module.id: The identifier for the module. Typically this is the fully resolved filename.
+- module.exports: 
+- module.filename: The fully resolved filename of the module.
+- module.children: 
+- module.parent: 
+- module.paths: The search paths for the module.
+- module.loaded
+
+```javascript
+Module {
+  id: '<repl>',
+  exports: {},
+  parent: undefined,
+  filename: null,
+  loaded: false,
+  children: [],
+  paths:
+   [ '/Users/zj/my-projects/learn/learn-nodejs/demo1/repl/node_modules',
+     '/Users/zj/my-projects/learn/learn-nodejs/demo1/node_modules',
+     '/Users/zj/my-projects/learn/learn-nodejs/node_modules',
+     '/Users/zj/my-projects/learn/node_modules',
+     '/Users/zj/my-projects/node_modules',
+     '/Users/zj/node_modules',
+     '/Users/node_modules',
+     '/node_modules',
+     '/Users/zj/.node_modules',
+     '/Users/zj/.node_libraries',
+     '/usr/local/lib/node' ] 
+}
+```
+
+## HTTP
+
 ```
 { _connectionListener: [Function: connectionListener],
   METHODS:
@@ -127,8 +550,10 @@
   get: [Function: get],
   request: [Function: request]
 }
-  ```
-  ## 打印`http.Server`
+```
+
+  ## http.Server
+
   ```
 { [Function: Server]
   super_:

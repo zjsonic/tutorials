@@ -34,8 +34,6 @@ net:
   bindIp: 127.0.0.1
 ```
 
-
-
 ### Installation on Ubuntu 18.04
 
 ```bash
@@ -63,11 +61,10 @@ security:
     authorization: 'enabled'
 ```
 
-
 ### check the version
 
 ```bash
-mongodb --version # check the version of mongodb
+mongod --version # check the version of mongodb
 ```
 
 ## Start
@@ -95,15 +92,38 @@ sudo service mongod restart # restart the mongodb server
 mongod --port 27017 --dbpath /var/lib/mongodb
 ```
 
-## Connection
+## The Mongo Shell
+
+The mongo shell is an interactive js interface to MongoDB.
+You can use the mongo shell to query and update data as well as perform administrative operations.
+The mongo shell is a component of the MongoDB. Once you have installed the MongoDB and started it, you can connect the mongo shell to  the running mongodb instance.
+
+### the location of the mongo 
+
+- `which mongo`: look for the location of the mongo 
+
+
+### Connect to MongoDB
+
+```bash
+mongo
+
+> show dbs;
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+
+> db
+test
+
+> show users;
+
+> db.getUsers()
+[ ]
+
+```
 
 If you try to access the mongo shell by simply typing `mongo` in the terminal. You will get through but won't be able to access any database. You need to use your created users to access the databases.
-
-### Connection with The Mongo Shell
-
-- The mongo shell is an interactive js interface to MongoDB. You can use the mongo shell to query and update data as well as perform administrative operations.
-- The mongo shell is a component of the MongoDB. Once you have installed the MongoDB and started it, you can connect the mongo shell to  the running mongodb instance.
-- `which mongo`: look for the location of the mongo 
 
 ### Connect MongoDB with a Full URI
 
@@ -174,6 +194,7 @@ sudo netstat -plntu # check that mongodb has been started on the port 27017
 sudo systemctl restart mongodb # restart the mongodb server
 
 ```
+
 MongoDB is now listening for remote connections, but anyone can access it. 
 
 ### Authorization
@@ -181,7 +202,7 @@ MongoDB is now listening for remote connections, but anyone can access it.
 Open the MongoDB config file:
 
 ```bash
-udo vim /etc/mongod.conf
+sudo vim /etc/mongod.conf
 ```
 
 In this file add the following lines:
@@ -198,12 +219,12 @@ This will tell mongodb that whenever it starts up next, it needs to enforce data
 Open the MongoDB config file:
 
 ```bash
-udo vim /etc/mongod.conf
+sudo vim /etc/mongod.conf
 ```
 
 Change the `bindIp` from `127.0.0.1` to `0.0.0.0`
 
-```
+```txt
 # network interfaces
 net:
     port: 27017
@@ -218,8 +239,9 @@ MongoDB uses port 27107 for all connections by default.
 So, let's open up that port. You can go to the network settings of your vultr console and 
 open up `inbound` and `outbound` traffic on port 27107
 
-```
+```bash
 sudo iptables -A INPUT -p tcp --destination-port 27017 -m state --state NEW,ESTABLISHED -j ACCEPT
+
 sudo iptables -A OUTPUT  -p tcp --source-port 27017 -m state --state ESTABLISHED -j ACCEPT
 ```
 

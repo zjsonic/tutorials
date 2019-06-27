@@ -4,7 +4,7 @@
 > Each module in Node.js has its own context, so it cannot interfere with other modules or pollute global scope.
 
 ## impart
->>The purpose of this guide is to impart a solid understanding of the process of Node.js HTTP handling.
+>The purpose of this guide is to impart a solid understanding of the process of Node.js HTTP handling.
 - vt. 给予（尤指抽象事物），传授；告知，透露
 
 ## bother
@@ -89,3 +89,20 @@ Why bother doing something you already have done a hundred times, where there is
 >Which of these snack brands have you seen online video advertising for recently?
 
 - snack: 小吃
+
+>Can you bundle up the sheets for me?
+
+- bundle: 捆 绑
+
+>We should opt out.
+
+- opt: 选择 挑选
+
+> The CommonJS and NodeJS are also synchronous in nature.  本质上是同步的。
+
+- nature  本质
+
+> pros and cons
+
+- 赞成和反对
+

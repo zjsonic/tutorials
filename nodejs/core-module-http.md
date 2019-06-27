@@ -1,4 +1,4 @@
-# Core Module: HTTP
+# HTTP
 
 ## http简介
 - `http`是服务器与客户端通信的一个接口。
