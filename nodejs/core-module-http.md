@@ -1,6 +1,9 @@
+[TOC]
+
 # HTTP
 
-## http简介
+- HTTP interfaces in Node.js are designed to support many features of the HTTP protocol which have been traditionally difficult to use.
+
 - `http`是服务器与客户端通信的一个接口。
 - `http`是一个接口对象。
 - `http`是Node.js的一个核心模块。
