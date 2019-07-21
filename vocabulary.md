@@ -72,40 +72,88 @@ Why bother doing something you already have done a hundred times, where there is
 
 > Proper validation of form data is important to protect your form from hackers and spammers.
 
-- spammer n 垃圾邮件发送者
+## spammer n 垃圾邮件发送者
 
-> The htmlspecialchars() function converts special charactoers to HTML entity.
+## entity n 实体 存在 本质
+> > The htmlspecialchars() function converts special charactoers to HTML entity.
 
-- entity n 实体 存在 本质
-
+## clue: 线索 头绪 
 >I see these in PHP all the time but I don't have a clue as to what they actually mean.
 
-- clue: 线索 头绪 
 
+## ecology: n. 生态  生态学
 > She is an expert on the ecology of wetlands. 她是一个湿地生态学专家。
 
-- ecology: n. 生态  生态学
-
+## snack: 小吃
 >Which of these snack brands have you seen online video advertising for recently?
 
-- snack: 小吃
 
+## bundle: 捆 绑
 >Can you bundle up the sheets for me?
 
-- bundle: 捆 绑
 
+## opt: 选择 挑选
 >We should opt out.
 
-- opt: 选择 挑选
 
+## nature  本质
 > The CommonJS and NodeJS are also synchronous in nature.  本质上是同步的。
 
-- nature  本质
 
+## 赞成和反对
 > pros and cons
 
-- 赞成和反对
-
+## Arbitrary adj. 任意的 武断的 专制的
 > If port is omitted or is 0, the operating system will assign an arbitrary unused port
 
-Arbitrary adj. 任意的 武断的 专制的
+## palette
+
+- ['pælət]
+- n. 调色板；颜料
+- n. 选板 面板
+
+> Command palette: the editor for commands
+
+## exclamation
+
+- [ˌɛkskləˈmeʃən]
+- n. 感叹；惊叫；惊叹词
+- 惊叹号： exclamation point
+
+## figure
+
+- **美** ['fɪɡjɚ]
+- 数字
+- 体型 身材
+
+## figure out
+
+- 计算出 想出 理解
+
+- If you were new to sass, you will figure out  what this means exactly
+
+## forward slash
+
+- /
+- 斜线
+
+## grap
+
+> **Your laptop needs more Sass.** [Grab a set of Sass stickers now ](http://devswag.com/products/sass-stickers-4).
+
+## mature
+
+- [mə'tʃʊr] 
+- Adj. 成熟的
+- vi & vt  使...成熟
+- They have matured way beyond their age.
+
+## standalone
+
+- ['stændə,lon]
+- n. 独立的电脑（单机)
+- adj. 单独的 独立的
+- 
+
+
+

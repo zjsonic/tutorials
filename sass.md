@@ -1,51 +1,68 @@
-# Sass Basic
-- installation
-- preprocess
-- watch
-- variables
-- nesting
-- partials
-- import
-- mixins
-- inheritance
-- operators
+[TOC]
 
-## 什么是Sass
-- Sass是CSS的元语言.
-- 用于描述CSS语言.
-- Sass是css的预处理器
+# SASS
 
-## installation
-Install Anywhere
-```
+Sass is the most mature, stable and powerful professional grade CSS extension language.
+
+- CSS is getting larger, more complex, and hard to maintain. 
+- Sass can help. Features that don't exist in CSS: 
+  + variables
+  + nesting
+  + mixins
+  + inheritance
+
+## Install Sass
+
+### Standalone Installation
+
+On Windows, Mac and Linux, you can install sass by downloading the package from [github](https://github.com/sass/dart-sass/releases/tag/1.22.1) and adding it to your path: (Mac OS X )
+
+1. Open the *.**bash_profile* file in your home directory (for example, /Users/your-user-name/*.**bash_profile*) in a text editor.
+2. Add export PATH="your-dir:$PATH"to the last line of the file,where your-dir is the directory you want to add. 
+3. Save the *.**bash_profile* file. 
+4. Restart your terminal.
+
+### Installation with NPM
+
+```bash
 npm install -g sass
 ```
-Install on MacOX
-```
-brew install sass/sass/sass
+
+### Installation with applications
+
+- compass.app
+- koala
+- GhostLab
+
+## Compiling Sass To CSS
+
+### Using the sass command
+
+```bash
+sass ./css/input.scss  ./css/output.css
 ```
 
-## Preprocess(预处理)
-Preprocess refers to compling your Sass to CSS using the `Sass` command.
-You'll need to tell Sass which file to build from and where to output CSS to.
-```
-sass input.scss  output.css
-```
+You can `watch`  and `output`  to the specified directories
 
-## watch(监听)
-You can watch and output to the specified directories
+```bash
+sass --watch ./scss:./css
 ```
-sass --watch sass:css
-```
-sass would watch all the files in the sass folder for changes,and compile CSS to the css folder
+sass would watch all the files in the sass folder for changes,and compile CSS to the css folder.
 
-## variables(变量)
-Variables is the way to sore information that you want to reuse.You can sore things like:
+### Using Plugins
+
+- VS code extensions: Live Scss Compiler
+  + Click to `Watch Scss` button from the status bar.
+
+## variables
+Variables is the way to sore information that you want to reuse throughout your stylesheets. You can sore things like:
 - colors
 - font stack
 - any css value you wanna reuse
-Sass uses the `$` to make something a variable.Here's an example:
-```
+
+to make something a variable, you can use the `$` .
+
+```scss
 $font-stack: Helvetica, sans-serif;
 $primary-color: #333;
 
@@ -54,13 +71,13 @@ body{
     color: $primary-color;
 }
 ```
-在处理Sass文件的时候,编译器会输出普通的css,并使用变量值替换掉变量.
+## Nesting
 
-## Nesting(嵌套)
-- 在Sass中,CSS选择器可以嵌套使用
-- css选择器的签套规则:参照HTML的嵌套结构
-- 过度嵌套css选择器可导致难以维护
-```
+HTML has a clear nested structure. On the other hand, CSS doesn't. 
+
+Sass allows you to nest CSS selectors in a way that follows the same structure of your HTML. Be aware of overly nested rules.
+
+```scss
 nav {
   ul {
     margin: 0;
@@ -236,47 +253,3 @@ aside[role="complementary"] {
 ```
 
 
-
-## 什么是Sass
-- Sass是CSS的元语言.
-- 用于描述CSS语言.
-- Sass是css的预处理器
-
-
-## 什么是compass
-- 基于sass的CSS开发框架
-- Compass可以让你书写css代码变得简单
-
-## 安装Sass
-第一步: 安装Ruby(Mac OX自带Ruby)
-第二步: 安装Compass(自带安装sass,基于sass)
-```
-$ sudo gem install compass
-```
-第三步: 查看版本
-```
-$ compass -v
-```
-或
-```
-$ sass -v
-```
-
-## 创建项目
-```
-compass create my-project
-```
-项目结构说明:
-```
-.sass-cache // 快速生成css文件的cache文件
-sass // 需要编译的sass文件
-stylesheets // 编译后的css文件
-config.rb // 项目的默认配置文件
-```
-
-## 开启自动编译
-在项目根目录下(也就是config.rb所在目录)运行
-```
-compass watch
-```
-To create a mixin you use the @mixin directive and give it a name. We've named our mixin transform. We're also using the variable $property inside the parentheses so we can pass in a transform of whatever we want. After you create your mixin, you can then use it as a CSS declaration starting with @include followed by the name of the mixin.
